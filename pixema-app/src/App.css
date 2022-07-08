@@ -36,3 +36,41 @@
     transform: rotate(360deg);
   }
 }
+
+/* /////////////////////////////////////////// */
+
+*{
+  font-family: 'Exo 2', sans-serif;
+  box-sizing: border-box;
+}
+
+.font-size-16px{
+font-size: 16px;
+}
+
+.font-size-20px{
+    font-size: 20px;
+    }
+
+h2,h3{
+    background-color: transparent;
+    color: white;
+}
+
+h2{
+    font-weight: 700;
+}
+
+h3{
+    font-weight: 600;
+}
+
+.center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+a{
+  text-decoration: none;
+}

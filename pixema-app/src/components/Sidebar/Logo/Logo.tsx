@@ -3,7 +3,7 @@ import "./Logo.scss";
 
 const Logo = () => {
     return (
-        <Link to='/'><img src="/pixema.png" className="logo" alt="logo" /></Link>
+        <Link to='/' className="logo" ><img src="/pixema.png" alt="logo" /></Link>
     )
 }
 

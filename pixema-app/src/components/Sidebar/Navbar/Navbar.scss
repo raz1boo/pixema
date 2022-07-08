@@ -1,0 +1,37 @@
+.nav {
+  display: flex;
+  gap: 25px;
+  flex-direction: column;
+  width: 160px;
+  padding-top: 64px;
+  a {
+    color: #80858b;
+    transition: 0.3s ease;
+    gap: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    path {
+      transition: 0.3s ease;
+    }
+    & .nav_active-page {
+      color: #7b61ff;
+    }
+    &:hover,
+    &:hover path {
+      fill: #917cff;
+      color: #917cff;
+    }
+  }
+  &.burger-nav{
+    position: absolute;
+    top: -20px;
+    right: -250px;
+    transition: .3s ease;
+    background-color: #000;
+    padding-left: 30px;
+  }
+  &.burger-nav__open{
+    right: 25px;
+  }
+}

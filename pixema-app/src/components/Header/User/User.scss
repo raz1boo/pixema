@@ -1,0 +1,120 @@
+.about-user {
+  display: flex;
+  height: 56px;
+  white-space: nowrap;
+  width: 267px;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  .initials {
+    background-color: #7b61ff;
+    border-radius: 10px;
+    width: 56px;
+    height: 56px;
+    img {
+      height: 24px;
+      width: 24px;
+    }
+  }
+  .username {
+    padding-left: 20px;
+  }
+  h3 {
+    line-height: 24px;
+  }
+  .arrow {
+    height: 6px;
+    width: 10px;
+    transition: 0.3s ease;
+  }
+  .arrow-right {
+    height: 10px;
+    width: 6px;
+  }
+  .arrow-top {
+    transition: 0.3s ease;
+    transform: rotate(180deg);
+  }
+}
+.user-modal {
+  height: 0;
+  width: 267px;
+  overflow: hidden;
+  background-color: #242426;
+  border-radius: 10px;
+  flex-direction: column;
+  display: inline-flex;
+  justify-content: center;
+  transition: 0.3s ease;
+  margin-top: 24px;
+  hr {
+    width: 100%;
+    border: 1px solid #323537;
+    margin: 0;
+  }
+  a {
+    color: #fff;
+    transition: 0.3s ease;
+    cursor: pointer;
+    font-weight: 500;
+    padding: 15px 20px;
+    &:hover {
+      color: #7b61ff;
+    }
+  }
+}
+.user-modal_open {
+  height: 112px;
+  transition: 0.2s ease;
+}
+.user-block {
+  margin-left: 41px;
+  height: 56px;
+}
+
+.burger-menu__button {
+  height: 56px;
+  width: 56px;
+  background-color: #7b61ff;
+  border-radius: 10px;
+  margin-left: 32px;
+  display: flex;
+  align-items: center;
+  @media (max-width:480px){
+    margin-left: 64px;
+  }
+  .burger {
+    margin: auto;
+    height: 24px;
+    width: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    position: relative;
+    gap: 4px;
+    .burger-menu__lines {
+      height: 2px;
+      width: 20px;
+      background-color: #fff;
+      border-radius: 3px;
+      transition: 0.3s ease;
+    }
+    &.x {
+      position: relative;
+      .burger-menu__lines {
+        position: absolute;
+        top: 10px;
+        &:nth-child(2) {
+          opacity: 0;
+        }
+        &:nth-child(1) {
+          transform: rotate(45deg);
+        }
+        &:nth-child(3) {
+          transform: rotate(135deg);
+        }
+      }
+    }
+  }
+}

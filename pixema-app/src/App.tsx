@@ -1,13 +1,19 @@
-import { Route, Routes } from 'react-router-dom';
-import './App.css';
-import Logo from './components/Header/Logo/Logo';
-import User from "./components/Header/User/User";
+import { useState } from "react";
+import MediaQuery from "react-responsive";
+import { Route, Routes } from "react-router-dom";
+import "./App.css";
+import Header from "./components/Header/Header";
+import Logo from "./components/Sidebar/Logo/Logo";
+import Sidebar from "./components/Sidebar/Sidebar";
 
 function App() {
+  const [name, setName] = useState("Artem Lapetsky");
   return (
-  <>
-    <User username="Vladimir Ivanov" initials="VI"/>
-    <Logo></Logo>
+    <>
+      <MediaQuery minDeviceWidth={1281}>
+        <Sidebar />
+      </MediaQuery>
+      <Header username={name} onClickLogOut={() => setName("")} />
     </>
   );
 }
