@@ -25,13 +25,33 @@
   }
   &.burger-nav{
     position: absolute;
-    top: -20px;
+    top: 45px;
     right: -250px;
     transition: .3s ease;
     background-color: #000;
     padding-left: 30px;
+    padding-top: 0;
+    @media (max-width:1024px){
+      top: 120px;
+    }
+    @media (max-width:480px){
+      top: 40px;
+    }
+    @media (max-width:320px){
+      top: 100px;
+    }
   }
   &.burger-nav__open{
     right: 25px;
+    @media (max-width:480px){
+      right: 5px;
+    }
+    @media (max-width:320px){
+      z-index: 88;
+      padding-top: 200px;
+      padding-left: 115px;
+      top: 0;
+      width: 320px;
+    }
   }
 }

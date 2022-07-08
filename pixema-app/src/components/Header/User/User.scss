@@ -80,9 +80,14 @@
   margin-left: 32px;
   display: flex;
   align-items: center;
-  @media (max-width:480px){
-    margin-left: 64px;
+  transition: 0.3s ease;
+  @media (max-width: 480px) {
+    position: absolute;
+    top: 30px;
+    right: 32px;
+    z-index: 99;
   }
+
   .burger {
     margin: auto;
     height: 24px;
@@ -115,6 +120,14 @@
           transform: rotate(135deg);
         }
       }
+    }
+  }
+  &.burger-menu__open {
+    @media (max-width: 480px) {
+      right: 175px;
+    }
+    @media (max-width: 320px) {
+      right: 32px;
     }
   }
 }

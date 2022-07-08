@@ -4,6 +4,7 @@ import Search from "./Search/Search";
 import { useState } from "react";
 import MediaQuery from "react-responsive";
 import Logo from "../Sidebar/Logo/Logo";
+import cn from 'classnames';
 
 interface IHeader {
   username: string;
@@ -19,7 +20,7 @@ function Header({ username, onClickLogOut }: IHeader) {
         <Logo />
       </MediaQuery>
       </MediaQuery>
-      <header>
+      <header className={cn(open&&"burger-menu__open")}>
       <MediaQuery maxDeviceWidth={480}>
         <Logo />
       </MediaQuery>
@@ -34,7 +35,7 @@ function Header({ username, onClickLogOut }: IHeader) {
         />
       </header>
         <MediaQuery maxDeviceWidth={480}>
-        <Search />
+        <Search openMenu={open} />
       </MediaQuery>
     </>
   );

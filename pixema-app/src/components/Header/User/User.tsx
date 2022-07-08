@@ -75,7 +75,7 @@ const User = ({ username, onClickLogOut, open, openFunction }: UserProps) => {
         </div>
       </MediaQuery>
       <MediaQuery maxDeviceWidth={1280}>
-        <div className="burger-menu__button" onClick={openFunction}>
+        <div className={cn("burger-menu__button", open&&'burger-menu__open')} onClick={openFunction}>
           <div className={cn("burger", open && "x")}>
             <div className="burger-menu__lines"></div>
             <div className="burger-menu__lines"></div>
