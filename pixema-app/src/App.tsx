@@ -1,9 +1,8 @@
 import { useState } from "react";
 import MediaQuery from "react-responsive";
-import { Route, Routes } from "react-router-dom";
+// import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import Header from "./components/Header/Header";
-import Logo from "./components/Sidebar/Logo/Logo";
 import Sidebar from "./components/Sidebar/Sidebar";
 
 function App() {

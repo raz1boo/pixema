@@ -5,48 +5,49 @@
   width: 160px;
   padding-top: 64px;
   a {
-    color: #80858b;
     transition: 0.3s ease;
+    color: #80858b;
     gap: 25px;
     display: flex;
     align-items: center;
     justify-content: left;
+    &.nav__active, &.nav__active path {
+      color: #7b61ff;
+      fill: #7b61ff;
+    }
     path {
       transition: 0.3s ease;
     }
-    & .nav_active-page {
-      color: #7b61ff;
-    }
     &:hover,
     &:hover path {
-      fill: #917cff;
       color: #917cff;
+      fill: #917cff;
     }
   }
-  &.burger-nav{
+  &.burger-nav {
     position: absolute;
     top: 45px;
     right: -250px;
-    transition: .3s ease;
+    transition: 0.3s ease;
     background-color: #000;
     padding-left: 30px;
     padding-top: 0;
-    @media (max-width:1024px){
+    @media (max-width: 1024px) {
       top: 120px;
     }
-    @media (max-width:480px){
+    @media (max-width: 480px) {
       top: 40px;
     }
-    @media (max-width:320px){
+    @media (max-width: 320px) {
       top: 100px;
     }
   }
-  &.burger-nav__open{
+  &.burger-nav__open {
     right: 25px;
-    @media (max-width:480px){
+    @media (max-width: 480px) {
       right: 5px;
     }
-    @media (max-width:320px){
+    @media (max-width: 320px) {
       z-index: 88;
       padding-top: 200px;
       padding-left: 115px;

@@ -6,7 +6,7 @@ import Logo from "./Logo/Logo";
 function Sidebar() {
   return (
     <aside>
-      <div>
+      <div className="side-bar">
         <Logo />
         <Navbar />
       </div>

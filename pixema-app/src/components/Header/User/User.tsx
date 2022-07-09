@@ -68,9 +68,9 @@ const User = ({ username, onClickLogOut, open, openFunction }: UserProps) => {
               Edit Profile
             </Link>
             <hr />
-            <a onClick={onClickLogOut} className="font-size-16px">
+            <p onClick={onClickLogOut} className="font-size-16px">
               Log Out
-            </a>
+            </p>
           </div>
         </div>
       </MediaQuery>
