@@ -1,0 +1,234 @@
+.dark-background {
+  height: 100%;
+  width: 100%;
+  background-color: #000;
+  position: absolute;
+  opacity: 0.5;
+}
+.modal-filter {
+  max-width: 518px;
+  background-color: #242426;
+  border-radius: 10px;
+  padding: 48px 40px;
+  position: absolute;
+  transition: 0.2s ease;
+  top: 0px;
+  z-index: 999;
+  right: -1000px;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  display: block;
+  flex-direction: column;
+  &.modal-filter__active {
+    right: 0;
+    transition: 0.2s ease;
+  }
+  h2 {
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 36px;
+    margin: 0;
+  }
+  h3 {
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 24px;
+    margin: 0;
+    margin-bottom: 8px;
+    margin-top: 32px;
+  }
+  input {
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 24px;
+    background-color: #323537;
+    border-radius: 10px;
+    height: 56px;
+    width: 100%;
+    border: none;
+    outline: none;
+    padding: 16px 20px;
+    color: #fff;
+    &::placeholder {
+      color: #80858b;
+    }
+  }
+  .modal-filter__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .close-button {
+      position: relative;
+      cursor: pointer;
+      i {
+        color: #afb2b6;
+      }
+    }
+  }
+  .sort-by {
+    padding-bottom: 32px;
+    margin-top: 48px;
+    margin-bottom: 32px;
+    border-bottom: 1px solid #323537;
+    .sort-switcher {
+      height: 52px;
+      button {
+        padding: 14px 0;
+        max-width: 217px;
+        font-size: 16px;
+        cursor: pointer;
+        width: 217px;
+        height: 50px;
+        color: #80858b;
+        background-color: #242426;
+        border: 2px solid #323537;
+        border-radius: 10px;
+        transition: .3s ease;
+        &:nth-child(1) {
+          border-top-right-radius: 0;
+          border-bottom-right-radius: 0;
+        }
+        &:nth-child(2) {
+          border-top-left-radius: 0;
+          border-bottom-left-radius: 0;
+        }
+        &:hover {
+          color: #fff;
+        }
+        &:disabled {
+          color: #fff;
+          background-color: #323537;
+          border: 2px solid #323537;
+          border-radius: 10px;
+          &:nth-child(2) {
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+          }
+          &:nth-child(1) {
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
+          }
+        }
+      }
+    }
+  }
+  .genre {
+    .genre-block {
+      padding: 12px;
+      background-color: #323537;
+      border-radius: 10px;
+      height: 100px;
+      ul {
+        display: inline-flex;
+        gap: 12px;
+        flex-wrap: wrap;
+        padding: 0;
+        margin: 0;
+        input {
+          width: 30%;
+          height: 30%;
+          padding: 0;
+          background-color: transparent;
+          padding-top: 5px;
+        }
+      }
+      li {
+        font-size: 16px;
+        font-weight: 500;
+        line-height: 24px;
+        color: #ffffff;
+        max-height: 32px;
+        list-style-type: none;
+        white-space: nowrap;
+        padding: 4px 8px;
+        background-color: #242426;
+        border-radius: 6px;
+        cursor: pointer;
+        i {
+          margin-left: 11px;
+          color: #afb2b6;
+        }
+      }
+    }
+  }
+  .years {
+    .years-block {
+      display: flex;
+      gap: 40px;
+      input {
+        width: 50%;
+        max-width: 199px;
+      }
+    }
+  }
+  .rating {
+    .rating-block {
+      display: flex;
+      gap: 40px;
+      input {
+        width: 50%;
+        max-width: 199px;
+      }
+    }
+  }
+  .country {
+    select {
+      width: 100%;
+      max-width: 438px;
+      background-color: #323537;
+      border-radius: 10px;
+      color: #80858b;
+      padding: 16px 20px;
+      outline: none;
+      border: 2px solid transparent;
+      font-size: 16px;
+      appearance: none;
+      background-image: url("../../../public/assets/icons/arrow-grey.png");
+      background-repeat: no-repeat, repeat;
+      background-color: #323537;
+      background-position: right 0.7em top 50%, 0 0;
+      background-size: 0.65em auto, 100%;
+      transition: 0.3s ease;
+    }
+    select:hover {
+      background-image: url("../../../public/assets/icons/arrow-white.png");
+    }
+    select:focus {
+      border-color: #7b61ff;
+    }
+    option {
+      color: #fff;
+    }
+  }
+  .modal-filter__footer {
+    padding-top: 111px;
+    display: flex;
+    gap: 40px;
+    button {
+      border: 2px solid #323537;
+      border-radius: 10px;
+      padding: 14px 0;
+      max-width: 217px;
+      font-size: 16px;
+      font-weight: 600;
+      line-height: 24px;
+      cursor: pointer;
+      color: #fff;
+      border: none;
+      width: 217px;
+      background-color: #323537;
+      height: 50px;
+      transition: 0.3s ease;
+      &:hover {
+        color: #afb2b6;
+      }
+      &:nth-child(2) {
+        background-color: #7b61ff;
+        &:hover {
+          background-color: #917cff;
+          color: #fff;
+        }
+      }
+    }
+  }
+}

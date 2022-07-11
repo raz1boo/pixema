@@ -1,9 +1,13 @@
 .search {
-  width: 77%;
+  width: 80%;
   height: 56px;
   position: relative;
   max-width: 1184px;
   transition: .3s ease;
+  max-width: 1186px;
+  @media (max-width: 1280px) {
+    width: 65%;
+  }
   @media (max-width: 480px) {
     padding: 0 32px;
     width: 100%;
@@ -55,7 +59,10 @@
   }
   &.burger-menu__open{
     @media (max-width:480px){
-      width: 70%;
+      width: 69%;
+    }
+    @media (max-width:420px){
+      width: 68%;
     }
     @media (max-width:320px){
       width: 100%;

@@ -4,19 +4,27 @@ import cn from "classnames";
 import { useOutsideClick } from "rooks";
 import { useRef, useState } from "react";
 import MediaQuery from "react-responsive";
-import Navbar from "../../Sidebar/Navbar/Navbar";
 
 interface UserProps {
   username: string;
   onClickLogOut: () => void;
-  open: boolean;
-  openFunction: () => void;
+  openBurger: boolean;
+  openBurgerFunction: () => void;
+  closeBurger: () => void;
 }
 
-const User = ({ username, onClickLogOut, open, openFunction }: UserProps) => {
+const User = ({
+  username,
+  onClickLogOut,
+  openBurger,
+  openBurgerFunction,
+  closeBurger
+}: UserProps) => {
   const [menu, openMenu] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
   useOutsideClick(ref, () => openMenu(false));
+  const ref1 = useRef<HTMLDivElement>(null);
+  useOutsideClick(ref1, closeBurger);
   return (
     <>
       <MediaQuery minDeviceWidth={1281}>
@@ -75,14 +83,20 @@ const User = ({ username, onClickLogOut, open, openFunction }: UserProps) => {
         </div>
       </MediaQuery>
       <MediaQuery maxDeviceWidth={1280}>
-        <div className={cn("burger-menu__button", open&&'burger-menu__open')} onClick={openFunction}>
-          <div className={cn("burger", open && "x")}>
+        <div
+          className={cn(
+            "burger-menu__button",
+            openBurger && "burger-menu__open"
+          )}
+          onClick={openBurgerFunction}
+          ref={ref1}
+        >
+          <div className={cn("burger", openBurger && "x")}>
             <div className="burger-menu__lines"></div>
             <div className="burger-menu__lines"></div>
             <div className="burger-menu__lines"></div>
           </div>
         </div>
-      <Navbar burger={true} open={open}/>
       </MediaQuery>
     </>
   );
