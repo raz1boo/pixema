@@ -88,7 +88,10 @@
     right: 32px;
     z-index: 99;
   }
-
+  @media (max-width: 320px) {
+    right: 24px;
+  }
+  
   .burger {
     margin: auto;
     height: 24px;
@@ -126,6 +129,9 @@
   &.burger-menu__open {
     @media (max-width: 480px) {
       right: 175px;
+    }
+    @media (max-width: 420px) {
+      right: 165px;
     }
     @media (max-width: 320px) {
       right: 32px;

@@ -32,6 +32,7 @@
     background-color: #000;
     padding-left: 30px;
     padding-top: 0;
+    z-index: 77;
     @media (max-width: 1024px) {
       top: 120px;
     }
@@ -44,12 +45,21 @@
   }
   &.burger-nav__open {
     right: 25px;
+    @media (max-width: 1280px) {
+      right: 15px;
+    }
+    @media (max-width: 1024px) {
+      right: 20px;
+    }
     @media (max-width: 480px) {
       right: 5px;
+      top: 5px;
     }
     @media (max-width: 320px) {
       z-index: 88;
       padding-top: 200px;
+      height: 100%;
+      overflow-y: hidden;
       padding-left: 115px;
       top: 0;
       width: 320px;

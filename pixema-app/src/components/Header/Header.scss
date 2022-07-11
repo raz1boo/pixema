@@ -1,25 +1,27 @@
 header {
   display: flex;
-  padding-left: 146px;
+  padding-left: 147px;
   padding-top: 40px;
   width: 100%;
-  padding-right: 60px;
   position: relative;
   height: 100px;
   align-items: center;
   transition: 0.3s ease;
+  padding-right: 2vw;
   @media (max-width: 1440px) {
     padding-right: 135px;
   }
   @media (max-width: 1280px) {
-    padding-left: 78px;
+    padding-left: 176px;
     padding-right: 176px;
   }
   @media (max-width: 1024px) {
     padding-right: 48px;
+    padding-left: 48px;
   }
   @media (max-width: 768px) {
     padding-right: 40px;
+    padding-left: 40px;
   }
   @media (max-width: 480px) {
     padding-right: 32px;
