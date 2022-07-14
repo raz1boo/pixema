@@ -1,0 +1,31 @@
+.movie {
+  width: 266px;
+  max-height: 433px;
+  &__poster{
+    height: 357px;
+    padding: 20px;
+    border-radius: 20px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    .rating{
+      font-size: 18px;
+      display: inline;
+      padding: 2px 8px;
+      max-width: 40px;
+      color: #fff;
+      background-color: #F3A608;
+      border-radius: 6px;
+      &.__green{
+        background-color: #00A340;
+      }
+      &.__red{
+        background-color: #F45D2D;
+      }
+    }
+  }
+  .genres {
+    display: flex;
+    gap: 10px;
+  }
+}

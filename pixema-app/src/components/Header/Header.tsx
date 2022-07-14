@@ -2,16 +2,17 @@ import User from "./User/User";
 import "./Header.scss";
 import Search from "./Search/Search";
 import MediaQuery from "react-responsive";
-import Logo from "../Sidebar/Logo/Logo";
+import Logo from "./Logo/Logo";
 import cn from "classnames";
-import Navbar from "../Sidebar/Navbar/Navbar";
+import Navbar from "./Navbar/Navbar";
+import Layout from "../Main/Layout/Layout";
 
 interface IHeader {
   username: string;
   onClickLogOut: () => void;
   open: boolean;
   openFunct: () => void;
-  openModal: () => void;
+  openModalFunct: () => void;
   closeFunction: () => void;
 }
 
@@ -20,31 +21,37 @@ function Header({
   onClickLogOut,
   open,
   openFunct,
-  openModal,
+  openModalFunct,
   closeFunction,
 }: IHeader) {
   return (
     <>
       <header className={cn(open && "burger-menu__open")}>
-        <MediaQuery maxDeviceWidth={1280}>
+        <Layout>
+          <Navbar
+            closeBurger={closeFunction}
+            openBurgerFunction={openFunct}
+            burger={true}
+            open={open}
+          />
           <Logo />
-        </MediaQuery>
-        <MediaQuery minDeviceWidth={481}>
-          <Search openModalFilter={openModal} />
-        </MediaQuery>
-        <User
-          username={username}
-          onClickLogOut={onClickLogOut}
-          openBurger={open}
-          openBurgerFunction={openFunct}
-          closeBurger={closeFunction}
-        />
+          <MediaQuery minDeviceWidth={481}>
+            <Search openModalFilter={openModalFunct} />
+          </MediaQuery>
+          <User
+            username={username}
+            onClickLogOut={onClickLogOut}
+            openBurger={open}
+            openBurgerFunction={openFunct}
+            closeBurger={closeFunction}
+          />
+        </Layout>
       </header>
       <MediaQuery maxDeviceWidth={480}>
-        <Search openMenu={open} openModalFilter={openModal} />
+        <Search openMenu={open} openModalFilter={openModalFunct} />
       </MediaQuery>
       <MediaQuery maxDeviceWidth={1280}>
-        <Navbar burger={true} open={open} />
+        <Navbar burger={true} open={open} closeBurger={closeFunction} />
       </MediaQuery>
     </>
   );

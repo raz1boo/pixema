@@ -1,13 +1,13 @@
 .settings {
-  padding-left: 147px;
-  width: 80%;
-  display: flex;
-  flex-direction: column;
-  gap: 40px;
-  padding-top: 56px;
-  max-width: 1186px;
+  width: 100%;
   box-sizing: content-box;
   position: relative;
+  z-index: 30;
+  .layout{
+    flex-direction: column;
+    gap: 40px;
+    max-width: 1690px;
+  }
   input {
     width: 100%;
     height: 56px;
@@ -58,7 +58,9 @@
     width: 100%;
     transition: 0.3s ease;
       &.open {
-        width: 85%;
+        @media (max-width:1280px){
+          width: 85%;
+        }
         @media (max-width:768px){
             width: 70%;
         }

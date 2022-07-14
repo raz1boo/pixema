@@ -15,11 +15,22 @@ code {
 }
 #root {
   height: 100%;
+  z-index: 0;
   display: flex;
-  overflow: hidden;
+  justify-self: center;
+}
+
+.root-2{
+  height: 100%;
+  display: flex;
+  /* overflow: hidden; */
   flex-wrap: nowrap;
   padding-bottom: 64px;
   position: relative;
+  z-index: 0;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
 }
 
 @media screen and (max-width: 480px) {

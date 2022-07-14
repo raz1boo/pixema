@@ -1,0 +1,13 @@
+.movies-block{
+    display: flex;
+    max-width: 1920px;
+    flex-direction: column;
+    h1{
+        color: #fff;
+    }
+    &__movies{
+        display: flex;
+        gap: 40px;
+        flex-wrap: wrap;
+    }
+}

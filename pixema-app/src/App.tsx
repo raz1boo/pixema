@@ -1,53 +1,70 @@
-import { useState } from "react";
-import MediaQuery from "react-responsive";
+import { useEffect, useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import Header from "./components/Header/Header";
 import ModalFilter from "./components/ModalFilter/ModalFilter";
-import Settings from "./components/Settings/Settings";
-import Sidebar from "./components/Sidebar/Sidebar";
-import Movie from "./components/Main/Movie/Movie";
-
-interface IUser {
-  name: string;
-  email: string;
-}
+import Settings from "./components/Main/Settings/Settings";
+import Home from "./components/Main/Home/Home";
+import { IUser } from "./components/types/IUser";
+import { useAppSelector } from "./components/store/hooks/redux";
+import { useGetNewMoviesQuery } from "./components/api/PixemaAPI";
+import { getCurrentDate } from "./components/helpers/getCurrentDate";
 
 function App() {
-  const [data, setData] = useState<IUser>({
+  const [dataUser, setDataUser] = useState<IUser>({
     name: "Artem Lapetsky",
     email: "a.lapitsky@gmail.com",
   });
   const [open, setOpen] = useState(false);
   const [openModal, setOpenModal] = useState(false);
-  return (
-    <>
-    <Movie title="The Joker" poster="https://avatars.mds.yandex.net/get-kinopoisk-image/1946459/84934543-5991-4c93-97eb-beb6186a3ad7/300x450" genre="Thriller Crime Drama" rating={9}/>
-      {/* <MediaQuery minDeviceWidth={1281}>
-        <Sidebar />
-      </MediaQuery>
-<<<<<<< HEAD
-      <Header username={name} onClickLogOut={() => setName("")} /> */}
-      <div className="second-root__block">
-        <Header
-          username={data.name}
-          onClickLogOut={() => setData({ name: "", email: "" })}
-          open={open}
-          openFunct={() => setOpen(!open)}
-          openModal={() => setOpenModal(true)}
-          closeFunction={() => setOpen(false)}
-        />
-        <Routes>
-          <Route
-            path="/settings"
-            element={<Settings open={open} userData={data} />}
-          />
-        </Routes>
-      </div>
-      <ModalFilter open={openModal} closeModal={() => setOpenModal(false)} />
 
-    </>
+  const { limit, type } = useAppSelector((state) => state.loadReducer);
+  const { data, isFetching } = useGetNewMoviesQuery({ limit, type });
+  const [bgVideo, setBgVideo] = useState(
+    localStorage.getItem("bgVideo") || "1219909"
+  );
+  
+  const [oldDate, setOldDate] = useState(
+    localStorage.getItem("oldDate") || `${getCurrentDate() - 1}`
+  );
+  function getRandomInt(min: number, max: number) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    let count: number = Math.floor(Math.random() * (max - min)) + min;
+    if (count !== 3 && count !== 7 && count !== 8 && count !== 9) {
+      return count === undefined ? 0 : count;
+    } else return 0;
+  }
+  useEffect(() => {
+    if (oldDate !== `${getCurrentDate() - 1}`) {
+      setOldDate(JSON.stringify(getCurrentDate()-1));
+      setBgVideo(JSON.stringify(data?.docs[getRandomInt(0, 10)].id));
+      localStorage.setItem("bgVideo", bgVideo);
+      localStorage.setItem("oldDate", oldDate);
+    }
+  }, [isFetching]);
+  return (
+    <div className="root-2">
+      <Header
+        username={dataUser.name}
+        onClickLogOut={() => setDataUser({ name: "", email: "" })}
+        open={open}
+        openFunct={() => setOpen(!open)}
+        openModalFunct={() => setOpenModal(true)}
+        closeFunction={() => setOpen(false)}
+      />
+      <Routes>
+        <Route path="/" element={<Home idBigVideo={bgVideo} />} />
+        <Route
+          path="/settings"
+          element={<Settings open={open} userData={dataUser} />}
+        />
+      </Routes>
+      <ModalFilter open={openModal} closeModal={() => setOpenModal(false)} />
+    </div>
   );
 }
 
 export default App;
+
+// доделать дизайн мобильной версии по фильтрам и /settings

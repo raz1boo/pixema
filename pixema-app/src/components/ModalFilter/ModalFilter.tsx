@@ -2,6 +2,7 @@ import "./ModalFilter.scss";
 import cn from "classnames";
 import { useRef, useState } from "react";
 import { useOutsideClick } from "rooks";
+import getAllCountries from '../constants/getAllCountries'
 
 interface IModal {
   open: boolean;
@@ -77,15 +78,8 @@ const ModalFilter = ({ open, closeModal }: IModal) => {
           <div className="country">
             <h3>Country</h3>
             <select name="country" id="country">
-              <option value="0" label="Select country">
-                Select country
-              </option>
-              <option value="BLR" label="Belarus">
-                Belarus
-              </option>
-              <option value="RUS" label="Russia">
-                Russia
-              </option>
+              <option value="0" label="Select country" />
+              {Object.entries(getAllCountries).map(country=><option key={country[0]} label={country[1]} value={country[0]} />)}
             </select>
           </div>
         </div>
