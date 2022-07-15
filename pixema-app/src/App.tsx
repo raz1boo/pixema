@@ -9,6 +9,8 @@ import { IUser } from "./components/types/IUser";
 import { useAppSelector } from "./components/store/hooks/redux";
 import { useGetNewMoviesQuery } from "./components/api/PixemaAPI";
 import { getCurrentDate } from "./components/helpers/getCurrentDate";
+import Login from "./components/Auth/Registration/Registration";
+import Registration from "./components/Auth/Login/Login";
 
 function App() {
   const [dataUser, setDataUser] = useState<IUser>({
@@ -45,20 +47,22 @@ function App() {
   }, [isFetching]);
   return (
     <div className="root-2">
-      <Header
+      {/* <Header
         username={dataUser.name}
         onClickLogOut={() => setDataUser({ name: "", email: "" })}
         open={open}
         openFunct={() => setOpen(!open)}
         openModalFunct={() => setOpenModal(true)}
         closeFunction={() => setOpen(false)}
-      />
+      /> */}
       <Routes>
         <Route path="/" element={<Home idBigVideo={bgVideo} />} />
         <Route
           path="/settings"
           element={<Settings open={open} userData={dataUser} />}
         />
+        <Route path="/registration" element={<Registration/>}/>
+        <Route path="/login" element={<Login/>}/>
       </Routes>
       <ModalFilter open={openModal} closeModal={() => setOpenModal(false)} />
     </div>
