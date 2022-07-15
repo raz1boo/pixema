@@ -10,8 +10,8 @@ import { useAppSelector } from "./components/store/hooks/redux";
 import { useGetNewMoviesQuery } from "./components/api/PixemaAPI";
 import { getCurrentDate } from "./components/helpers/getCurrentDate";
 import Footer from "./components/Footer/Footer";
-import Login from "./components/Auth/Registration/Registration";
-import Registration from "./components/Auth/Login/Login";
+import Registration from "./components/Auth/Registration/Registration";
+import Login from "./components/Auth/Login/Login";
 
 function App() {
   const [dataUser, setDataUser] = useState<IUser>({
@@ -66,8 +66,8 @@ function App() {
           path="/settings"
           element={<Settings open={open} userData={dataUser} />}
         />
-        <Route path="/registration" element={<Registration/>}/>
-        <Route path="/login" element={<Login/>}/>
+        <Route path="/registration" element={<Registration />} />
+        <Route path="/login" element={<Login />} />
       </Routes>
       <ModalFilter open={openModal} closeModal={() => setOpenModal(false)} />
       <Footer />
