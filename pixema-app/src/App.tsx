@@ -12,6 +12,8 @@ import { getCurrentDate } from "./components/helpers/getCurrentDate";
 import Footer from "./components/Footer/Footer";
 import Registration from "./components/Auth/Registration/Registration";
 import Login from "./components/Auth/Login/Login";
+import ResetPassword from "./components/Auth/ResetPassword/ResetPassword";
+import NewPassword from "./components/Auth/NewPassword/NewPassword";
 
 function App() {
   const [dataUser, setDataUser] = useState<IUser>({
@@ -45,14 +47,14 @@ function App() {
   localStorage.setItem("oldDate", oldDate);
   return (
     <div className="root-2">
-      <Header
+{ window.location.pathname!==("/login" && '/registration')  &&  <Header
         username={dataUser.name}
         onClickLogOut={() => setDataUser({ name: "", email: "" })}
         open={open}
         openFunct={() => setOpen(!open)}
         openModalFunct={() => setOpenModal(true)}
         closeFunction={() => setOpen(false)}
-      />
+      />}
       <Routes>
         <Route
           path="/"
@@ -68,6 +70,8 @@ function App() {
         />
         <Route path="/registration" element={<Registration />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/reset_password" element={<ResetPassword />} />
+        <Route path="/new_password" element={<NewPassword />} />
       </Routes>
       <ModalFilter open={openModal} closeModal={() => setOpenModal(false)} />
       <Footer />

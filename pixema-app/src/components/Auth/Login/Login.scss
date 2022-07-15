@@ -1,19 +1,15 @@
-.login-logo{
-    padding: 50px 0 0 50px;
+.login-logo {
+  padding: 50px 0 0 50px;
 }
 
 .login-window {
   position: relative;
   color: white;
   .form-window {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    margin-right: -50%;
-    transform: translate(-50%, 20%);
+    margin:100px auto 0;
     background-color: #242426;
     width: 574px;
-    height: 540px;
+    min-height: 540px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -21,15 +17,15 @@
     gap: 10px;
     font-size: 16px;
     border-radius: 10px;
-    a{
-        color: #80858B;
+    a {
+      color: #80858b;
     }
     p {
       color: #80858b;
       margin-left: auto;
       margin-right: auto;
-      a{
-        color:#7B61FF;
+      a {
+        color: #7b61ff;
       }
     }
     input {
@@ -62,11 +58,3 @@
     }
   }
 }
-
-// footer{
-//     position: absolute;
-//     left: 50%;
-//     top: 50%;
-//     margin-right: -50%;
-//     transform: translate(-50%, 800px);
-// }

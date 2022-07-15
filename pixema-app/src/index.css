@@ -18,6 +18,7 @@ code {
   z-index: 0;
   display: flex;
   justify-self: center;
+  overflow: hidden;
 }
 
 .root-2{
