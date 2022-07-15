@@ -1,15 +1,18 @@
 .movie {
   width: 266px;
-  max-height: 433px;
+  height: 433px;
   position: relative;
   cursor: pointer;
+  display: flex;
+  text-decoration: none;
+  flex-direction: column;
   z-index: 22;
-  &:hover p {
+  &:hover h2 {
     color: #7b61ff;
   }
   &:hover {
     &:after {
-      background-color: rgba(#000, .2);
+      background-color: rgba(#000, 0.2);
     }
   }
   &:after {
@@ -20,7 +23,7 @@
     right: 0;
     height: 358px;
     background-color: rgba(#000, 0);
-    transition: .3s ease;
+    transition: 0.3s ease;
   }
   &__poster {
     height: 357px;
@@ -38,6 +41,7 @@
       max-width: 40px;
       color: #fff;
       z-index: 33;
+      position: relative;
       background-color: #f3a608;
       border-radius: 6px;
       &.__green {
@@ -49,16 +53,36 @@
     }
   }
   &__description {
-    p {
+    display: flex;
+    flex-direction: column;
+    max-height: 76px;
+    h2 {
       font-size: 16px;
+      color: #fff;
       font-weight: 700;
       line-height: 24px;
-      color: #fff;
       transition: 0.3s ease;
+      margin-bottom: 4px;
     }
-    .genres {
+    &__footer {
+      flex-wrap: wrap;
       display: flex;
-      gap: 10px;
+      p {
+        font-size: 16px;
+        color: #afb2b6;
+        font-weight: 500;
+        line-height: 24px;
+        margin: 0;
+        &:not(:last-child):after {
+          content: " • ";
+          margin-right: 4px;
+        }
+      }
+      .genres {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+      }
     }
   }
 }

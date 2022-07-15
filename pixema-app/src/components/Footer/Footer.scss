@@ -1,10 +1,12 @@
 footer{
-    // position: absolute;
-    // bottom: 64px;
+    padding-top: 100px;
+    display: flex;
+    justify-content: center;
     p{
         color: #AFB2B6;
         font-weight: 500;
         line-height: 24px;
         white-space: nowrap;
+        margin: auto;
     }
 }

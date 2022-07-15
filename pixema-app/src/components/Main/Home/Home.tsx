@@ -2,7 +2,7 @@ import "./Home.scss";
 import { useGetMovieByIdQuery } from "../../api/PixemaAPI";
 import { Link } from "react-router-dom";
 import cn from "classnames";
-import NewMovies from "../Movies/NewMovies";
+import NewMovies from "../Movies/Movies";
 
 interface IHome {
   idBigVideo?: string | string[] | undefined;
@@ -90,7 +90,7 @@ const Home = ({ idBigVideo }: IHome) => {
             {data?.description}
           </div>
           <div className="background-video-block__button">
-            <Link to="/settings">Подробнее</Link>
+            <Link to={`/film/${data?.id}`}>Подробнее</Link>
           </div>
         </div>}
       </div>

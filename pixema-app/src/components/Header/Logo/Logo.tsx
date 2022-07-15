@@ -3,7 +3,7 @@ import "./Logo.scss";
 
 const Logo = () => {
   return (
-    <Link to="/home" className="logo">
+    <Link to="/" className="logo">
       <img src="/pixema.png" alt="logo" />
     </Link>
   );

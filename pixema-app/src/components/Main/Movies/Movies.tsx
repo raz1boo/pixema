@@ -12,7 +12,7 @@ const NewMovies = ({type}:IMovies) => {
   return (
     <Layout>
       <div className="movies-block">
-        <h1>Новые{
+        <h1>Новые {
           (type===1&&'фильмы') ||
           (type===2&&'сериалы') ||
           (type===3&&'мультфильмы')
@@ -23,7 +23,7 @@ const NewMovies = ({type}:IMovies) => {
           ))}
         </div>
         <div className="movies-block__button">
-        <button onClick={() => setLimit(limit+5)}>
+        <button onClick={() => setLimit(limit+10)}>
             {isFetching ? "Загрузка..." : "Показать ещё"}
           </button>
         </div>
