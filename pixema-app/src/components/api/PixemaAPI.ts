@@ -14,7 +14,7 @@ export const pixemaAPI = createApi({
       query: (id) => `/movie?search=${id}&field=id&token=${API_KEY}`,
     }),
     getNewMovies: build.query<IData, IBaseQuery>({
-      query: ( {type, limit} ) =>
+      query: ({limit, type}) =>
         `/movie?field=rating.kp&search=1-10&field=year&search=${getCurrentYear()}&field=typeNumber&search=${type}&limit=${limit}&sortField=year&selectFields=genres year name id poster rating &sortType=1&sortField=votes.imdb&sortType=-1&token=${API_KEY}`,
     }),
     getFilmByName: build.query<IData, IQuery>({

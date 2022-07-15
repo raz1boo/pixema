@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   limit: 10,
-  type: 1,
+  type: 1
 };
 
 export const loadSlice = createSlice({
@@ -11,7 +11,7 @@ export const loadSlice = createSlice({
   reducers: {
     loadMoreMovies: (state,action) => {
       state.limit += 10;
-      state.type = action.payload;
+      state.type = action.payload
     },
   },
 });

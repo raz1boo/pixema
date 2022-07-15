@@ -1,5 +1,4 @@
 header {
-  padding-left: 50px;
   padding-top: 40px;
   width: 100%;
   position: relative;
@@ -7,9 +6,10 @@ header {
   max-height: 140px;
   transition: 0.3s ease;
   background: linear-gradient(180deg, rgba(black,0.7), transparent);
-  padding-right: 2vw;
   z-index: 40;
   .layout{
+    padding-left: 147px;
+    padding-right: 120px;
     align-items: center;
   }
   @media (max-width: 1440px) {

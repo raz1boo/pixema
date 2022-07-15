@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import Header from "./components/Header/Header";
@@ -9,6 +9,7 @@ import { IUser } from "./components/types/IUser";
 import { useAppSelector } from "./components/store/hooks/redux";
 import { useGetNewMoviesQuery } from "./components/api/PixemaAPI";
 import { getCurrentDate } from "./components/helpers/getCurrentDate";
+import Footer from "./components/Footer/Footer";
 
 function App() {
   const [dataUser, setDataUser] = useState<IUser>({
@@ -17,32 +18,29 @@ function App() {
   });
   const [open, setOpen] = useState(false);
   const [openModal, setOpenModal] = useState(false);
-
   const { limit, type } = useAppSelector((state) => state.loadReducer);
   const { data, isFetching } = useGetNewMoviesQuery({ limit, type });
   const [bgVideo, setBgVideo] = useState(
-    localStorage.getItem("bgVideo") || "1219909"
+    localStorage.getItem("bgVideo") || "0"
   );
-  
   const [oldDate, setOldDate] = useState(
     localStorage.getItem("oldDate") || `${getCurrentDate() - 1}`
   );
+
   function getRandomInt(min: number, max: number) {
     min = Math.ceil(min);
     max = Math.floor(max);
     let count: number = Math.floor(Math.random() * (max - min)) + min;
     if (count !== 3 && count !== 7 && count !== 8 && count !== 9) {
-      return count === undefined ? 0 : count;
+      return count;
     } else return 0;
   }
-  useEffect(() => {
-    if (oldDate !== `${getCurrentDate() - 1}`) {
-      setOldDate(JSON.stringify(getCurrentDate()-1));
-      setBgVideo(JSON.stringify(data?.docs[getRandomInt(0, 10)].id));
-      localStorage.setItem("bgVideo", bgVideo);
-      localStorage.setItem("oldDate", oldDate);
-    }
-  }, [isFetching]);
+  if (oldDate === `${getCurrentDate() - 1}`) {
+    setBgVideo(`${getRandomInt(0, 10)}`);
+    setOldDate(`${getCurrentDate()}`);
+  }
+  localStorage.setItem("bgVideo", bgVideo);
+  localStorage.setItem("oldDate", oldDate);
   return (
     <div className="root-2">
       <Header
@@ -54,13 +52,21 @@ function App() {
         closeFunction={() => setOpen(false)}
       />
       <Routes>
-        <Route path="/" element={<Home idBigVideo={bgVideo} />} />
+        <Route
+          path="/"
+          element={
+            <Home
+              idBigVideo={`${isFetching ? 1219909 : data?.docs[+bgVideo].id}`}
+            />
+          }
+        />
         <Route
           path="/settings"
           element={<Settings open={open} userData={dataUser} />}
         />
       </Routes>
       <ModalFilter open={openModal} closeModal={() => setOpenModal(false)} />
+      <Footer />
     </div>
   );
 }

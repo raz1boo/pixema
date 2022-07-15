@@ -1,8 +1,8 @@
 import "./Home.scss";
 import { useGetMovieByIdQuery } from "../../api/PixemaAPI";
 import { Link } from "react-router-dom";
-import Movies from "../Movies/Movies";
 import cn from "classnames";
+import NewMovies from "../Movies/NewMovies";
 
 interface IHome {
   idBigVideo?: string | string[] | undefined;
@@ -21,9 +21,7 @@ const Home = ({ idBigVideo }: IHome) => {
   //           data-bg="#000"
   //           data-kinopoisk='1046206'
   //         ></div>
-
-  const { data } = useGetMovieByIdQuery(idBigVideo);
-
+  const { data, isFetching } = useGetMovieByIdQuery(idBigVideo);
   const prepareVideos = (videos: any) => {
     const regex =
       /(?:youtu\.be\/|youtube\.com(?:\/embed\/|\/v\/|\/watch\?v=|\/user\/\S+|\/ytscreeningroom\?v=|\/sandalsResorts#\w\/\w\/.*\/))([^&]{10,12})/;
@@ -49,7 +47,7 @@ const Home = ({ idBigVideo }: IHome) => {
       )
       .filter((i) => i)
   );
-
+  const rating= `${data?.rating?.kp}`;
   return (
     <div className="home">
       <div className="background-video-block">
@@ -66,7 +64,7 @@ const Home = ({ idBigVideo }: IHome) => {
           allow="autoplay"
           frameBorder="0"
         ></iframe>
-        <div className="background-video-block__main">
+        {!isFetching&&<div className="background-video-block__main">
           <h1>{data?.name}</h1>
           <div className="background-video-block__small-description">
             <div
@@ -77,7 +75,7 @@ const Home = ({ idBigVideo }: IHome) => {
                     (data?.rating?.kp <= 5 && "__red"))
               )}
             >
-              {data?.rating?.kp}
+              {rating.split('')[1]?rating:rating+'.0'}
             </div>
             <div className="year">{data?.year}</div>
             <div className="genres">
@@ -94,11 +92,13 @@ const Home = ({ idBigVideo }: IHome) => {
           <div className="background-video-block__button">
             <Link to="/settings">Подробнее</Link>
           </div>
-        </div>
+        </div>}
       </div>
-      <Movies movieType={1} />
-      <Movies movieType={2} />
-      <Movies movieType={3} />
+      <div className="home__content">
+      <NewMovies type={1} />
+      <NewMovies type={2} />
+      <NewMovies type={3} />
+      </div>
     </div>
   );
 };

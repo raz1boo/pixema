@@ -1,4 +1,4 @@
-import { loadMoreMovies } from "./reducers/loadMore.slice";
+import { loadMoreMovies} from "./reducers/loadMore.slice";
 import {
   setFilterCountry,
   setFilterRating,
