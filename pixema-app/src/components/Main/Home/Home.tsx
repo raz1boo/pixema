@@ -1,8 +1,9 @@
 import "./Home.scss";
 import { useGetMovieByIdQuery } from "../../api/PixemaAPI";
 import { Link } from "react-router-dom";
-import cn from "classnames";
 import NewMovies from "../Movies/Movies";
+import Rating from "../../UI/Rating/Rating";
+import AgeRating from "../../UI/AgeRating/AgeRating";
 
 interface IHome {
   idBigVideo?: string | string[] | undefined;
@@ -47,7 +48,6 @@ const Home = ({ idBigVideo }: IHome) => {
       )
       .filter((i) => i)
   );
-  const rating= `${data?.rating?.kp}`;
   return (
     <div className="home">
       <div className="background-video-block">
@@ -67,16 +67,7 @@ const Home = ({ idBigVideo }: IHome) => {
         {!isFetching&&<div className="background-video-block__main">
           <h1>{data?.name}</h1>
           <div className="background-video-block__small-description">
-            <div
-              className={cn(
-                "rating",
-                data?.rating?.kp &&
-                  ((data?.rating?.kp >= 7 && "__green") ||
-                    (data?.rating?.kp <= 5 && "__red"))
-              )}
-            >
-              {rating.split('')[1]?rating:rating+'.0'}
-            </div>
+            <Rating rating={data?.rating} />
             <div className="year">{data?.year}</div>
             <div className="genres">
               {data?.genres?.map((item) => (
@@ -84,7 +75,7 @@ const Home = ({ idBigVideo }: IHome) => {
               ))}
             </div>
             <div className="countries">{data?.countries?.[0].name}</div>
-            <div className="countries">{data?.ageRating}+</div>
+            <AgeRating ageRating={data?.ageRating}/>
           </div>
           <div className="background-video-block__description">
             {data?.description}

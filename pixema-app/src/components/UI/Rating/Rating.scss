@@ -1,0 +1,17 @@
+.rating {
+  font-size: 18px;
+  display: inline;
+  padding: 2px 8px;
+  max-width: 40px;
+  color: #fff;
+  z-index: 33;
+  position: relative;
+  background-color: #f3a608;
+  border-radius: 6px;
+    &__green {
+      background-color: #00a340;
+    }
+    &__red {
+      background-color: #f45d2d;
+    }
+  }

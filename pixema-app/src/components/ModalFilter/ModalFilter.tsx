@@ -28,7 +28,7 @@ const ModalFilter = ({ open, closeModal }: IModal) => {
           </div>
         </div>
         <div className="modal-filter__main">
-          <div className="sort-by">
+          <div className="modal-filter__sort-by">
             <h3>Sort by</h3>
             <div className="sort-switcher">
               <button
@@ -42,11 +42,11 @@ const ModalFilter = ({ open, closeModal }: IModal) => {
               </button>
             </div>
           </div>
-          <div className="movie-name">
+          <div className="modal-filter__movie-name">
             <h3>Full or short movie name</h3>
             <input type="text" placeholder="Your text" />
           </div>
-          <div className="genre">
+          <div className="modal-filter__genre">
             <h3>Genre</h3>
             <div className="genre-block">
               <ul>
@@ -61,21 +61,21 @@ const ModalFilter = ({ open, closeModal }: IModal) => {
               </ul>
             </div>
           </div>
-          <div className="years">
+          <div className="modal-filter__years">
             <h3>Years</h3>
             <div className="years-block">
               <input type="text" placeholder="From" />
               <input type="text" placeholder="To" />
             </div>
           </div>
-          <div className="rating">
+          <div className="modal-filter__rating">
             <h3>Rating</h3>
             <div className="rating-block">
               <input type="text" placeholder="From" />
               <input type="text" placeholder="To" />
             </div>
           </div>
-          <div className="country">
+          <div className="modal-filter__country">
             <h3>Country</h3>
             <select name="country" id="country">
               <option value="0" label="Select country" />

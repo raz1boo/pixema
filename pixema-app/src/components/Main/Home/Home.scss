@@ -48,21 +48,14 @@
     color: #80858b;
     align-items: center;
     gap: 10px;
-    .rating {
-      font-size: 18px;
-      padding: 2px 8px;
-      color: #fff;
-      background-color: #f3a608;
-      border-radius: 6px;
-      &.__green {
-        background-color: #00a340;
-      }
-      &.__red {
-        background-color: #f45d2d;
-      }
-    }
     .genres {
       display: flex;
+      p {
+        &:not(:last-child):after {
+          content: " • ";
+          margin-right: 4px;
+        }
+      }
     }
   }
   &__description {

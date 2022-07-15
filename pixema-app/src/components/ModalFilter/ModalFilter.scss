@@ -19,7 +19,7 @@
   border-bottom-right-radius: 0;
   display: block;
   flex-direction: column;
-  &.modal-filter__active {
+  &__active {
     right: 0;
     transition: 0.2s ease;
   }
@@ -53,7 +53,7 @@
       color: #80858b;
     }
   }
-  .modal-filter__header {
+  &__header {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -65,7 +65,7 @@
       }
     }
   }
-  .sort-by {
+  &__sort-by {
     padding-bottom: 32px;
     margin-top: 48px;
     margin-bottom: 32px;
@@ -112,7 +112,7 @@
       }
     }
   }
-  .genre {
+  &__genre {
     .genre-block {
       padding: 12px;
       background-color: #323537;
@@ -151,7 +151,7 @@
       }
     }
   }
-  .years {
+  &__years {
     .years-block {
       display: flex;
       gap: 40px;
@@ -161,7 +161,7 @@
       }
     }
   }
-  .rating {
+  &__rating {
     .rating-block {
       display: flex;
       gap: 40px;
@@ -171,7 +171,7 @@
       }
     }
   }
-  .country {
+  &__country {
     select {
       width: 100%;
       max-width: 438px;
@@ -200,7 +200,7 @@
       color: #fff;
     }
   }
-  .modal-filter__footer {
+  &__footer {
     padding-top: 111px;
     display: flex;
     gap: 40px;
