@@ -47,7 +47,7 @@ const User = ({
                 </div>
               </div>
               <img
-                src="assets/icons/bottom-arrow.png"
+                src="/assets/icons/bottom-arrow.png"
                 alt="arrow"
                 className={cn("arrow", menu && "arrow-top")}
               />
@@ -65,7 +65,7 @@ const User = ({
                 </div>
               </div>
               <img
-                src="assets/icons/right-arrow.png"
+                src="/assets/icons/right-arrow.png"
                 alt="arrow"
                 className="arrow-right"
               />

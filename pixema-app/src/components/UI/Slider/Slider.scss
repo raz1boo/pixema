@@ -1,0 +1,15 @@
+.swiper-wrapper {
+  display: flex;
+  position: relative;
+  gap: 40px;
+  flex-wrap: nowrap;
+  .swiper-slide {
+    max-width: 266px;
+    min-width: 266px;
+    margin: 0 !important;
+  }
+}
+.swiper-buttons {
+  display: flex;
+  gap: 20px;
+}

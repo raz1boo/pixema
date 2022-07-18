@@ -1,0 +1,51 @@
+.person {
+  min-width: 266px;
+  height: 433px;
+  position: relative;
+  cursor: pointer;
+  display: flex;
+  text-decoration: none;
+  flex-direction: column;
+  z-index: 22;
+  &:hover h2 {
+    color: #7b61ff;
+  }
+  &:hover {
+    &:after {
+      background-color: rgba(#000, 0.2);
+    }
+  }
+  &:after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 358px;
+    background-color: rgba(#000, 0);
+    transition: 0.3s ease;
+  }
+  &__photo {
+    height: 357px;
+    padding: 20px;
+    border-radius: 20px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    transition: 0.3s ease;
+    position: relative;
+  }
+  &__description {
+    display: flex;
+    flex-direction: column;
+    max-height: 76px;
+    h2 {
+      font-size: 16px;
+      color: #fff;
+      font-weight: 700;
+      line-height: 24px;
+      transition: 0.3s ease;
+      margin-bottom: 4px;
+    }
+  }
+}

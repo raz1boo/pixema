@@ -1,0 +1,16 @@
+.genres {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  p {
+    font-size: 16px;
+    color: #afb2b6;
+    font-weight: 500;
+    line-height: 24px;
+    margin: 0;
+    &:not(:last-child):after {
+      content: " • ";
+      margin-right: 4px;
+    }
+  }
+}

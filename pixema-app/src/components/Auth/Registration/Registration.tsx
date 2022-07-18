@@ -1,7 +1,10 @@
 import { Link } from "react-router-dom";
+
 import Input from "../../api/AuthInput/Input";
 import Submit from "../../api/AuthInput/Submit";
-import Logo from "../../Header/Logo/Logo";
+import Logo from "../../UI/Header/Logo/Logo";
+
+
 import "./Registration.scss";
 
 const Registration = () => {
@@ -49,7 +52,3 @@ const Registration = () => {
 };
 
 export default Registration;
-
-function UseState(arg0: string): [any, any] {
-  throw new Error("Function not implemented.");
-}

@@ -25,13 +25,13 @@ interface IMovieVotes {
     await: number;
 }
 
-interface IMovieTrailer {
+export interface IMovieTrailer {
     url: string;
     name: string;
     site: string;
 }
 
-interface IMovieVideos {
+export interface IMovieVideos {
     trailers: IMovieTrailer[];
     teasers: any[];
 }
@@ -108,7 +108,7 @@ export interface IMovie {
     premiere?: IMoviePremiere;
     collections?: any[];
     updateDates?: any[];
-    id: number;
+    id?: number;
     alternativeName?: any;
     countries?: IMovieCountry[];
     createdAt?: Date;
@@ -117,7 +117,7 @@ export interface IMovie {
     facts?: IFact[];
     genres?: IMovieGenre[];
     movieLength?: number;
-    name: string;
+    name?: string;
     names?: IMovieName[];
     persons?: IMoviePerson[];
     productionCompanies?: any[];

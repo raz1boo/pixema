@@ -1,0 +1,15 @@
+.react-icons{
+    color: #fff;
+    height: 30px;
+    width: 30px;
+    transition: .3s ease;
+}
+
+.button-base{
+    background-color: transparent;
+    cursor: pointer;
+    border: none;
+    &:hover .react-icons{
+        color: #AFB2B6;
+    }
+}

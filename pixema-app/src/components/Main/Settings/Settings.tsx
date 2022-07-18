@@ -1,7 +1,7 @@
 import "./Settings.scss";
 import cn from "classnames";
 import { useState } from "react";
-import Layout from "../Layout/Layout";
+import Layout from "../../UI/Layout/Layout";
 
 interface IUser {
   name: string;

@@ -76,22 +76,8 @@ a {
   text-decoration: none;
 }
 
-.second-root__block {
-  width: 88vw;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  z-index: 49;
-}
-
 @media screen and (max-width: 1280px) {
   .second-root__block {
     width: 100vw;
   }
 }
-/* 
-#kinobd{
-  height: 800px;
-  width: 800px;
-  display: block;
-} */
