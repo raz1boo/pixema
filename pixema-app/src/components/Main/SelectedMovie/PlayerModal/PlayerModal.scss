@@ -1,0 +1,48 @@
+.player-modal {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: rgba($color: #000000, $alpha: 0.8);
+  height: 100%;
+  width: 100%;
+  opacity: 0;
+  pointer-events: none;
+  display: flex;
+  justify-content: center;
+  transition: 0.3s ease;
+  z-index: 999;
+  &.active {
+    pointer-events: all;
+    transition: 0.3s ease;
+    opacity: 1;
+  }
+  &__content {
+    height: 80vh;
+    width: 70vw;
+    position: fixed;
+    top: 10vh;
+    transition: 0.4s ease;
+    transform: scale(0);
+    &.active {
+      transition: 0.4s ease;
+      transform: scale(1);
+    }
+    #kinobd {
+      height: 100%;
+      width: 100%;
+    }
+  }
+  svg {
+    position: fixed;
+    top: 50px;
+    right: 100px;
+    color: #afb2b6;
+    height: 30px;
+    width: 30px;
+    cursor: pointer;
+    transition: 0.3s ease;
+    &:hover {
+      color: #fff;
+    }
+  }
+}

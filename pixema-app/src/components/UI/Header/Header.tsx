@@ -5,7 +5,7 @@ import MediaQuery from "react-responsive";
 import Logo from "./Logo/Logo";
 import cn from "classnames";
 import Navbar from "./Navbar/Navbar";
-import Layout from "../Main/Layout/Layout";
+import Layout from "../Layout/Layout";
 
 interface IHeader {
   username: string;

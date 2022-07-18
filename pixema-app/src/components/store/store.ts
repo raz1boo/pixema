@@ -40,7 +40,7 @@ export function useStore(initialState: RootState) {
 const rootReducer = combineReducers({
     loadReducer,
     searchReducer,
-    filtersReducers
+    filtersReducers,
 });
 
 

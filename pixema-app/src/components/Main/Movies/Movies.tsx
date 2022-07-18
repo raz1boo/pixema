@@ -1,9 +1,9 @@
-import Layout from "../Layout/Layout";
 import Movie from "./Movie/Movie";
 import "./Movies.scss";
 import { useGetNewMoviesQuery } from "../../api/PixemaAPI";
 import { IMovies } from "../../types/IMovies";
 import { useState } from "react";
+import Layout from "../../UI/Layout/Layout";
 
 const NewMovies = ({type}:IMovies) => {
   const [limit, setLimit] = useState(10);

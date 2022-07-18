@@ -1,17 +1,17 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  limit: 10,
-  type: 1
+  limit: 50,
+  type: 1,
 };
 
 export const loadSlice = createSlice({
   name: "loadMore",
   initialState,
   reducers: {
-    loadMoreMovies: (state,action) => {
+    loadMoreMovies: (state, action) => {
       state.limit += 10;
-      state.type = action.payload
+      state.type = action.payload;
     },
   },
 });

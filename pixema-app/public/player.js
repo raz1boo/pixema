@@ -316,69 +316,6 @@ function kbp(self) {
                     option.dataset.iframe = players[key].iframe;
                     option.dataset.quality = players[key].quality;
                     option.dataset.translate = players[key].translate;
-                    if (btns.hasOwnProperty(key) && btns[key]) {
-                        var q = (players[key].quality) ?
-                            (players[key].quality.toUpperCase().search(/TS|TC|SCR|CAM/gi) + 1) ?
-                            'ЭКРАН' :
-                            (players[key].quality.toUpperCase().search(/720P/gi) + 1) ?
-                            '720P' :
-                            (players[key].quality.toUpperCase().search(/1080P/gi) + 1) ?
-                            '1080P' :
-                            players[key].quality
-                            .toUpperCase()
-                            .replace(/\s?ХОРОШЕЕ\s?|\s?СРЕДНЕЕ\s?|\s?ПЛОХОЕ\s?/gi, '') :
-                            '';
-                        var t = (players[key].translate) ?
-                            /ДУБЛ/i.test(players[key].translate) ?
-                            'ДУБЛЯЖ' :
-                            /ПРОФ/i.test(players[key].translate) ?
-                            'ПРОФ.' :
-                            /ЛЮБИТ/i.test(players[key].translate) ?
-                            'ЛЮБИТ.' :
-                            /АВТОР/i.test(players[key].translate) ?
-                            'АВТОР.' :
-                            /МНОГОГОЛ/i.test(players[key].translate) ?
-                            'МНОГОГОЛ.' :
-                            /ОДНОГОЛ/i.test(players[key].translate) ?
-                            'ОДНОГОЛ.' :
-                            /ДВУХГОЛ/i.test(players[key].translate) ?
-                            'ДВУХГОЛ.' :
-                            /ОРИГИНАЛ/i.test(players[key].translate) ?
-                            'ОРИГИНАЛ' :
-                            /(ENG|ORIG|СУБТ)/i.test(players[key].translate) ?
-                            options.language && /en/i.test(options.language) ?
-                            'ENGLISH' :
-                            'СУБТИТИРЫ' :
-                            players[key].translate.toUpperCase() :
-                            '';
-                        j++;
-                        btns[key] = btns[key]
-                            .replace('{N}', j)
-                            .replace('{Q}', q)
-                            .replace('{T}', t)
-                            .replace(/\s+/g, ' ')
-                            .replace(/(^\s*)|(\s*)$/g, '');
-                        btns[key] = (btns[key]) ? btns[key] : key.toUpperCase();
-                        option.innerText = j + '✨ ' + btns[key];
-                    } else if (key === 'trailer') {
-                        j++;
-                        option.innerText = j + '✨ ' + language.trailer.toUpperCase();
-                    } else if (key === 'torrent') {
-                        j++;
-                        option.innerText = j + '✨ ' + language.torrent.toUpperCase();
-                    } else if (key === 'vk') {
-                        j++;
-                        option.innerText = j + '✨ ' + language.vk.toUpperCase();
-                    } else if (key === 'nf') {
-                        j++;
-                        option.innerText = j + '✨ ' + language.nf.toUpperCase();
-                    } else if (key === 'lookbase') {
-                        j++;
-                        option.innerText = j + '✨ ' + language.lookbase.toUpperCase();
-                    } else {
-                        j++;
-                        option.innerText = j + '✨ ' + key.toUpperCase();
-                    }
                     if (first) {
                         kb_player(players[key].iframe, players[key].quality, players[key].translate, option, buttons, options.button_size, key);
                         first = false;

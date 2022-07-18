@@ -1,0 +1,21 @@
+.tabs {
+  overflow: hidden;
+  ul {
+    border-bottom: 1px solid #323537;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    padding-bottom: 10px;
+    gap: 20px;
+    li {
+      list-style-type: none;
+      color: #fff;
+      outline: none;
+      cursor: pointer;
+      padding: 20px;
+    }
+  }
+  .react-tabs__tab-panel{
+    width: 100%;
+  }
+}

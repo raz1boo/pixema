@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import Logo from "../../Header/Logo/Logo";
+import Logo from "../../UI/Header/Logo/Logo";
 import "./Login.scss";
 
 const Login = () => {

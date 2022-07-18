@@ -25,13 +25,13 @@ interface IMovieVotes {
     await: number;
 }
 
-interface IMovieTrailer {
+export interface IMovieTrailer {
     url: string;
     name: string;
     site: string;
 }
 
-interface IMovieVideos {
+export interface IMovieVideos {
     trailers: IMovieTrailer[];
     teasers: any[];
 }

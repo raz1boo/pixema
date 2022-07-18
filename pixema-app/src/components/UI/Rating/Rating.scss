@@ -8,6 +8,9 @@
   position: relative;
   background-color: #f3a608;
   border-radius: 6px;
+  &:empty{
+    display: none;
+  }
     &__green {
       background-color: #00a340;
     }

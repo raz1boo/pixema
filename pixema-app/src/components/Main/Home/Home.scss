@@ -2,9 +2,10 @@
   width: 100%;
   box-sizing: content-box;
   position: relative;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
+  &__content{
+    display: flex;
+    flex-direction: column;
+  }
   .layout {
     padding-top: 56px;
     padding-left: 147px;
@@ -48,17 +49,10 @@
     color: #80858b;
     align-items: center;
     gap: 10px;
-    .genres {
-      display: flex;
-      p {
-        &:not(:last-child):after {
-          content: " • ";
-          margin-right: 4px;
-        }
-      }
-    }
+    padding-top: 10px;
   }
   &__description {
+    padding-top: 20px;
     color: #fff;
     font-size: 18px;
     width: 55%;
@@ -91,7 +85,7 @@
     top: -400px;
     opacity: 0.3;
     height: 1100px;
-    width: 100%;
+    width: 100vw;
     z-index: 2;
     transform: scale(1.15);
   }

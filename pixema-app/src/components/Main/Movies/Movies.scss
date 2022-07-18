@@ -19,12 +19,14 @@
     button {
       border: none;
       max-width: 266px;
+      min-width: 266px;
       border-radius: 10px;
       height: 56px;
       font-size: 18px;
       padding: 16px 73px;
       font-weight: 600;
       line-height: 24px;
+      outline: none;
       color: #fff;
       cursor: pointer;
       transition: 0.3s ease;

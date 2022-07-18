@@ -1,27 +1,35 @@
-.dark-background {
-  height: 100%;
-  width: 100%;
-  background-color: #000;
-  position: absolute;
-  opacity: 0.5;
-}
 .modal-filter {
-  max-width: 518px;
-  background-color: #242426;
-  border-radius: 10px;
-  padding: 48px 40px;
+  width: 100%;
+  height: 100%;
   position: absolute;
-  transition: 0.2s ease;
-  top: 0px;
+  top: 0;
+  left: 0;
+  background-color: rgba($color: #000000, $alpha: 0);
+  transition: 0.3s ease;
+  pointer-events: none;
   z-index: 999;
-  right: -100000px;
-  border-top-right-radius: 0;
-  border-bottom-right-radius: 0;
-  display: block;
-  flex-direction: column;
-  &__active {
-    right: 0;
-    transition: 0.2s ease;
+  &.active {
+    pointer-events: all;
+    transition: 0.3s ease;
+    background-color: rgba($color: #000000, $alpha: 0.7);
+  }
+  &__content {
+    max-width: 518px;
+    background-color: #242426;
+    border-radius: 10px;
+    padding: 48px 40px;
+    transition: 0.3s ease;
+    position: absolute;
+    top: 0px;
+    right: -100000px;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    display: block;
+    flex-direction: column;
+    &.active {
+      right: 0;
+      transition: 0.3s ease;
+    }
   }
   h2 {
     font-size: 24px;
@@ -60,7 +68,7 @@
     .close-button {
       position: relative;
       cursor: pointer;
-      i {
+      svg {
         color: #afb2b6;
       }
     }
@@ -83,7 +91,7 @@
         background-color: #242426;
         border: 2px solid #323537;
         border-radius: 10px;
-        transition: .3s ease;
+        transition: 0.3s ease;
         &:nth-child(1) {
           border-top-right-radius: 0;
           border-bottom-right-radius: 0;
@@ -140,12 +148,14 @@
         max-height: 32px;
         list-style-type: none;
         white-space: nowrap;
+        align-items: center;
+        display: inline-flex;
         padding: 4px 8px;
         background-color: #242426;
         border-radius: 6px;
         cursor: pointer;
-        i {
-          margin-left: 11px;
+        svg {
+          margin-left: 10px;
           color: #afb2b6;
         }
       }

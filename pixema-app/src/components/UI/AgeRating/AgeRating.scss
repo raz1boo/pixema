@@ -1,9 +1,12 @@
 .age-rating {
     font-size: 18px;
     display: inline;
-    padding: 2px 6px;
+    padding: 0 6px;
     max-width: 40px;
     color: #80858b;
     border: 1px solid #80858b;
     border-radius: 4px;
+    &:empty{
+        display: none;
+    }
     }
