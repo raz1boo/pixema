@@ -6,6 +6,7 @@ import { convertTimestampToDate } from "../../helpers/convertTimestampToDate";
 import { getRandomInt } from "../../helpers/getRandomInt";
 import useScrollBlock from "../../helpers/scrollHook";
 import AgeRating from "../../UI/AgeRating/AgeRating";
+import Facts from "../../UI/Facts/Facts";
 import Genres from "../../UI/Genres/Genres";
 import Rating from "../../UI/Rating/Rating";
 import Tabs from "../../UI/Tabs/Tabs";
@@ -41,6 +42,7 @@ const SelectedMovie = () => {
     typeNumber,
     sequelsAndPrequels,
     year,
+    facts,
   } = { ...data };
   const prepareVideos = (videos: any) => {
     const regex =
@@ -177,6 +179,11 @@ const SelectedMovie = () => {
       ),
       condition: sequels?.length,
     },
+    {
+      txt: "Факты",
+      content: <Facts facts={facts} />,
+      condition: facts?.length,
+    },
   ];
   const [blockScroll, allowScroll] = useScrollBlock();
   active || activePlayer ? blockScroll() : allowScroll();
@@ -217,7 +224,8 @@ const SelectedMovie = () => {
               >{`Смотреть ${
                 (typeNumber === 1 && "фильм") ||
                 (typeNumber === 2 && "сериал") ||
-                (typeNumber === 3 && "мультфильм")
+                (typeNumber === 3 && "мультфильм") ||
+                "фильм"
               }`}</button>
               {src?.[0]?.embedUrl && (
                 <div className="trailer-block">
