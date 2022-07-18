@@ -1,4 +1,4 @@
-import { Fragment, ReactNode, useEffect } from "react";
+import { Fragment, ReactNode } from "react";
 import { Tab, TabList, TabPanel, Tabs as ReactTabs } from "react-tabs";
 import './Tabs.scss'
 interface TabItem {
