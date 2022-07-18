@@ -1,6 +1,9 @@
 import { Link } from "react-router-dom";
+import Input from "../../api/AuthInput/Input";
+import Submit from "../../api/AuthInput/Submit";
 import Logo from "../../Header/Logo/Logo";
 import "./Login.scss";
+import "../../Auth/Authorization.scss";
 
 const Login = () => {
   return (
@@ -8,16 +11,24 @@ const Login = () => {
       <div className="login-logo">
         <Logo />
       </div>
-      <section className="login-window">
-        <form action="" className="form-window">
+      <section className="section-window">
+        <form action="" className="form-window login-form-window">
           <h2>Вход</h2>
           {/* <h3>Ваш пароль успешно изменён!</h3> */}
-          <label htmlFor="GET-name">Почта</label>
-          <input type="email" name="name" placeholder="Введите почту" />
-          <label htmlFor="GET-name">Пароль</label>
-          <input type="password" name="name" placeholder="Введите пароль" />
+          <Input
+            label="Почта"
+            type="email"
+            name="email"
+            placeholder="Введите почту"
+          />
+          <Input
+            label="Пароль"
+            type="password"
+            name="password"
+            placeholder="Введите пароль"
+          />
           <Link to="/reset">Забыли пароль?</Link>
-          <input className="submit" type="submit" value="Войти" />
+          <Submit className="submit" type="submit" value="Войти" />
           <p>
             У Вас нет аккаунта? <Link to="/registration">Регистрация</Link>
           </p>

@@ -47,14 +47,19 @@ function App() {
   localStorage.setItem("oldDate", oldDate);
   return (
     <div className="root-2">
-{ window.location.pathname!==("/login" && '/registration')  &&  <Header
-        username={dataUser.name}
-        onClickLogOut={() => setDataUser({ name: "", email: "" })}
-        open={open}
-        openFunct={() => setOpen(!open)}
-        openModalFunct={() => setOpenModal(true)}
-        closeFunction={() => setOpen(false)}
-      />}
+      {window.location.pathname !== "/login" &&
+        window.location.pathname !== "/new_password" &&
+        window.location.pathname !== "/reset_password" &&
+        window.location.pathname !== "/registration" && (
+          <Header
+            username={dataUser.name}
+            onClickLogOut={() => setDataUser({ name: "", email: "" })}
+            open={open}
+            openFunct={() => setOpen(!open)}
+            openModalFunct={() => setOpenModal(true)}
+            closeFunction={() => setOpen(false)}
+          />
+        )}
       <Routes>
         <Route
           path="/"

@@ -1,57 +1,6 @@
-.registration-logo {
-  padding: 50px 0 0 50px;
-}
-
-.registration-window {
-  position: relative;
-  color: white;
-  .form-window {
-    margin:50px auto 0;
-    background-color: #242426;
-    width: 574px;
-    min-height: 732px;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 40px;
-    gap: 10px;
-    font-size: 16px;
-    border-radius: 10px;
-    p {
-      color: #80858b;
-      margin-left: auto;
-      margin-right: auto;
-      a {
-        color: #7b61ff;
-      }
-    }
-    input {
-      width: 100%;
-      height: 56px;
-      background-color: #323537;
-      color: #fff;
-      outline: none;
-      border: none;
-      border-radius: 10px;
-      padding: 16px 20px;
-      font-size: 16px;
-      font-weight: 500;
-      line-height: 24px;
-      ::placeholder {
-        color: #80858b;
-        font-weight: 500;
-        line-height: 24px;
-      }
-    }
-    .submit {
-      padding: 0;
-      color: white;
-      font-size: 16px;
-      margin: 40px 0 32px 0;
-      background-color: #7b61ff;
-      :hover {
-        background-color: #80858b;
-      }
-    }
+.section-window {
+  .registration-form-window {
+    margin: 100px auto 0;
+    min-height: 832px;
   }
 }

@@ -1,21 +1,31 @@
 import { Link } from "react-router-dom";
+import Input from "../../api/AuthInput/Input";
+import Submit from "../../api/AuthInput/Submit";
 import Logo from "../../Header/Logo/Logo";
 import "./NewPassword.scss";
 
 const NewPassword = () => {
   return (
     <>
-      <div className="registration-logo">
+      <div className="login-logo">
         <Logo />
       </div>
-      <section className="new-password-window">
-        <form action="" className="form-window">
+      <section className="section-window">
+        <form action="" className="form-window new-password-form-window">
           <h2>Новый пароль</h2>
-          <label htmlFor="GET-name">Пароль</label>
-          <input type="password" name="name" placeholder="Введите пароль" />
-          <label htmlFor="GET-name">Подтверждение пароля</label>
-          <input type="password" name="name" placeholder="Повторите пароль" />
-          <input className="submit" type="submit" value="Изменить пароль" />
+          <Input
+            label="Пароль"
+            type="password"
+            name="password"
+            placeholder="Введите пароль"
+          />
+          <Input
+            label="Подтверждение пароля"
+            type="password"
+            name="password"
+            placeholder="Повторите пароль"
+          />
+          <Submit className="submit" type="submit" value="Изменить пароль" />
         </form>
       </section>
     </>
