@@ -1,6 +1,6 @@
 import { Fragment, ReactNode } from "react";
 import { Tab, TabList, TabPanel, Tabs as ReactTabs } from "react-tabs";
-import './Tabs.scss'
+import "./Tabs.scss";
 interface TabItem {
   txt?: string;
   condition?: unknown;

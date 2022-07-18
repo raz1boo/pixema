@@ -24,7 +24,6 @@ function App() {
   const [open, setOpen] = useState(false);
   const [openModal, setOpenModal] = useState(false);
   return (
-
     <div id="root-2">
       <Header
         username={dataUser.name}
@@ -35,22 +34,12 @@ function App() {
         closeFunction={() => setOpen(false)}
       />
       <Routes>
-        <Route
-          path="/"
-          element={
-            <Home />
-          }
-        />
+        <Route path="/" element={<Home />} />
         <Route
           path="/settings"
           element={<Settings open={open} userData={dataUser} />}
         />
-        <Route
-          path="/trends"
-          element={
-            <Trends />
-          }
-        />
+        <Route path="/trends" element={<Trends />} />
         <Route path="/movie/">
           <Route path=":id" element={<SelectedMovie />} />
         </Route>
