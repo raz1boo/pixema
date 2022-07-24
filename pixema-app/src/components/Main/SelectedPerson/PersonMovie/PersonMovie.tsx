@@ -1,7 +1,7 @@
 import "./PersonMovie.scss";
 import { Link } from "react-router-dom";
-import Rating from "../../UI/Rating/Rating";
-import Genres from "../../UI/Genres/Genres";
+import Rating from "../../../UI/Rating/Rating";
+import Genres from "../../../UI/Genres/Genres";
 
 const PersonMovie = ({ docs }: any) => {
   return (
@@ -16,7 +16,7 @@ const PersonMovie = ({ docs }: any) => {
         <h2>{docs.name}</h2>
         <div className="person-movie__description__footer">
           <p>
-            {docs.year===null?'2022':docs.year}
+            {docs.year === null ? "2022" : docs.year}
             {(docs.typeNumber === 1 && ", фильм") ||
               (docs.typeNumber === 2 && ", сериал") ||
               (docs.typeNumber === 3 && ", мультфильм")}

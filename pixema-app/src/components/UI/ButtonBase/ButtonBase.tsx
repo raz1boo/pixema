@@ -1,5 +1,6 @@
 import { ButtonHTMLAttributes, ReactNode, useRef } from "react";
 import { forwardRef } from "react";
+import cn from "classnames";
 
 interface ButtonBaseProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   ripple?: boolean;
@@ -25,7 +26,11 @@ const ButtonBase = forwardRef<HTMLButtonElement, ButtonBaseProps>(
     const commonRef = ref || buttonRef;
 
     return (
-      <button ref={commonRef} {...props} className='button-base'>
+      <button
+        ref={commonRef}
+        {...props}
+        className={cn("button-base", className)}
+      >
         {startIcon && <span>{startIcon}</span>}
         {children}
         {endIcon && <span>{endIcon}</span>}

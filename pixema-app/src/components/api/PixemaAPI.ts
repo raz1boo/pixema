@@ -14,11 +14,15 @@ export const pixemaAPI = createApi({
       query: (id) => `/movie?search=${id}&field=id&token=${API_KEY}`,
     }),
     getMoviesById: build.query<IData, IBaseQuery>({
-      query: ({query,limit}) => `/movie?${query}&limit=${limit}&sortField=year&selectFields=genres year name typeNumber id poster rating &token=${API_KEY}`,
+      query: ({query,limit}) => `/movie?${query}&limit=${limit}&sortField=rating.kp&sortType=-1&selectFields=genres year name typeNumber id poster rating &token=${API_KEY}`,
     }),
     getNewMovies: build.query<IData, IBaseQuery>({
       query: ({ limit, type }) =>
         `/movie?field=rating.kp&search=1-10&field=year&search=2021-${getCurrentYear()}&field=typeNumber&search=${type}&limit=${limit}&sortField=year&selectFields=genres videos.trailers year name description ageRating id poster rating &sortType=-1&sortField=votes.imdb&sortType=-1&token=${API_KEY}`,
+    }),
+    getTrendMovies: build.query<IData, IBaseQuery>({
+      query: ({ limit, type }) =>
+        `/movie?field=rating.kp&search=1-10&field=typeNumber&search=${type}&limit=${limit}&sortField=year&selectFields=genres videos.trailers year name description ageRating id poster rating &sortType=-1&sortField=rating.imdb&sortType=-1&token=${API_KEY}`,
     }),
     getMovieByName: build.query<IData, IQuery>({
       query: ({ name, page }) =>
@@ -36,6 +40,7 @@ export const pixemaAPI = createApi({
 
 export const {
   useGetNewMoviesQuery,
+  useGetTrendMoviesQuery,
   useGetMoviesQuery,
   useGetMovieByNameQuery,
   useGetPersonByIdQuery,
@@ -45,6 +50,7 @@ export const {
 
 export const {
   getNewMovies,
+  getTrendMovies,
   getMovies,
   getMovieByName,
   getPersonById,

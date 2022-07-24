@@ -1,9 +1,12 @@
 import { useParams } from "react-router-dom";
-import { useGetMoviesByIdQuery, useGetPersonByIdQuery } from "../api/PixemaAPI";
-import { convertTimestampToDate } from "../helpers/convertTimestampToDate";
-import Facts from "../UI/Facts/Facts";
-import Tabs from "../UI/Tabs/Tabs";
-import TabsLayout from "../UI/Tabs/TabsLayout/TabsLayout";
+import {
+  useGetMoviesByIdQuery,
+  useGetPersonByIdQuery,
+} from "../../api/PixemaAPI";
+import { convertTimestampToDate } from "../../helpers/convertTimestampToDate";
+import Facts from "../../UI/Facts/Facts";
+import Tabs from "../../UI/Tabs/Tabs";
+import TabsLayout from "../../UI/Tabs/TabsLayout/TabsLayout";
 import "./SelectedPerson.scss";
 
 const SelectedPerson = () => {

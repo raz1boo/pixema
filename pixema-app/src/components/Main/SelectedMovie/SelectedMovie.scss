@@ -10,36 +10,46 @@
     flex-direction: column;
     min-width: 300px;
     gap: 32px;
-    .favorite-button, .watch-button {
-      border: none;
+    .favorite-button,
+    .watch-button {
       outline: none;
       background-color: #323537;
       max-height: 56px;
       padding: 19px;
       border-radius: 10px;
-      transition: .3s ease;
+      transition: 0.3s;
+      font-weight: 600;
+      font-size: 18px;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
       cursor: pointer;
-      &.active{
+      span {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      svg,
+      path {
+        transition: fill 0.3s ease;
+        fill: transparent;
+      }
+      &.active {
         background-color: #7b61ff;
       }
-      svg {
-        path {
-          transition: 0.3s ease;
-        }
-        margin: auto;
-      }
       &:hover {
-        background-color: #917CFF;
+        background-color: #917cff;
         path {
           fill: #fff;
         }
       }
     }
-    .watch-button{
-      font-weight: 600;
-      font-size: 18px;
-      color: #fff;
-      padding: 17px;
+    .watch-button {
+      &:hover svg {
+        fill: #fff;
+      }
     }
     img {
       height: 400px;
@@ -57,8 +67,19 @@
         width: 100%;
       }
       button {
+        svg {
+          transition: fill 0.3s ease;
+          fill: transparent;
+        }
+        &:hover {
+          background-color: #917cff;
+          svg {
+            fill: #fff;
+          }
+        }
         color: #fff;
         position: absolute;
+        transition: 0.3s ease;
         top: 110px;
         left: 10px;
         border: none;

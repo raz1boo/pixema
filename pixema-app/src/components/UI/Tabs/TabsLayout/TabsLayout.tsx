@@ -1,6 +1,6 @@
 import { SwiperSlide } from "swiper/react";
 import Movie from "../../../Main/Movies/Movie/Movie";
-import PersonMovie from "../../../SelectedPerson/PersonMovie/PersonMovie";
+import PersonMovie from "../../../Main/SelectedPerson/PersonMovie/PersonMovie";
 import { IMovie, IMoviePerson } from "../../../types/IMovie";
 import Slider from "../../Slider/Slider";
 import PersonTab from "./PersonTab/PersonTab";

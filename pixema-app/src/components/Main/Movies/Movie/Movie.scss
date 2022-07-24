@@ -2,11 +2,11 @@
   width: 266px;
   height: 433px;
   position: relative;
-  cursor: pointer;
   display: flex;
   text-decoration: none;
   flex-direction: column;
   z-index: 22;
+  cursor: pointer;
   &:hover h2 {
     color: #7b61ff;
   }
@@ -18,12 +18,22 @@
   &:after {
     content: "";
     position: absolute;
+    pointer-events: none;
     top: 0;
     left: 0;
     right: 0;
     height: 358px;
     background-color: rgba(#000, 0);
     transition: 0.3s ease;
+  }
+  &__markers {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: absolute;
+    padding: 20px;
+    height: 70px;
+    width: 100%;
   }
   &__poster {
     height: 357px;
@@ -34,6 +44,9 @@
     background-size: cover;
     transition: 0.3s ease;
     position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
   }
   &__description {
     display: flex;
