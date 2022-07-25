@@ -37,13 +37,16 @@
     background-color: #323537;
     min-height: 150px;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     flex-direction: column;
     max-height: 400px;
     h2 {
       margin: 0;
       color: #80858b;
+    }
+    &.not-founded {
+      justify-content: center;
     }
     &__items {
       width: 100%;
