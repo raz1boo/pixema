@@ -13,16 +13,16 @@ interface INav {
 
 const Navbar = ({ open, closeBurger, openBurgerFunction }: INav) => {
   const pathnames = ["Home", "Trends", "Favorites", "Settings"];
-  const ref1 = useRef<HTMLDivElement>(null);
   const params = useLocation();
-  useOutsideClick(ref1, closeBurger);
+  const ref = useRef<HTMLDivElement>(null);
+  useOutsideClick(ref, closeBurger);
   return (
     <>
       <MediaQuery minDeviceWidth={1281}>
         <div
           className={cn("burger-menu__button", open && "burger-menu__open")}
           onClick={openBurgerFunction}
-          ref={ref1}
+          ref={ref}
         >
           <div className={cn("burger", open && "x")}>
             <div className="burger-menu__lines"></div>
