@@ -7,7 +7,7 @@ interface PersonTabProps {
 }
 
 const PersonTab = ({ item }: PersonTabProps) => {
-  const { name, id, photo } = item;
+  const { name, id, photo, description } = item;
   return (
     <Link to={`/person/${id}`} className="person">
       <div
@@ -16,6 +16,7 @@ const PersonTab = ({ item }: PersonTabProps) => {
       ></div>
       <div className="person__description">
         <h2>{name}</h2>
+        <p>{description}</p>
       </div>
     </Link>
   );

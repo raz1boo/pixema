@@ -193,7 +193,7 @@
       border: 2px solid transparent;
       font-size: 16px;
       appearance: none;
-      background-image: url("../../../public/assets/icons/arrow-grey.png");
+      background-image: url("../../../../public/assets/icons/arrow-grey.png");
       background-repeat: no-repeat, repeat;
       background-color: #323537;
       background-position: right 0.7em top 50%, 0 0;
@@ -201,7 +201,7 @@
       transition: 0.3s ease;
     }
     select:hover {
-      background-image: url("../../../public/assets/icons/arrow-white.png");
+      background-image: url("../../../../public/assets/icons/arrow-white.png");
     }
     select:focus {
       border-color: #7b61ff;

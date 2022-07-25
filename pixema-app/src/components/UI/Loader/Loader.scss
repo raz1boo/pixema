@@ -1,0 +1,114 @@
+$dot: #afb2b6;
+$line: #7b61ff;
+$dot-size: 10px;
+
+.loader {
+  position: relative;
+  z-index: 999;
+  &__container {
+    height: 100px;
+    width: 100px;
+
+    &__dot {
+      position: absolute;
+      transform: translate(-50%, -50%);
+      top: 52.5%;
+      left: 150px;
+      height: $dot-size;
+      width: $dot-size;
+      background-color: $dot;
+      border-radius: 5rem;
+      transition: all 0.15s ease-in-out;
+
+      &:nth-child(1) {
+        animation: waveUp 2s, smallExtend 2s;
+        left: 0;
+        animation-timing-function: ease-in-out;
+        animation-iteration-count: infinite;
+      }
+
+      &:nth-child(2) {
+        left: 25px;
+        animation: waveUp 2s, largeExtend 2s;
+        animation-timing-function: ease-in-out;
+        animation-iteration-count: infinite;
+        animation-delay: 0.15s;
+      }
+
+      &:nth-child(3) {
+        animation: waveUp 2s, smallExtend 2s;
+        animation-timing-function: ease-in-out;
+        animation-iteration-count: infinite;
+        animation-delay: 0.3s;
+        left: 50px;
+      }
+
+      &:nth-child(4) {
+        left: 75px;
+        animation: waveUp 2s, largeExtend 2s;
+        animation-timing-function: ease-in-out;
+        animation-iteration-count: infinite;
+        animation-delay: 0.45s;
+      }
+
+      &:nth-child(5) {
+        left: 100px;
+        animation: waveUp 2s, smallExtend 2s;
+        animation-timing-function: ease-in-out;
+        animation-iteration-count: infinite;
+        animation-delay: 0.6s;
+      }
+
+      @keyframes waveUp {
+        0%,
+        15% {
+          top: 50%;
+        }
+        45%,
+        65% {
+          top: 42.5%;
+        }
+        85%,
+        100% {
+          top: 50%;
+        }
+      }
+
+      @keyframes smallExtend {
+        0%,
+        8% {
+          background-color: $dot;
+          height: $dot-size;
+        }
+        14%,
+        34% {
+          background-color: $line;
+          height: 30px;
+        }
+        46%,
+        100% {
+          background-color: $dot;
+          height: $dot-size;
+        }
+      }
+
+      @keyframes largeExtend {
+        0%,
+        8% {
+          background-color: $dot;
+          height: $dot-size;
+        }
+        14%,
+        34% {
+          background-color: $line;
+          height: 50px;
+        }
+        46%,
+        100% {
+          background-color: $dot;
+          height: $dot-size;
+        }
+      }
+    }
+  }
+}

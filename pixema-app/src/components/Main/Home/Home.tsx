@@ -27,7 +27,7 @@ const Home = () => {
   const [oldDate, setOldDate] = useState(
     localStorage.getItem("oldDate") || `${getCurrentDate() - 1}`
   );
-  if (oldDate === `${getCurrentDate() - 1}`) {
+  if (oldDate !== `${getCurrentDate()}`) {
     setBgVideo(`${getRandomInt(0, dataLength || 27)}`);
     setOldDate(`${getCurrentDate()}`);
   }

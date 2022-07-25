@@ -1,3 +1,6 @@
+import { IMovie } from "./IMovie";
+
 export interface IMovies {
-  type: number;
+  docs?: IMovie[];
+  type?: number;
 }

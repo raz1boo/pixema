@@ -1,20 +1,26 @@
 .rating {
   font-size: 18px;
-  display: inline;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
   padding: 2px 8px;
   max-width: 40px;
+  max-height: 28px;
+  height: 100%;
+  width: 100%;
   color: #fff;
   z-index: 33;
   position: relative;
   background-color: #f3a608;
   border-radius: 6px;
-  &:empty{
+  pointer-events: none;
+  &:empty {
     display: none;
   }
-    &__green {
-      background-color: #00a340;
-    }
-    &__red {
-      background-color: #f45d2d;
-    }
+  &__green {
+    background-color: #00a340;
   }
+  &__red {
+    background-color: #f45d2d;
+  }
+}

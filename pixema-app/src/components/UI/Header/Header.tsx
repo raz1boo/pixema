@@ -31,7 +31,6 @@ function Header({
           <Navbar
             closeBurger={closeFunction}
             openBurgerFunction={openFunct}
-            burger={true}
             open={open}
           />
           <Logo />
@@ -51,7 +50,7 @@ function Header({
         <Search openMenu={open} openModalFilter={openModalFunct} />
       </MediaQuery>
       <MediaQuery maxDeviceWidth={1280}>
-        <Navbar burger={true} open={open} closeBurger={closeFunction} />
+        <Navbar open={open} closeBurger={closeFunction} />
       </MediaQuery>
     </>
   );

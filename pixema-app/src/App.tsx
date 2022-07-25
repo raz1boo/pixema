@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
-import ModalFilter from "./components/ModalFilter/ModalFilter";
+import ModalFilter from "./components/Main/ModalFilter/ModalFilter";
 import Settings from "./components/Main/Settings/Settings";
 import Home from "./components/Main/Home/Home";
 import { IUser } from "./components/types/IUser";
@@ -11,10 +11,11 @@ import ResetPassword from "./components/Auth/ResetPassword/ResetPassword";
 import NewPassword from "./components/Auth/NewPassword/NewPassword";
 import Trends from "./components/Main/Trends/Trends";
 import SelectedMovie from "./components/Main/SelectedMovie/SelectedMovie";
-import NotFound from "./components/NotFound/NotFound";
+import NotFound from "./components/Main/NotFound/NotFound";
 import Footer from "./components/UI/Footer/Footer";
 import Header from "./components/UI/Header/Header";
-import SelectedPerson from "./components/SelectedPerson/SelectedPerson";
+import SelectedPerson from "./components/Main/SelectedPerson/SelectedPerson";
+import Favorites from "./components/Main/Favorites/Favorites";
 
 function App() {
   const [dataUser, setDataUser] = useState<IUser>({
@@ -40,6 +41,7 @@ function App() {
           element={<Settings open={open} userData={dataUser} />}
         />
         <Route path="/trends" element={<Trends />} />
+        <Route path="/favorites" element={<Favorites />} />
         <Route path="/movie/">
           <Route path=":id" element={<SelectedMovie />} />
         </Route>
@@ -59,5 +61,3 @@ function App() {
 }
 
 export default App;
-
-// доделать дизайн мобильной версии по фильтрам и /settings

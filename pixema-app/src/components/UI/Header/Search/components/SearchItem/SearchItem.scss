@@ -1,0 +1,40 @@
+.search-item {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  transition: 0.3s ease;
+  background-color: #323537;
+  &:hover {
+    background-color: #242426;
+  }
+  &__left {
+    max-width: 80%;
+    display: flex;
+    gap: 20px;
+    img {
+      height: 70px;
+      width: 60px;
+      border-radius: 10px;
+    }
+    &__description {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      h2 {
+        color: #fff;
+        margin: 0;
+        font-size: 20px;
+      }
+      &__info {
+        color: #afb2b6;
+        div {
+          background-color: transparent;
+          padding: 0;
+          font-size: 16px;
+          margin-left: 5px;
+        }
+      }
+    }
+  }
+}

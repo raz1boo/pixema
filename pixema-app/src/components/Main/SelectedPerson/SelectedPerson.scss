@@ -8,42 +8,11 @@
     &__left-side {
       display: flex;
       flex-direction: column;
-      min-width: 300px;
+      min-width: 266px;
       gap: 32px;
-      .favorite-button, .watch-button {
-        border: none;
-        outline: none;
-        background-color: #323537;
-        max-height: 56px;
-        padding: 19px;
-        border-radius: 10px;
-        transition: .3s ease;
-        cursor: pointer;
-        &.active{
-          background-color: #7b61ff;
-        }
-        svg {
-          path {
-            transition: 0.3s ease;
-          }
-          margin: auto;
-        }
-        &:hover {
-          background-color: #917CFF;
-          path {
-            fill: #fff;
-          }
-        }
-      }
-      .watch-button{
-        font-weight: 600;
-        font-size: 18px;
-        color: #fff;
-        padding: 17px;
-      }
       img {
         height: 400px;
-        width: 300px;
+        width: 266px;
         border-radius: 20px;
       }
       .trailer-block {
@@ -114,6 +83,7 @@
         .content {
           margin: 0;
           max-width: 1100px;
+          color: #fff;
           div {
             background-color: transparent;
           }

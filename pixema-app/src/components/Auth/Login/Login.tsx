@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
-import Input from "../../api/AuthInput/Input";
-import Submit from "../../api/AuthInput/Submit";
+import Input from "../AuthInput/Input";
+import Submit from "../AuthInput/Submit";
 import Logo from "../../UI/Header/Logo/Logo";
 import "./Login.scss";
 import "../../Auth/Authorization.scss";

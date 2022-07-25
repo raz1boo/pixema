@@ -1,21 +1,29 @@
 .tabs {
   overflow: hidden;
-  ul {
+  .react-tabs__tab-list {
     border-bottom: 1px solid #323537;
     padding: 0;
     margin: 0;
     display: flex;
-    padding-bottom: 10px;
     gap: 20px;
-    li {
+    .react-tabs__tab {
       list-style-type: none;
       color: #fff;
       outline: none;
       cursor: pointer;
       padding: 20px;
+      border-bottom: 2px solid transparent;
+      transition: 0.3s ease;
+      transform: translateY(1.5px);
+      &:hover {
+        border-color: #7b61ff;
+      }
+      &--selected {
+        border-color: #7b61ff;
+      }
     }
-  }
-  .react-tabs__tab-panel{
-    width: 100%;
+    &-panel {
+      width: 100%;
+    }
   }
 }

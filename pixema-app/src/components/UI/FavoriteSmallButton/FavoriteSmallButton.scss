@@ -1,0 +1,20 @@
+.favorite-small-button {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  align-items: center;
+  padding: 2px 8px;
+  max-width: 40px;
+  max-height: 28px;
+  height: 100%;
+  width: 100%;
+  z-index: 443;
+  background-color: #323537;
+  border-radius: 6px;
+  path {
+    height: 18px;
+    width: 14px;
+    fill: #7b61ff;
+    color: #7b61ff;
+  }
+}
