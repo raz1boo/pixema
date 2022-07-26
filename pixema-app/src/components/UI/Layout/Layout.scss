@@ -5,4 +5,7 @@
     margin: 0 auto;
     z-index: 90;
     position: relative;
+    &.justify-content__space-between{
+        justify-content: space-between;
+    }
 }

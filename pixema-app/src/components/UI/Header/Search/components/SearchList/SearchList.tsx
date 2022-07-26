@@ -8,25 +8,27 @@ import Loader from "../../../../Loader/Loader";
 import SearchItem from "../SearchItem/SearchItem";
 import "./SearchList.scss";
 import cn from "classnames";
-import { IMovie } from "../../../../../types/IMovie";
+import { IMovie, IMoviePerson } from "../../../../../types/IMovie";
+import SearchPersonItem from "../SearchPersonItem/SearchPersonItem";
+import { Link } from "react-router-dom";
 
 interface SearchListProps {
   value: string;
+  closeClick?: () => void;
 }
 
-const SearchList = ({ value }: SearchListProps) => {
+const SearchList = ({ value, closeClick }: SearchListProps) => {
   const [type, setType] = useState(1);
   const { data, isFetching } = useGetMoviesBySearchQuery({
     query: value,
     type,
-    limit: 100,
+    limit: 40,
   });
   const [person, setPerson] = useState(false);
   const { data: persons } = useGetPersonsBySearchQuery({
     query: `&search=${value}&field=name`,
-    limit: 100,
+    limit: 40,
   });
-  console.log(persons?.docs);
   let content = null;
   if (data?.docs?.length && (type === 1 || type === 2 || type === 3)) {
     content = (
@@ -36,18 +38,23 @@ const SearchList = ({ value }: SearchListProps) => {
             <SearchItem key={item.id} item={item} />
           ))}
         </div>
-        <ButtonBase>Показать все</ButtonBase>
+        <Link to={`/search/movies/${value}`}>
+          <ButtonBase>Показать все</ButtonBase>
+        </Link>
       </>
     );
   } else if (persons?.docs?.length && type === 0) {
     content = (
       <>
         <div className="search-list__main__items">
-          {persons?.docs?.map((item: IMovie) => (
-            <SearchItem key={item.id} item={item} />
+          {persons?.docs?.map((item: IMoviePerson) => (
+            <SearchPersonItem key={item.id} item={item} />
           ))}
         </div>
-        <ButtonBase>Показать все</ButtonBase>
+
+        <Link to={`/search/persons/${value}`}>
+          <ButtonBase>Показать все</ButtonBase>
+        </Link>
       </>
     );
   } else {
@@ -60,57 +67,56 @@ const SearchList = ({ value }: SearchListProps) => {
   return (
     <div className="search-list">
       <div className="search-list__buttons">
-        <div className="search-list__buttons__label">
-          <button
-            onClick={() => {
-              setType(1);
-              setPerson(false);
-            }}
-            className={cn(
-              "search-list__buttons__button",
-              type === 1 && "active"
-            )}
-          >
-            Фильмы
-          </button>
-          <button
-            onClick={() => {
-              setType(2);
-              setPerson(false);
-            }}
-            className={cn(
-              "search-list__buttons__button",
-              type === 2 && "active"
-            )}
-          >
-            Сериалы
-          </button>
-          <button
-            onClick={() => {
-              setType(3);
-              setPerson(false);
-            }}
-            className={cn(
-              "search-list__buttons__button",
-              type === 3 && "active"
-            )}
-          >
-            Мультфильмы
-          </button>
-          <button
-            onClick={() => {
-              setPerson(true);
-              setType(0);
-            }}
-            className={cn("search-list__buttons__button", person && "active")}
-          >
-            Люди
-          </button>
+        <button
+          onClick={() => {
+            setType(1);
+            setPerson(false);
+          }}
+          className={cn("search-list__buttons__button", type === 1 && "active")}
+        >
+          Фильмы
+        </button>
+        <button
+          onClick={() => {
+            setType(2);
+            setPerson(false);
+          }}
+          className={cn("search-list__buttons__button", type === 2 && "active")}
+        >
+          Сериалы
+        </button>
+        <button
+          onClick={() => {
+            setType(3);
+            setPerson(false);
+          }}
+          className={cn("search-list__buttons__button", type === 3 && "active")}
+        >
+          Мультфильмы
+        </button>
+        <button
+          onClick={() => {
+            setPerson(true);
+            setType(0);
+          }}
+          className={cn("search-list__buttons__button", person && "active")}
+        >
+          Люди
+        </button>
+      </div>
+
+      {isFetching ? (
+        <div
+          className="search-list__main search-list__main__loader"
+          onClick={closeClick}
+        >
+          <Loader />
         </div>
-      </div>
-      <div className="search-list__main">
-        {isFetching ? <Loader /> : content}
-      </div>
+      ) : (
+        <div className="search-list__main" onClick={closeClick}>
+          {content}
+        </div>
+      )}
     </div>
   );
 };

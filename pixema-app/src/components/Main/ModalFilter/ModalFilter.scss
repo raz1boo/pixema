@@ -16,6 +16,9 @@
   &__content {
     max-width: 518px;
     background-color: #242426;
+    height: 100vh;
+    display: flex;
+    justify-content: space-between;
     border-radius: 10px;
     padding: 48px 40px;
     transition: 0.3s ease;
@@ -24,7 +27,6 @@
     right: -100000px;
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
-    display: block;
     flex-direction: column;
     &.active {
       right: 0;
@@ -40,10 +42,9 @@
   h3 {
     font-size: 16px;
     font-weight: 600;
-    line-height: 24px;
     margin: 0;
     margin-bottom: 8px;
-    margin-top: 32px;
+    margin-top: 8px;
   }
   input {
     font-size: 16px;
@@ -73,10 +74,13 @@
       }
     }
   }
+  &__main {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+  }
   &__sort-by {
-    padding-bottom: 32px;
-    margin-top: 48px;
-    margin-bottom: 32px;
+    padding-bottom: 16px;
     border-bottom: 1px solid #323537;
     .sort-switcher {
       height: 52px;
@@ -211,8 +215,8 @@
     }
   }
   &__footer {
-    padding-top: 111px;
     display: flex;
+    padding-top: 10px;
     gap: 40px;
     button {
       border: 2px solid #323537;

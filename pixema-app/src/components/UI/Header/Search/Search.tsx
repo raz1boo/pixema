@@ -1,47 +1,48 @@
 import "./Search.scss";
-import cn from "classnames";
-import { useAppDispatch, useAppSelector } from "../../../store/hooks/redux";
-import { FormEvent, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { useOutsideClick } from "rooks";
-import { searchSlice } from "../../../store/reducers/search.slice";
 import { FiX } from "react-icons/fi";
 import { useDebounce } from "usehooks-ts";
 import SearchList from "./components/SearchList/SearchList";
+import { useNavigate } from "react-router-dom";
+import { useAppDispatch } from "../../../store/hooks/redux";
+import { filtersSlice } from "../../../store/reducers/filters.slice";
 
 interface ISearch {
-  activeFilter?: boolean;
   openMenu?: boolean;
-  openModalFilter?: () => void;
 }
 
-const Search = ({ activeFilter, openMenu, openModalFilter }: ISearch) => {
+const Search = ({ openMenu }: ISearch) => {
   const dispatch = useAppDispatch();
-  const { visible } = useAppSelector((state) => state.searchReducer);
+  const { setVisibleFilter } = filtersSlice.actions;
+  const [visible, setVisible] = useState(false);
   const [value, setValue] = useState<string>("");
   const debouncedValue = useDebounce<string>(value, 500);
   const ref = useRef<HTMLLabelElement>(null);
   const isActive = debouncedValue && visible;
-  const { setSearch, setVisible } = searchSlice.actions;
-  useOutsideClick(ref, () => dispatch(setVisible(false)));
-  const submitForm = (
-    e: FormEvent<HTMLFormElement | HTMLButtonElement | HTMLLabelElement>
-  ) => {
-    e.preventDefault();
-    setSearch(value);
-    setVisible(false);
-    setValue("");
-  };
+  useOutsideClick(ref, () => setVisible(false));
+  const navigate = useNavigate();
+  document.addEventListener("keydown", function (e) {
+    if (e.keyCode === 13) {
+      e.preventDefault();
+      if (debouncedValue) {
+        setVisible(false);
+        setValue("");
+        navigate(`/search/movies/${debouncedValue}`, { replace: true });
+      }
+    }
+  });
   return (
-    <label
-      className={cn("search", openMenu && "burger-menu__open")}
-      ref={ref}
-      onSubmit={submitForm}
-    >
+    <label className="search" ref={ref}>
+      {/* <label className={cn("search", openMenu && "burger-menu__open")} ref={ref}> */}
       <input
         type="text"
         placeholder="Search"
-        onChange={(e) => setValue(e.target.value)}
-        onClick={() => dispatch(setVisible(true))}
+        onChange={(e) => {
+          setValue(e.target.value);
+          setVisible(true);
+        }}
+        onClick={() => setVisible(true)}
         value={value}
       />
       {value ? (
@@ -56,14 +57,23 @@ const Search = ({ activeFilter, openMenu, openModalFilter }: ISearch) => {
         </button>
       ) : (
         <button
-          className={cn(
-            "filter-button",
-            activeFilter && "filter-button_active"
-          )}
-          onClick={openModalFilter}
+          className="filter-button"
+          // className={cn(
+          //   "filter-button",
+          //   activeFilter && "filter-button_active"
+          // )}
+          onClick={() => dispatch(setVisibleFilter(true))}
         ></button>
       )}
-      {isActive && <SearchList value={debouncedValue} />}
+      {isActive && (
+        <SearchList
+          value={debouncedValue}
+          closeClick={() => {
+            setValue("");
+            setVisible(false);
+          }}
+        />
+      )}
     </label>
   );
 };

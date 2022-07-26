@@ -12,7 +12,6 @@ interface IHeader {
   onClickLogOut: () => void;
   open: boolean;
   openFunct: () => void;
-  openModalFunct: () => void;
   closeFunction: () => void;
 }
 
@@ -21,7 +20,6 @@ function Header({
   onClickLogOut,
   open,
   openFunct,
-  openModalFunct,
   closeFunction,
 }: IHeader) {
   return (
@@ -35,7 +33,7 @@ function Header({
           />
           <Logo />
           <MediaQuery minDeviceWidth={481}>
-            <Search openModalFilter={openModalFunct} />
+            <Search />
           </MediaQuery>
           <User
             username={username}
@@ -47,7 +45,7 @@ function Header({
         </Layout>
       </header>
       <MediaQuery maxDeviceWidth={480}>
-        <Search openMenu={open} openModalFilter={openModalFunct} />
+        <Search />
       </MediaQuery>
       <MediaQuery maxDeviceWidth={1280}>
         <Navbar open={open} closeBurger={closeFunction} />

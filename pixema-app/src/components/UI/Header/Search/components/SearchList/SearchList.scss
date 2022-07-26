@@ -8,39 +8,52 @@
     height: 70px;
     display: flex;
     align-items: center;
-    gap: 10px;
-    background-color: #323537;
+    background-color: #242426;
     padding: 10px;
-    &__label {
-      border-radius: 6px;
-      overflow: hidden;
-    }
     &__button {
-      outline: none;
       border: none;
-      background-color: #242426;
-      color: #fff;
-      cursor: pointer;
-      padding: 15px 30px;
-      font-weight: 600;
+      border-top: 2px solid #323537;
+      border-bottom: 2px solid #323537;
+      padding: 14px 0;
+      max-width: 217px;
       font-size: 16px;
+      cursor: pointer;
+      outline: none;
+      width: 217px;
+      height: 50px;
+      color: #80858b;
       transition: 0.3s ease;
+      background-color: #242426;
+      &:nth-child(1) {
+        border-top-left-radius: 6px;
+        border-left: 2px solid #323537;
+        border-bottom-left-radius: 6px;
+      }
+      &:nth-child(4) {
+        border-top-right-radius: 6px;
+        border-bottom-right-radius: 6px;
+        border-right: 2px solid #323537;
+      }
       &:hover {
-        background-color: #000;
+        color: #fff;
       }
       &.active {
-        background-color: #7b61ff;
+        background-color: #323537;
+        color: #fff;
       }
     }
   }
   &__main {
-    background-color: #323537;
+    background-color: #242426;
     min-height: 150px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     flex-direction: column;
     max-height: 400px;
+    &__loader {
+      justify-content: center;
+    }
     h2 {
       margin: 0;
       color: #80858b;
@@ -67,19 +80,23 @@
         border-radius: 10px;
       }
     }
-    button {
-      outline: none;
-      border: none;
-      background-color: #7b61ff;
+    a {
       color: #fff;
-      cursor: pointer;
-      padding: 15px 30px;
-      font-weight: 600;
-      font-size: 16px;
       width: 100%;
-      transition: 0.3s ease;
-      &:hover {
-        background-color: #917cff;
+      button {
+        color: #fff;
+        outline: none;
+        border: none;
+        background-color: #7b61ff;
+        cursor: pointer;
+        padding: 15px 30px;
+        font-weight: 600;
+        font-size: 16px;
+        width: 100%;
+        transition: 0.3s ease;
+        &:hover {
+          background-color: #917cff;
+        }
       }
     }
   }

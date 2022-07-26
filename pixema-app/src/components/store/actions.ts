@@ -7,7 +7,6 @@ import {
   setFilterSortBy,
   resetFilters,
 } from "./reducers/filters.slice";
-import { setSearch } from "./reducers/search.slice";
 
 export default {
   loadMoreMovies,
@@ -17,5 +16,4 @@ export default {
   setFilterSortBy,
   setFilterYear,
   resetFilters,
-  setSearch,
 };

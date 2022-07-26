@@ -16,6 +16,9 @@ import Footer from "./components/UI/Footer/Footer";
 import Header from "./components/UI/Header/Header";
 import SelectedPerson from "./components/Main/SelectedPerson/SelectedPerson";
 import Favorites from "./components/Main/Favorites/Favorites";
+import SearchMoviesResults from "./components/Main/SearchResults/SearchMoviesResults";
+import SearchPersonsResults from "./components/Main/SearchResults/SearchPersonsResults";
+import FiltersResults from "./components/Main/FilterResults/FilterResults";
 
 function App() {
   const [dataUser, setDataUser] = useState<IUser>({
@@ -23,7 +26,6 @@ function App() {
     email: "a.lapitsky@gmail.com",
   });
   const [open, setOpen] = useState(false);
-  const [openModal, setOpenModal] = useState(false);
   return (
     <div id="root-2">
       <Header
@@ -31,7 +33,6 @@ function App() {
         onClickLogOut={() => setDataUser({ name: "", email: "" })}
         open={open}
         openFunct={() => setOpen(!open)}
-        openModalFunct={() => setOpenModal(true)}
         closeFunction={() => setOpen(false)}
       />
       <Routes>
@@ -48,13 +49,18 @@ function App() {
         <Route path="/person/">
           <Route path=":id" element={<SelectedPerson />} />
         </Route>
+        <Route path="/filter" element={<FiltersResults />} />
+        <Route path="/search/">
+          <Route path="movies/:id" element={<SearchMoviesResults />} />
+          <Route path="persons/:id" element={<SearchPersonsResults />} />
+        </Route>
         <Route path="/registration" element={<Registration />} />
         <Route path="/login" element={<Login />} />
         <Route path="/reset_password" element={<ResetPassword />} />
         <Route path="/new_password" element={<NewPassword />} />
         <Route element={<NotFound />} path="*" />
       </Routes>
-      <ModalFilter open={openModal} closeModal={() => setOpenModal(false)} />
+      <ModalFilter />
       <Footer />
     </div>
   );

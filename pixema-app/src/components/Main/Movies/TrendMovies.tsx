@@ -1,11 +1,14 @@
 import Movie from "./Movie/Movie";
 import "./Movies.scss";
 import { useGetTrendMoviesQuery } from "../../api/PixemaAPI";
-import { IMovies } from "../../types/IMovies";
 import { useState } from "react";
 import Layout from "../../UI/Layout/Layout";
 
-const TrendMovies = ({ type }: IMovies) => {
+interface TrendMoviesProps {
+  type: number;
+}
+
+const TrendMovies = ({ type }: TrendMoviesProps) => {
   const [limit, setLimit] = useState(10);
   const { data, isFetching } = useGetTrendMoviesQuery({ limit, type });
 

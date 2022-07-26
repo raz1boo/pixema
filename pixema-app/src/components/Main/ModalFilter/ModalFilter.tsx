@@ -4,23 +4,40 @@ import { HiOutlineX } from "react-icons/hi";
 import { useRef, useState } from "react";
 import { useOutsideClick } from "rooks";
 import getAllCountries from "../../constants/getAllCountries";
+import useScrollBlock from "../../helpers/scrollHook";
+import { filtersSlice } from "../../store/reducers/filters.slice";
+import { useAppDispatch, useAppSelector } from "../../store/hooks/redux";
 
-interface IModal {
-  open: boolean;
-  closeModal: () => void;
-}
-
-const ModalFilter = ({ open, closeModal }: IModal) => {
+const ModalFilter = () => {
+  const dispatch = useAppDispatch();
+  const { visible } = useAppSelector((state) => state.filtersReducers);
   const genres = ["Adventure", "Dramma", "Documental", "Thriller"];
-  const [dis, setDis] = useState(false);
+  const [dis, setDis] = useState(true);
   const ref = useRef<HTMLDivElement>(null);
-  useOutsideClick(ref, closeModal);
+  useOutsideClick(ref, () => dispatch(setVisibleFilter(false)));
+  const [blockScroll, allowScroll] = useScrollBlock();
+  visible ? blockScroll() : allowScroll();
+  const {
+    setFilterYear,
+    setFilterRating,
+    setFilterGenre,
+    setFilterCountry,
+    setFilterSortBy,
+    setVisibleFilter,
+    resetFilters,
+  } = filtersSlice.actions;
   return (
-    <div className={cn("modal-filter", open && "active")}>
-      <div className={cn("modal-filter__content", open && "active")} ref={ref}>
+    <div className={cn("modal-filter", visible && "active")}>
+      <div
+        className={cn("modal-filter__content", visible && "active")}
+        ref={ref}
+      >
         <div className="modal-filter__header">
           <h2>Filters</h2>
-          <div className="close-button" onClick={closeModal}>
+          <div
+            className="close-button"
+            onClick={() => dispatch(setVisibleFilter(false))}
+          >
             <HiOutlineX />
           </div>
         </div>
@@ -87,8 +104,18 @@ const ModalFilter = ({ open, closeModal }: IModal) => {
           </div>
         </div>
         <div className="modal-filter__footer">
-          <button className="footer-button clear">Clear filter</button>
-          <button className="footer-button results">Show results</button>
+          <button
+            className="footer-button clear"
+            onClick={() => dispatch(setVisibleFilter(false))}
+          >
+            Clear filter
+          </button>
+          <button
+            className="footer-button results"
+            onClick={() => dispatch(setVisibleFilter(false))}
+          >
+            Show results
+          </button>
         </div>
       </div>
     </div>
