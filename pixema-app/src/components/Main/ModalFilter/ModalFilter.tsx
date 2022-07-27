@@ -3,37 +3,101 @@ import cn from "classnames";
 import { HiOutlineX } from "react-icons/hi";
 import { useRef, useState } from "react";
 import { useOutsideClick } from "rooks";
-import getAllCountries from "../../constants/getAllCountries";
 import useScrollBlock from "../../helpers/scrollHook";
 import { filtersSlice } from "../../store/reducers/filters.slice";
 import { useAppDispatch, useAppSelector } from "../../store/hooks/redux";
+import { Controller, useForm } from "react-hook-form";
+import { getCurrentYear } from "../../helpers/getCurrentYear";
+import getAllGenres from "../../constants/getAllGenres";
+import FilterSlider from "../../UI/FilterSlider/FilterSlider";
+import { Link } from "react-router-dom";
+import ButtonBase from "../../UI/ButtonBase/ButtonBase";
+import { FiCheck } from "react-icons/fi";
 
 const ModalFilter = () => {
+  const [text, setText] = useState<string>("");
+  const [suggestions, setSuggestions] = useState<
+    { label: string; value: string }[]
+  >([]);
+  const [checkedGenres, setCheckedGenres] = useState<
+    { label: string; value: string }[]
+  >([]);
   const dispatch = useAppDispatch();
   const { visible } = useAppSelector((state) => state.filtersReducers);
-  const genres = ["Adventure", "Dramma", "Documental", "Thriller"];
-  const [dis, setDis] = useState(true);
-  const ref = useRef<HTMLDivElement>(null);
-  useOutsideClick(ref, () => dispatch(setVisibleFilter(false)));
   const [blockScroll, allowScroll] = useScrollBlock();
   visible ? blockScroll() : allowScroll();
+  const [dis, setDis] = useState(true);
   const {
     setFilterYear,
     setFilterRating,
     setFilterGenre,
-    setFilterCountry,
     setFilterSortBy,
     setVisibleFilter,
-    resetFilters,
+    setCheckedFilters,
   } = filtersSlice.actions;
+  const { handleSubmit, control, reset } = useForm({
+    defaultValues: {
+      sort: "-1",
+      rating: [1, 10],
+      year: [1990, getCurrentYear()],
+    },
+  });
+  const onSubmit = handleSubmit((data) => {
+    const { sort, rating, year } = data;
+    const ratingString = `${rating[0]}-${rating[1]}`;
+    const yearString = `${year[0]}-${year[1]}`;
+    const ratings = rating[0] !== rating[1] ? ratingString : rating[0];
+    const years = year[0] !== year[1] ? yearString : year[0];
+    const genre = checkedGenres
+      .map((item) => `search[]=${item.value}&field[]=genres.name`)
+      .join("&");
+    dispatch(setFilterRating(ratings));
+    dispatch(setFilterYear(years));
+    dispatch(setFilterSortBy(sort));
+    dispatch(setFilterGenre(genre));
+    dispatch(setVisibleFilter(false));
+  });
+  const handleReset = () => {
+    setDis(true);
+    reset();
+    setCheckedGenres([]);
+    dispatch(setCheckedFilters(false));
+  };
+  let matches: { label: string; value: string }[];
+  const onChangeHandler = (value: string) => {
+    matches = [];
+    if (value.length > 0) {
+      matches = getAllGenres.filter((item) => {
+        const regex = new RegExp(`${value}`, "gi");
+        return item.label.match(regex);
+      });
+    }
+    setSuggestions(matches);
+    setText(value);
+  };
+  const onSuggestHandler = (value: { label: string; value: string }) => {
+    setText("");
+    setSuggestions([]);
+    setCheckedGenres((checkedGenres) => [
+      ...checkedGenres.filter((item) => item.label !== value.label),
+      value,
+    ]);
+  };
+  const ref = useRef<HTMLDivElement>(null);
+  const genresRef = useRef<HTMLDivElement>(null);
+  useOutsideClick(ref, () => dispatch(setVisibleFilter(false)));
+  useOutsideClick(genresRef, () => {
+    setText("");
+    setSuggestions([]);
+  });
   return (
     <div className={cn("modal-filter", visible && "active")}>
       <div
         className={cn("modal-filter__content", visible && "active")}
-        ref={ref}
+        ref={visible ? ref : null}
       >
         <div className="modal-filter__header">
-          <h2>Filters</h2>
+          <h2>Фильтр</h2>
           <div
             className="close-button"
             onClick={() => dispatch(setVisibleFilter(false))}
@@ -43,79 +107,134 @@ const ModalFilter = () => {
         </div>
         <div className="modal-filter__main">
           <div className="modal-filter__sort-by">
-            <h3>Sort by</h3>
+            <h3>Год выхода</h3>
             <div className="sort-switcher">
-              <button disabled={dis} onClick={() => setDis(!dis)}>
-                Rating
-              </button>
-              <button
-                disabled={dis ? false : true}
-                onClick={() => setDis(!dis)}
-              >
-                Year
-              </button>
+              <Controller
+                name="sort"
+                control={control}
+                render={({ field: { onChange } }) => {
+                  return (
+                    <label className="sort-switcher">
+                      <button
+                        onClick={() => {
+                          onChange("-1");
+                          setDis(true);
+                        }}
+                        value="-1"
+                        name="sort"
+                        disabled={dis}
+                      >
+                        Сначала новые
+                      </button>
+                      <button
+                        onClick={() => {
+                          onChange("1");
+                          setDis(false);
+                        }}
+                        value="1"
+                        name="sort"
+                        disabled={dis ? false : true}
+                      >
+                        Сначала старые
+                      </button>
+                    </label>
+                  );
+                }}
+              />
             </div>
-          </div>
-          <div className="modal-filter__movie-name">
-            <h3>Full or short movie name</h3>
-            <input type="text" placeholder="Your text" />
           </div>
           <div className="modal-filter__genre">
-            <h3>Genre</h3>
+            <h3>Жанры</h3>
             <div className="genre-block">
               <ul>
-                {genres.map((genre) => (
-                  <li key={genre}>
-                    {genre}
-                    <HiOutlineX />
+                {checkedGenres.map((genre) => (
+                  <li key={genre.value}>
+                    {genre.label}
+                    <HiOutlineX
+                      onClick={() => {
+                        setCheckedGenres(
+                          checkedGenres.filter(
+                            (item) => item.label !== genre.label
+                          )
+                        );
+                      }}
+                    />
                   </li>
                 ))}
-                <input type="text" maxLength={20} />
-                {/* сделать мультиселект */}
+                <input
+                  type="text"
+                  maxLength={20}
+                  value={text}
+                  onChange={(e) => onChangeHandler(e.target.value)}
+                  placeholder={checkedGenres.length ? "" : "Введите жанр"}
+                />
               </ul>
             </div>
+            {suggestions && (
+              <div className="suggestions" ref={genresRef}>
+                {suggestions.map((item, index) => (
+                  <div
+                    key={index}
+                    onClick={() => onSuggestHandler(item)}
+                    className="suggestion"
+                  >
+                    {item.label}
+                    {checkedGenres.map(
+                      (element) =>
+                        element.label === item.label && <FiCheck key={index} />
+                    )}
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
           <div className="modal-filter__years">
-            <h3>Years</h3>
+            <h3>Год производства</h3>
             <div className="years-block">
-              <input type="text" placeholder="From" />
-              <input type="text" placeholder="To" />
+              <Controller
+                name="year"
+                control={control}
+                render={({ field: { value, onChange } }) => {
+                  return (
+                    <FilterSlider
+                      min={1990}
+                      max={getCurrentYear()}
+                      values={value}
+                      onChange={onChange}
+                    />
+                  );
+                }}
+              />
             </div>
           </div>
           <div className="modal-filter__rating">
-            <h3>Rating</h3>
+            <h3>Рейтинг</h3>
             <div className="rating-block">
-              <input type="text" placeholder="From" />
-              <input type="text" placeholder="To" />
+              <Controller
+                name="rating"
+                control={control}
+                render={({ field: { value, onChange } }) => {
+                  return (
+                    <FilterSlider
+                      min={1}
+                      max={10}
+                      values={value}
+                      onChange={onChange}
+                      step={1}
+                    />
+                  );
+                }}
+              />
             </div>
-          </div>
-          <div className="modal-filter__country">
-            <h3>Country</h3>
-            <select name="country" id="country">
-              <option value="0" label="Select country" />
-              {Object.entries(getAllCountries).map((country) => (
-                <option
-                  key={country[0]}
-                  label={country[1]}
-                  value={country[0]}
-                />
-              ))}
-            </select>
           </div>
         </div>
         <div className="modal-filter__footer">
-          <button
-            className="footer-button clear"
-            onClick={() => dispatch(setVisibleFilter(false))}
-          >
-            Clear filter
-          </button>
-          <button
-            className="footer-button results"
-            onClick={() => dispatch(setVisibleFilter(false))}
-          >
-            Show results
-          </button>
+          <ButtonBase className="footer-button clear" onClick={handleReset}>
+            Очистить фильтр
+          </ButtonBase>
+          <ButtonBase className="footer-button results" onClick={onSubmit}>
+            <Link to="/filter">Показать результаты</Link>
+          </ButtonBase>
         </div>
       </div>
     </div>

@@ -47,6 +47,7 @@ const SelectedMovie = () => {
     sequelsAndPrequels,
     year,
     facts,
+    enName,
   } = { ...data };
   const prepareVideos = (videos: any) => {
     const regex =
@@ -118,8 +119,8 @@ const SelectedMovie = () => {
     },
     {
       title: "Режиссер",
-      value: persons?.[0].name,
-      condition: persons?.[0].name,
+      value: persons?.[0]?.name,
+      condition: persons?.[0]?.name,
     },
     {
       title: "Продюссер",
@@ -238,7 +239,7 @@ const SelectedMovie = () => {
             </div>
             <div className="selected-movie__right-side">
               <Genres genres={genres} />
-              <h1>{name}</h1>
+              <h1>{name ? name : enName}</h1>
               <h2>{alternativeName}</h2>
               <div className="markers">
                 <Rating rating={rating} />

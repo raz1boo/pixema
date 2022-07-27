@@ -20,7 +20,7 @@
     display: flex;
     justify-content: space-between;
     border-radius: 10px;
-    padding: 48px 40px;
+    padding: 40px;
     transition: 0.3s ease;
     position: absolute;
     top: 0px;
@@ -35,16 +35,13 @@
   }
   h2 {
     font-size: 24px;
-    font-weight: 600;
-    line-height: 36px;
     margin: 0;
   }
   h3 {
     font-size: 16px;
-    font-weight: 600;
     margin: 0;
     margin-bottom: 8px;
-    margin-top: 8px;
+    margin-top: 32px;
   }
   input {
     font-size: 16px;
@@ -77,7 +74,8 @@
   &__main {
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: space-between;
+    height: 80%;
   }
   &__sort-by {
     padding-bottom: 16px;
@@ -125,11 +123,58 @@
     }
   }
   &__genre {
+    position: relative;
+    .suggestions {
+      max-height: 500px;
+      width: 100%;
+      background-color: #323537;
+      position: absolute;
+      margin-top: 8px;
+      left: -1px;
+      z-index: 888;
+      border-radius: 10px;
+      overflow-y: scroll;
+      &::-webkit-scrollbar {
+        width: 7px;
+      }
+
+      &::-webkit-scrollbar-track {
+        background-color: transparent;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background: #7b61ff;
+        border-radius: 10px;
+      }
+      .suggestion {
+        display: flex;
+        padding: 0 20px;
+        cursor: pointer;
+        align-items: center;
+        justify-content: space-between;
+        transition: 0.3s ease;
+        color: #fff;
+        height: 55px;
+        &:hover {
+          color: #7b61ff;
+        }
+        &:not(:last-child) {
+          border-bottom: 1px solid #242426;
+        }
+        svg {
+          color: #7b61ff;
+        }
+      }
+    }
     .genre-block {
       padding: 12px;
       background-color: #323537;
       border-radius: 10px;
-      height: 100px;
+      min-height: 56px;
+      border: 2px solid transparent;
+      &:focus-within {
+        border-color: #7b61ff;
+      }
       ul {
         display: inline-flex;
         gap: 12px;
@@ -137,11 +182,9 @@
         padding: 0;
         margin: 0;
         input {
-          width: 30%;
-          height: 30%;
-          padding: 0;
-          background-color: transparent;
-          padding-top: 5px;
+          max-height: 32px;
+          padding: 0 3px;
+          width: 55%;
         }
       }
       li {
@@ -165,60 +208,17 @@
       }
     }
   }
-  &__years {
-    .years-block {
-      display: flex;
-      gap: 40px;
-      input {
-        width: 50%;
-        max-width: 199px;
-      }
-    }
-  }
-  &__rating {
-    .rating-block {
-      display: flex;
-      gap: 40px;
-      input {
-        width: 50%;
-        max-width: 199px;
-      }
-    }
-  }
-  &__country {
-    select {
-      width: 100%;
-      max-width: 438px;
-      background-color: #323537;
-      border-radius: 10px;
-      color: #80858b;
-      padding: 16px 20px;
-      outline: none;
-      border: 2px solid transparent;
-      font-size: 16px;
-      appearance: none;
-      background-image: url("../../../../public/assets/icons/arrow-grey.png");
-      background-repeat: no-repeat, repeat;
-      background-color: #323537;
-      background-position: right 0.7em top 50%, 0 0;
-      background-size: 0.65em auto, 100%;
-      transition: 0.3s ease;
-    }
-    select:hover {
-      background-image: url("../../../../public/assets/icons/arrow-white.png");
-    }
-    select:focus {
-      border-color: #7b61ff;
-    }
-    option {
-      color: #fff;
-    }
-  }
   &__footer {
     display: flex;
     padding-top: 10px;
+    width: 99%;
     gap: 40px;
+    a {
+      color: #fff;
+      padding: 14px;
+    }
     button {
+      color: #fff;
       border: 2px solid #323537;
       border-radius: 10px;
       padding: 14px 0;
@@ -227,7 +227,6 @@
       font-weight: 600;
       line-height: 24px;
       cursor: pointer;
-      color: #fff;
       border: none;
       width: 217px;
       background-color: #323537;

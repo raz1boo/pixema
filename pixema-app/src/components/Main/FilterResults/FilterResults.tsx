@@ -1,21 +1,21 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { useGetMoviesByNameQuery } from "../../api/PixemaAPI";
+import { useGetMoviesByFiltersQuery } from "../../api/PixemaAPI";
 import Layout from "../../UI/Layout/Layout";
 import Movie from "../Movies/Movie/Movie";
 import "./FilterResults.scss";
 import { ImSpinner11 } from "react-icons/im";
+import { useAppSelector } from "../../store/hooks/redux";
 
 const FiltersResults = () => {
-  const params = useParams();
   const [limit, setLimit] = useState(10);
-  const { data, isFetching } = useGetMoviesByNameQuery({
-    query: params.id,
+  const { filters } = useAppSelector((state) => state.filtersReducers);
+  const { data, isFetching } = useGetMoviesByFiltersQuery({
+    filters,
     limit,
   });
   useEffect(() => {
     setLimit(10);
-  }, []);
+  }, [filters]);
   return (
     <div className="search-results">
       {data?.total ? (
