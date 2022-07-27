@@ -1,19 +1,19 @@
 import { loadMoreMovies } from "./reducers/loadMore.slice";
 import {
-  setFilterCountry,
   setFilterRating,
   setFilterGenre,
   setFilterYear,
   setFilterSortBy,
-  resetFilters,
+  setVisibleFilter,
+  setCheckedFilters,
 } from "./reducers/filters.slice";
 
 export default {
   loadMoreMovies,
-  setFilterCountry,
   setFilterGenre,
   setFilterRating,
   setFilterSortBy,
   setFilterYear,
-  resetFilters,
+  setVisibleFilter,
+  setCheckedFilters,
 };

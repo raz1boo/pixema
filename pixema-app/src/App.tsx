@@ -9,7 +9,6 @@ import Registration from "./components/Auth/Registration/Registration";
 import Login from "./components/Auth/Login/Login";
 import ResetPassword from "./components/Auth/ResetPassword/ResetPassword";
 import NewPassword from "./components/Auth/NewPassword/NewPassword";
-import Trends from "./components/Main/Trends/Trends";
 import SelectedMovie from "./components/Main/SelectedMovie/SelectedMovie";
 import NotFound from "./components/Main/NotFound/NotFound";
 import Footer from "./components/UI/Footer/Footer";
@@ -47,7 +46,6 @@ function App() {
           path="/settings"
           element={<Settings open={open} userData={dataUser} />}
         />
-        <Route path="/trends" element={<Trends />} />
         <Route path="/favorites" element={<Favorites />} />
         <Route path="/movie/">
           <Route path=":id" element={<SelectedMovie />} />

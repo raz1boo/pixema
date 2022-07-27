@@ -3,7 +3,6 @@ interface IFilters {
   year: string;
   sortBy?: string;
   genre: string;
-  country: string;
 }
 
 export interface IBaseQuery {
