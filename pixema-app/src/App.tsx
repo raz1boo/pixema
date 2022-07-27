@@ -19,8 +19,9 @@ import Favorites from "./components/Main/Favorites/Favorites";
 import SearchMoviesResults from "./components/Main/SearchResults/SearchMoviesResults";
 import SearchPersonsResults from "./components/Main/SearchResults/SearchPersonsResults";
 import FiltersResults from "./components/Main/FilterResults/FilterResults";
-
+import { useLocation } from "react-router-dom";
 function App() {
+  const location = useLocation();
   const [dataUser, setDataUser] = useState<IUser>({
     name: "Artem Lapetsky",
     email: "a.lapitsky@gmail.com",
@@ -28,13 +29,18 @@ function App() {
   const [open, setOpen] = useState(false);
   return (
     <div id="root-2">
-      <Header
-        username={dataUser.name}
-        onClickLogOut={() => setDataUser({ name: "", email: "" })}
-        open={open}
-        openFunct={() => setOpen(!open)}
-        closeFunction={() => setOpen(false)}
-      />
+      {!(location.pathname === "/login" ||
+        location.pathname === "/registration" ||
+        location.pathname === "/new_password" ||
+        location.pathname === "/reset_password") && (
+        <Header
+          username={dataUser.name}
+          onClickLogOut={() => setDataUser({ name: "", email: "" })}
+          open={open}
+          openFunct={() => setOpen(!open)}
+          closeFunction={() => setOpen(false)}
+        />
+      )}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route

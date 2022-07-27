@@ -37,7 +37,7 @@ const Search = ({ openMenu }: ISearch) => {
       {/* <label className={cn("search", openMenu && "burger-menu__open")} ref={ref}> */}
       <input
         type="text"
-        placeholder="Search"
+        placeholder="Поиск..."
         onChange={(e) => {
           setValue(e.target.value);
           setVisible(true);
