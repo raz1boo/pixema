@@ -20,6 +20,7 @@ import SearchPersonsResults from "./components/Main/SearchResults/SearchPersonsR
 import FiltersResults from "./components/Main/FilterResults/FilterResults";
 import { useLocation } from "react-router-dom";
 import { useAppSelector } from "./components/store/hooks/redux";
+
 function App() {
   const location = useLocation();
   const [dataUser, setDataUser] = useState<IUser>({
