@@ -5,6 +5,7 @@ import Layout from "../../UI/Layout/Layout";
 import Movie from "../Movies/Movie/Movie";
 import "./SearchResults.scss";
 import { ImSpinner11 } from "react-icons/im";
+import { useAppSelector } from "../../store/hooks/redux";
 
 const SearchMoviesResults = () => {
   const params = useParams();
@@ -16,6 +17,7 @@ const SearchMoviesResults = () => {
   useEffect(() => {
     setLimit(10);
   }, []);
+  const { theme } = useAppSelector((state) => state.themeReducer);
   return (
     <div className="search-results">
       {data?.total ? (
@@ -32,7 +34,12 @@ const SearchMoviesResults = () => {
             ))}
           </Layout>
           {data?.total > 10 && (
-            <button onClick={() => setLimit(limit + 10)}>
+            <button
+              onClick={() => setLimit(limit + 10)}
+              style={{
+                backgroundColor: theme === "light" ? "#AFB2B6" : "#242426",
+              }}
+            >
               {isFetching ? (
                 <span>Загрузка...</span>
               ) : (

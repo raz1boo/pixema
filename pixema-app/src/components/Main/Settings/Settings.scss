@@ -184,6 +184,9 @@
     gap: 40px;
     justify-content: right;
     .footer-button {
+      display: flex;
+      justify-content: center;
+      align-items: center;
       width: 266px;
       border-radius: 10px;
       max-height: 56px;

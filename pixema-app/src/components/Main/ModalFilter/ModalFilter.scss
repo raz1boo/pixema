@@ -20,7 +20,7 @@
     display: flex;
     justify-content: space-between;
     border-radius: 10px;
-    padding: 40px;
+    padding: 30px 40px;
     transition: 0.3s ease;
     position: absolute;
     top: 0px;
@@ -41,7 +41,6 @@
     font-size: 16px;
     margin: 0;
     margin-bottom: 8px;
-    margin-top: 32px;
   }
   input {
     font-size: 16px;
@@ -74,7 +73,7 @@
   &__main {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: space-evenly;
     height: 80%;
   }
   &__sort-by {

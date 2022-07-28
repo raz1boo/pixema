@@ -9,7 +9,7 @@ interface SearchPersonItemProps {
 const SearchPersonItem = ({ item }: SearchPersonItemProps) => {
   const { name, id, photo, enName } = item;
   return (
-    <Link to={`/person/${id}`} className="search-item">
+    <Link to={`/name/${id}`} className="search-item">
       <div className="search-item__left">
         <img src={photo} alt={`person/${id}`} />
         <div className="search-item__left__description">

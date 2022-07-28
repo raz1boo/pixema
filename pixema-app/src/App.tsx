@@ -18,22 +18,33 @@ import Favorites from "./components/Main/Favorites/Favorites";
 import SearchMoviesResults from "./components/Main/SearchResults/SearchMoviesResults";
 import SearchPersonsResults from "./components/Main/SearchResults/SearchPersonsResults";
 import FiltersResults from "./components/Main/FilterResults/FilterResults";
-
+import { useLocation } from "react-router-dom";
+import { useAppSelector } from "./components/store/hooks/redux";
 function App() {
+  const location = useLocation();
   const [dataUser, setDataUser] = useState<IUser>({
     name: "Artem Lapetsky",
     email: "a.lapitsky@gmail.com",
   });
   const [open, setOpen] = useState(false);
+  const { theme } = useAppSelector((state) => state.themeReducer);
+  document.body.style.backgroundColor = theme === "dark" ? "#000" : "#fff";
   return (
     <div id="root-2">
-      <Header
-        username={dataUser.name}
-        onClickLogOut={() => setDataUser({ name: "", email: "" })}
-        open={open}
-        openFunct={() => setOpen(!open)}
-        closeFunction={() => setOpen(false)}
-      />
+      {!(
+        location.pathname === "/login" ||
+        location.pathname === "/registration" ||
+        location.pathname === "/new_password" ||
+        location.pathname === "/reset_password"
+      ) && (
+        <Header
+          username={dataUser.name}
+          onClickLogOut={() => setDataUser({ name: "", email: "" })}
+          open={open}
+          openFunct={() => setOpen(!open)}
+          closeFunction={() => setOpen(false)}
+        />
+      )}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route
@@ -41,16 +52,16 @@ function App() {
           element={<Settings open={open} userData={dataUser} />}
         />
         <Route path="/favorites" element={<Favorites />} />
-        <Route path="/movie/">
+        <Route path="/film/">
           <Route path=":id" element={<SelectedMovie />} />
         </Route>
-        <Route path="/person/">
+        <Route path="/name/">
           <Route path=":id" element={<SelectedPerson />} />
         </Route>
         <Route path="/filter" element={<FiltersResults />} />
         <Route path="/search/">
-          <Route path="movies/:id" element={<SearchMoviesResults />} />
-          <Route path="persons/:id" element={<SearchPersonsResults />} />
+          <Route path="films/:id" element={<SearchMoviesResults />} />
+          <Route path="names/:id" element={<SearchPersonsResults />} />
         </Route>
         <Route path="/registration" element={<Registration />} />
         <Route path="/login" element={<Login />} />

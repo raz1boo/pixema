@@ -1,6 +1,7 @@
 import { ReactNode, useRef } from "react";
 import SwiperClass, { Navigation } from "swiper";
 import { Swiper } from "swiper/react";
+import { useAppSelector } from "../../store/hooks/redux";
 import "./Slider.scss";
 import SliderBtn from "./SliderBtn/SliderBtn";
 
@@ -47,10 +48,13 @@ const Slider = ({ children, title }: ISlider) => {
     swiper.navigation.init();
     swiper.navigation.update();
   };
+  const { theme } = useAppSelector((state) => state.themeReducer);
   return (
     <>
-      <div className="tabs-layout__title-block">
-        <h2>{title}</h2>
+      <div
+        className="tabs-layout__title-block"
+      >
+        <h2 style={{color: theme==='light'?'#242426':'#fff'}}>{title}</h2>
         <div className="swiper-buttons">
           <SliderBtn dir="left" ref={navigationPrevRef} />
           <SliderBtn dir="right" ref={navigationNextRef} />

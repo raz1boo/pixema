@@ -19,12 +19,14 @@ import IframeModal from "./components/IframeModal/IframeModal";
 import PlayerModal from "./components/PlayerModal/PlayerModal";
 import "./SelectedMovie.scss";
 import cn from "classnames";
+import { useAppSelector } from "../../store/hooks/redux";
 
 const SelectedMovie = () => {
   const params = useParams();
   const { data, isFetching } = useGetMovieByIdQuery(params.id);
   const [active, setActive] = useState(false);
   const [activePlayer, setActivePlayer] = useState(false);
+  const { theme } = useAppSelector((state) => state.themeReducer);
   const {
     alternativeName,
     name,
@@ -239,14 +241,21 @@ const SelectedMovie = () => {
             </div>
             <div className="selected-movie__right-side">
               <Genres genres={genres} />
-              <h1>{name ? name : enName}</h1>
+              <h1 style={{ color: theme === "light" ? "#242426" : "#fff" }}>
+                {name ? name : enName}
+              </h1>
               <h2>{alternativeName}</h2>
               <div className="markers">
                 <Rating rating={rating} />
                 <Time movieLength={movieLength} />
                 <AgeRating ageRating={ageRating} />
               </div>
-              <div className="selected-movie__description">{description}</div>
+              <div
+                className="selected-movie__description"
+                style={{ color: theme === "light" ? "#242426" : "#fff" }}
+              >
+                {description}
+              </div>
               <div className="selected-movie__column-description">
                 {items.map(
                   (item) =>
@@ -258,11 +267,16 @@ const SelectedMovie = () => {
                         <div className="title">{item.title}</div>
                         <div
                           className="content"
-                          style={
-                            item.title === "Слоган"
-                              ? { color: "#afb2b6" }
-                              : { color: "#fff" }
-                          }
+                          style={{
+                            color:
+                              theme === "light"
+                                ? item.title === "Слоган"
+                                  ? "#afb2b6"
+                                  : "#242426"
+                                : item.title === "Слоган"
+                                ? "#afb2b6"
+                                : "#fff",
+                          }}
                         >
                           {item.value}
                         </div>

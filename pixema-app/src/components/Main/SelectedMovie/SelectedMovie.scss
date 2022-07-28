@@ -19,6 +19,7 @@
       border-radius: 10px;
       transition: 0.3s;
       font-weight: 600;
+      border: none;
       font-size: 18px;
       color: #fff;
       display: flex;
@@ -109,6 +110,9 @@
     .markers {
       display: flex;
       gap: 20px;
+      .time{
+        color: #fff;
+      }
     }
   }
   &__description {

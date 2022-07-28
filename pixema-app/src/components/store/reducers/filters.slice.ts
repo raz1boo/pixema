@@ -10,6 +10,12 @@ const initialState = {
     sortBy: "-1",
     genre: "",
   },
+  defaultValues: {
+    sortBy: "-1",
+    rating: [1, 10],
+    year: [1990, getCurrentYear()],
+    genre: '',
+  },
 };
 
 export const filtersSlice = createSlice({

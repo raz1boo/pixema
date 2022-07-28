@@ -18,6 +18,7 @@
     font-size: 16px;
     font-weight: 500;
     display: flex;
+    border: none;
     justify-content: center;
     align-items: center;
     background-color: #242426;
@@ -47,6 +48,7 @@
     max-width: 1920px;
     padding-right: 120px;
     gap: 40px;
+    row-gap: 100px;
   }
   &__null {
     display: flex;

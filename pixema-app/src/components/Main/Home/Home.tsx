@@ -80,25 +80,25 @@ const Home = () => {
           allow="autoplay"
           frameBorder="0"
         ></iframe>
-        {!isFetching && (
-          <div className="background-video-block__main">
-            <h1>{name}</h1>
-            <div className="background-video-block__small-description">
-              <Rating rating={rating} />
-              <div className="year">{year}</div>
-              <Genres genres={genres} />
-              <div className="countries">{countries?.[0].name}</div>
-              <AgeRating ageRating={ageRating} />
-            </div>
-            <div className="background-video-block__description">
-              {description}
-            </div>
-            <div className="background-video-block__button">
-              <Link to={`/movie/${id}`}>Подробнее</Link>
-            </div>
-          </div>
-        )}
       </div>
+      {!isFetching && (
+        <div className="background-video-block__main">
+          <h1>{name}</h1>
+          <div className="background-video-block__small-description">
+            <Rating rating={rating} />
+            <div className="year">{year}</div>
+            <Genres genres={genres} />
+            <div className="countries">{countries?.[0].name}</div>
+            <AgeRating ageRating={ageRating} />
+          </div>
+          <div className="background-video-block__description">
+            {description}
+          </div>
+          <div className="background-video-block__button">
+            <Link to={`/movie/${id}`}>Подробнее</Link>
+          </div>
+        </div>
+      )}
       <div className="home__content">
         <NewMovies type={1} />
         <NewMovies type={2} />

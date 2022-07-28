@@ -3,6 +3,8 @@
   width: 158px;
   box-sizing: content-box;
   padding-right: 78px;
+  z-index: 999;
+  position: relative;
   @media (max-width: 1280px){
     margin: 0;
   }

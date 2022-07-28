@@ -4,6 +4,7 @@ import {
   useGetPersonByIdQuery,
 } from "../../api/PixemaAPI";
 import { convertTimestampToDate } from "../../helpers/convertTimestampToDate";
+import { useAppSelector } from "../../store/hooks/redux";
 import Facts from "../../UI/Facts/Facts";
 import Tabs from "../../UI/Tabs/Tabs";
 import TabsLayout from "../../UI/Tabs/TabsLayout/TabsLayout";
@@ -28,11 +29,11 @@ const SelectedPerson = () => {
   } = { ...data };
   const countFilms = Number(movies?.length) - 1;
   const query = movies?.map((el) => `search=${el.id}&field=id`).join("&");
+  const { theme } = useAppSelector((state) => state.themeReducer);
   const { data: personMovies } = useGetMoviesByIdQuery({
     query,
     limit: countFilms + 1,
   });
-
   const items = [
     {
       title: "Карьера",
@@ -92,7 +93,9 @@ const SelectedPerson = () => {
               <img src={photo} alt={`img/${id}`} />
             </div>
             <div className="selected-person__right-side">
-              <h1>{name}</h1>
+              <h1 style={{ color: theme === "light" ? "#242426" : "#fff" }}>
+                {name}
+              </h1>
               <h2>{enName}</h2>
               <div className="selected-person__column-description">
                 {items.map(
@@ -103,7 +106,14 @@ const SelectedPerson = () => {
                         key={item.title}
                       >
                         <div className="title">{item.title}</div>
-                        <div className="content">{item.value}</div>
+                        <div
+                          className="content"
+                          style={{
+                            color: theme === "light" ? "#242426" : "#fff",
+                          }}
+                        >
+                          {item.value}
+                        </div>
                       </div>
                     )
                 )}

@@ -3,6 +3,9 @@ import Submit from "../AuthInput/Submit";
 import Logo from "../../UI/Header/Logo/Logo";
 import "./ResetPassword.scss";
 
+const messageEmail =
+  "Мы отправили Вам электронное письмо на почту example@gmail.com со ссылкой для сброса пароля!";
+
 const ResetPassword = () => {
   return (
     <>
@@ -12,10 +15,7 @@ const ResetPassword = () => {
       <section className="section-window">
         <form action="" className="form-window reset-password-form-window">
           <h2>Восстановить пароль</h2>
-          <h3>
-            Мы отправили Вам электронное письмо на почту example@gmail.com со
-            ссылкой для сброса пароля!
-          </h3>
+          <h3>{messageEmail}</h3>
           <Input
             label="Почта"
             type="email"

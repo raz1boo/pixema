@@ -13,6 +13,7 @@ import FilterSlider from "../../UI/FilterSlider/FilterSlider";
 import { Link } from "react-router-dom";
 import ButtonBase from "../../UI/ButtonBase/ButtonBase";
 import { FiCheck } from "react-icons/fi";
+import _ from "lodash";
 
 const ModalFilter = () => {
   const [text, setText] = useState<string>("");
@@ -23,7 +24,9 @@ const ModalFilter = () => {
     { label: string; value: string }[]
   >([]);
   const dispatch = useAppDispatch();
-  const { visible } = useAppSelector((state) => state.filtersReducers);
+  const { visible, defaultValues } = useAppSelector(
+    (state) => state.filtersReducers
+  );
   const [blockScroll, allowScroll] = useScrollBlock();
   visible ? blockScroll() : allowScroll();
   const [dis, setDis] = useState(true);
@@ -35,15 +38,11 @@ const ModalFilter = () => {
     setVisibleFilter,
     setCheckedFilters,
   } = filtersSlice.actions;
-  const { handleSubmit, control, reset } = useForm({
-    defaultValues: {
-      sort: "-1",
-      rating: [1, 10],
-      year: [1990, getCurrentYear()],
-    },
+  const { handleSubmit, control, reset, getValues } = useForm({
+    defaultValues,
   });
   const onSubmit = handleSubmit((data) => {
-    const { sort, rating, year } = data;
+    const { sortBy, rating, year } = data;
     const ratingString = `${rating[0]}-${rating[1]}`;
     const yearString = `${year[0]}-${year[1]}`;
     const ratings = rating[0] !== rating[1] ? ratingString : rating[0];
@@ -53,9 +52,10 @@ const ModalFilter = () => {
       .join("&");
     dispatch(setFilterRating(ratings));
     dispatch(setFilterYear(years));
-    dispatch(setFilterSortBy(sort));
+    dispatch(setFilterSortBy(sortBy));
     dispatch(setFilterGenre(genre));
     dispatch(setVisibleFilter(false));
+    !_.isEqual(getValues(), defaultValues) && dispatch(setCheckedFilters(true));
   });
   const handleReset = () => {
     setDis(true);
@@ -85,7 +85,10 @@ const ModalFilter = () => {
   };
   const ref = useRef<HTMLDivElement>(null);
   const genresRef = useRef<HTMLDivElement>(null);
-  useOutsideClick(ref, () => dispatch(setVisibleFilter(false)));
+  useOutsideClick(ref, () => {
+    dispatch(setVisibleFilter(false));
+    !_.isEqual(getValues(), defaultValues) && dispatch(setCheckedFilters(true));
+  });
   useOutsideClick(genresRef, () => {
     setText("");
     setSuggestions([]);
@@ -100,7 +103,11 @@ const ModalFilter = () => {
           <h2>Фильтр</h2>
           <div
             className="close-button"
-            onClick={() => dispatch(setVisibleFilter(false))}
+            onClick={() => {
+              dispatch(setVisibleFilter(false));
+              !_.isEqual(getValues(), defaultValues) &&
+                dispatch(setCheckedFilters(true));
+            }}
           >
             <HiOutlineX />
           </div>
@@ -110,7 +117,7 @@ const ModalFilter = () => {
             <h3>Год выхода</h3>
             <div className="sort-switcher">
               <Controller
-                name="sort"
+                name="sortBy"
                 control={control}
                 render={({ field: { onChange } }) => {
                   return (

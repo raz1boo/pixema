@@ -31,7 +31,7 @@ export const pixemaAPI = createApi({
     }),
     getMoviesByName: build.query<IData, IBaseQuery>({
       query: ({ query, limit }) =>
-        `/movie?search=${query}&field=name&limit=${limit}&sortField=rating.kp&sortType=-1&isStrict=false&token=${API_KEY}`,
+        `/movie?search=${query}&field=name&limit=${limit}&sortField=rating.kp&sortType=-1&isStrict=false&selectFields=genres name id poster rating &token=${API_KEY}`,
     }),
     getPersonsBySearch: build.query<IDataPerson, IBaseQuery>({
       query: ({ query, limit }) =>

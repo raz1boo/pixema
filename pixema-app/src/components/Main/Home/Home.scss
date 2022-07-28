@@ -8,6 +8,7 @@
   }
   .layout {
     padding-top: 56px;
+    padding-bottom: 56px;
     padding-left: 147px;
     flex-direction: row;
     flex-wrap: wrap;
@@ -18,18 +19,21 @@
 
 .background-video-block {
   width: 100%;
-  height: 600px;
+  height: 550px;
   z-index: 1;
   display: flex;
   align-items: center;
-  position: relative;
+  position: absolute;
+  top: -140px;
   justify-content: center;
+  overflow: hidden;
   &__untouch-block {
     position: absolute;
     top: -400px;
     height: 1100px;
     width: 100%;
-    z-index: 3;
+    z-index: 44;
+    background-color: rgba($color: #000000, $alpha: 0.6);
   }
   &__main {
     max-width: 1920px;
@@ -37,8 +41,9 @@
     padding-left: 147px;
     height: 400px;
     display: flex;
+    position: relative;
+    z-index: 10;
     flex-direction: column;
-    z-index: 4;
     h1 {
       color: #fff;
       font-size: 50px;
@@ -84,10 +89,8 @@
   iframe {
     position: absolute;
     top: -400px;
-    opacity: 0.3;
     height: 1100px;
     width: 100vw;
     z-index: 2;
-    transform: scale(1.15);
   }
 }

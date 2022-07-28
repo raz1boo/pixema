@@ -7,6 +7,7 @@ import {
   setVisibleFilter,
   setCheckedFilters,
 } from "./reducers/filters.slice";
+import { setTheme } from "./reducers/theme.slice";
 
 export default {
   loadMoreMovies,
@@ -16,4 +17,5 @@ export default {
   setFilterYear,
   setVisibleFilter,
   setCheckedFilters,
+  setTheme,
 };

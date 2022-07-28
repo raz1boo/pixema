@@ -2,10 +2,12 @@ import "./PersonMovie.scss";
 import { Link } from "react-router-dom";
 import Rating from "../../../UI/Rating/Rating";
 import Genres from "../../../UI/Genres/Genres";
+import { useAppSelector } from "../../../store/hooks/redux";
 
 const PersonMovie = ({ docs }: any) => {
+  const { theme } = useAppSelector((state) => state.themeReducer);
   return (
-    <Link to={`/movie/${docs.id}`} className="person-movie">
+    <Link to={`/film/${docs.id}`} className="person-movie">
       <div
         style={{ backgroundImage: `url(${docs?.poster?.url})` }}
         className="person-movie__poster"
@@ -13,7 +15,9 @@ const PersonMovie = ({ docs }: any) => {
         <Rating rating={docs.rating} />
       </div>
       <div className="person-movie__description">
-        <h2>{docs.name}</h2>
+        <h2 style={{ color: theme === "light" ? "#242426" : "#fff" }}>
+          {docs.name}
+        </h2>
         <div className="person-movie__description__footer">
           <p>
             {docs.year === null ? "2022" : docs.year}

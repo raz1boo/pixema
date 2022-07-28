@@ -5,6 +5,7 @@ import Layout from "../../UI/Layout/Layout";
 import "./SearchResults.scss";
 import { ImSpinner11 } from "react-icons/im";
 import PersonTab from "../../UI/Tabs/TabsLayout/PersonTab/PersonTab";
+import { useAppSelector } from "../../store/hooks/redux";
 
 const SearchPersonsResults = () => {
   const params = useParams();
@@ -16,6 +17,7 @@ const SearchPersonsResults = () => {
   useEffect(() => {
     setLimit(10);
   }, []);
+  const { theme } = useAppSelector((state) => state.themeReducer);
   return (
     <div className="search-results">
       {data?.total ? (
@@ -32,7 +34,12 @@ const SearchPersonsResults = () => {
             ))}
           </Layout>
           {data?.total > 10 && (
-            <button onClick={() => setLimit(limit + 10)}>
+            <button
+              onClick={() => setLimit(limit + 10)}
+              style={{
+                backgroundColor: theme === "light" ? "#AFB2B6" : "#242426",
+              }}
+            >
               {isFetching ? (
                 <span>Загрузка...</span>
               ) : (

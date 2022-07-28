@@ -12,13 +12,13 @@ const SearchItem = ({ item }: SearchItemProps) => {
   const { name, id, poster, description, year, enName, movieLength, rating } =
     item;
   return (
-    <Link to={`/movie/${id}`} className="search-item">
+    <Link to={`/film/${id}`} className="search-item">
       <div className="search-item__left">
         <img src={poster?.previewUrl} alt={description} />
         <div className="search-item__left__description">
           <h2>{name ? name : enName}</h2>
           <span className="search-item__left__description__info">
-            {year},
+            {year}
             <Time movieLength={movieLength} />
           </span>
         </div>

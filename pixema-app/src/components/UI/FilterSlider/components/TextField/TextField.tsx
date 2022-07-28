@@ -1,5 +1,6 @@
 import { ChangeEvent, forwardRef, InputHTMLAttributes } from "react";
-// import cn from "classnames";
+import "./TextField.scss";
+import cn from "classnames";
 
 export interface TextFieldProps extends InputHTMLAttributes<HTMLInputElement> {
   label?: string;
@@ -25,17 +26,11 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
     ref
   ) => {
     return (
-      <label className={className}>
+      <label className={cn(className, "numeric-slider")}>
         {label && <span>{label}</span>}
         <input
           data-testid="input"
           ref={ref}
-          // className={classNames(
-          //   styles.textField,
-          //   variant === "dark" && styles.dark,
-          //   variant === "small" && styles.small,
-          //   error === true && styles.error
-          // )}
           value={value}
           onChange={onChange}
           {...props}

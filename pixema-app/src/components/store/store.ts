@@ -1,8 +1,13 @@
-import { combineReducers, configureStore, PreloadedState } from "@reduxjs/toolkit";
+import {
+  combineReducers,
+  configureStore,
+  PreloadedState,
+} from "@reduxjs/toolkit";
 import { pixemaAPI } from "../api/PixemaAPI";
 import { loadReducer } from "./reducers/loadMore.slice";
 import { filtersReducers } from "./reducers/filters.slice";
 import { useMemo } from "react";
+import { themeReducer } from "./reducers/theme.slice";
 
 let store: AppStore;
 
@@ -11,6 +16,7 @@ export const setupStore = (preloadedState = {}) => {
     reducer: {
       loadReducer,
       filtersReducers,
+      themeReducer,
       [pixemaAPI.reducerPath]: pixemaAPI.reducer,
     },
     preloadedState,
@@ -32,14 +38,13 @@ export const initializeStore = (preloadedState: PreloadedState<RootState>) => {
 export function useStore(initialState: RootState) {
   const store = useMemo(() => initializeStore(initialState), [initialState]);
   return store;
-};
-
+}
 
 const rootReducer = combineReducers({
-    loadReducer,
-    filtersReducers,
+  loadReducer,
+  filtersReducers,
+  themeReducer,
 });
-
 
 // export const setupStore = ()=>{
 //     return configureStore({
@@ -48,5 +53,5 @@ const rootReducer = combineReducers({
 // }
 
 export type AppStore = ReturnType<typeof setupStore>;
-export type AppDispatch = AppStore['dispatch'];
+export type AppDispatch = AppStore["dispatch"];
 export type RootState = ReturnType<typeof rootReducer>;

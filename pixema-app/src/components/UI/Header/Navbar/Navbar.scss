@@ -2,48 +2,29 @@
   display: flex;
   gap: 15px;
   flex-direction: column;
-  width: 160px;
+  top: -100px;
+  width: 340px;
   position: absolute;
+  height: 370px;
   opacity: 0;
-  top: 85px;
   left: 100px;
   border-radius: 10px;
-  padding: 20px;
-  background-color: #7b61ff;
-  transition: .3s ease;
-  z-index: 999;
+  padding: 0 50px;
+  padding-top: 180px;
+  background-color: #242426;
+  transition: 0.3s ease;
+  z-index: 99;
   pointer-events: none;
-  &::after {
-    position: absolute;
-    top: -30px;
-    transition: 0.3s ease;
-    left: 10px;
-    height: 30px;
-    width: 50px;
-    border-radius: 10px;
-    content: "";
-    box-shadow: 25px 0 0 #7b61ff;
-  }
-  &::before {
-    box-shadow: -25px 0 0 #7b61ff;
-    position: absolute;
-    top: -30px;
-    transition: 0.3s ease;
-    left: 90px;
-    height: 30px;
-    width: 50px;
-    border-radius: 10px;
-    content: "";
-  }
-  @media (max-width: 1024px) {
-    top: 120px;
-  }
-  @media (max-width: 480px) {
-    top: 40px;
-  }
-  @media (max-width: 320px) {
-    top: 100px;
-  }
+  box-shadow: 0 5px 10px rgba($color: #000000, $alpha: 0.7);
+  // @media (max-width: 1024px) {
+  //   top: 120px;
+  // }
+  // @media (max-width: 480px) {
+  //   top: 40px;
+  // }
+  // @media (max-width: 320px) {
+  //   top: 100px;
+  // }
   a {
     transition: 0.3s ease;
     color: #fff;
@@ -52,23 +33,24 @@
     height: 40px;
     align-items: center;
     justify-content: left;
-    // &.nav__active,
-    // &.nav__active path {
-    //   color: #7b61ff;
-    //   fill: #7b61ff;
-    // }
-    // path {
-    //   transition: 0.3s ease;
-    // }
-    // &:hover,
-    // &:hover path {
-    //   color: #917cff;
-    //   fill: #917cff;
-    // }
+    font-weight: 600;
+    &.nav__active,
+    &.nav__active path {
+      color: #7b61ff;
+      fill: #7b61ff;
+    }
+    path {
+      transition: 0.3s ease;
+    }
+    &:hover,
+    &:hover path {
+      color: #917cff;
+      fill: #917cff;
+    }
   }
   &.nav__open {
     opacity: 1;
-    transition: .3s ease;
+    transition: 0.3s ease;
     pointer-events: all;
     //   right: 25px;
     //   @media (max-width: 1280px) {
@@ -102,20 +84,22 @@
   align-items: center;
   transition: 0.3s ease;
   margin-right: 32px;
+  z-index: 999;
+  position: relative;
   cursor: pointer;
-  @media (max-width: 1280px) {
-    margin-left: 32px;
-    margin-right: 0;
-  }
-  @media (max-width: 480px) {
-    position: absolute;
-    top: 30px;
-    right: 32px;
-    z-index: 99;
-  }
-  @media (max-width: 320px) {
-    right: 24px;
-  }
+  // @media (max-width: 1280px) {
+  //   margin-left: 32px;
+  //   margin-right: 0;
+  // }
+  // @media (max-width: 480px) {
+  //   position: absolute;
+  //   top: 30px;
+  //   right: 32px;
+  //   z-index: 99;
+  // }
+  // @media (max-width: 320px) {
+  //   right: 24px;
+  // }
 
   .burger {
     margin: auto;

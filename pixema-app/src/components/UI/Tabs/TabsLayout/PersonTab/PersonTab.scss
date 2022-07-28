@@ -8,7 +8,7 @@
   flex-direction: column;
   z-index: 22;
   &:hover h2 {
-    color: #7b61ff;
+    color: #7b61ff !important;
   }
   &:hover {
     &:after {
@@ -22,6 +22,7 @@
     left: 0;
     right: 0;
     height: 358px;
+    border-radius: 20px;
     background-color: rgba(#000, 0);
     transition: 0.3s ease;
   }
@@ -47,8 +48,8 @@
       transition: 0.3s ease;
       margin-bottom: 4px;
     }
-    p{
-      color: #AFB2B6;
+    p {
+      color: #afb2b6;
       margin: 0;
     }
   }

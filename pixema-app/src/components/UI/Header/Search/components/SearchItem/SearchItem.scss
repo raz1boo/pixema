@@ -28,11 +28,14 @@
       }
       &__info {
         color: #afb2b6;
+        
         div {
           background-color: transparent;
           padding: 0;
           font-size: 16px;
-          margin-left: 5px;
+          &:last-child::before {
+            content: ", ";
+          }
         }
       }
     }

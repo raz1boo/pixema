@@ -4,9 +4,11 @@ import Rating from "../../../UI/Rating/Rating";
 import Genres from "../../../UI/Genres/Genres";
 import { useFavorites } from "../../../store/hooks/useFavorites";
 import FavoriteSmallButton from "../../../UI/FavoriteSmallButton/FavoriteSmallButton";
+import { useAppSelector } from "../../../store/hooks/redux";
 
 const Movie = ({ docs }: any) => {
   const { favorites } = useFavorites();
+  const { theme } = useAppSelector((state) => state.themeReducer);
   return (
     <div className="movie">
       <div className="movie__markers">
@@ -16,13 +18,15 @@ const Movie = ({ docs }: any) => {
             item === docs?.id && <FavoriteSmallButton key={item} id={item} />
         )}
       </div>
-      <Link to={`/movie/${docs?.id}`}>
+      <Link to={`/film/${docs?.id}`}>
         <div
           style={{ backgroundImage: `url(${docs?.poster?.url})` }}
           className="movie__poster"
         ></div>
         <div className="movie__description">
-          <h2>{docs?.name}</h2>
+          <h2 style={{ color: theme === "light" ? "#242426" : "#fff" }}>
+            {docs?.name}
+          </h2>
           <div className="movie__description__footer">
             <Genres genres={docs?.genres} />
           </div>

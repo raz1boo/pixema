@@ -27,7 +27,7 @@ const Login = () => {
             name="password"
             placeholder="Введите пароль"
           />
-          <Link to="/reset">Забыли пароль?</Link>
+          <Link to="/reset_password">Забыли пароль?</Link>
           <Submit className="submit" type="submit" value="Войти" />
           <p>
             У Вас нет аккаунта? <Link to="/registration">Регистрация</Link>
