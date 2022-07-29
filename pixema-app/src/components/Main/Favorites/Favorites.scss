@@ -4,6 +4,7 @@
   position: relative;
   z-index: 11;
   height: 100%;
+  padding-top: 50px;
   .layout {
     padding-top: 0;
     padding-left: 147px;
@@ -19,8 +20,8 @@
     align-items: center;
     flex-direction: column;
     padding-top: 100px;
-    h2{
-      color: #80858B;
+    h2 {
+      color: #80858b;
       margin-top: 50px;
     }
   }

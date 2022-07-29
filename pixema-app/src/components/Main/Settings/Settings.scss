@@ -2,8 +2,9 @@
   width: 100%;
   box-sizing: content-box;
   position: relative;
+  padding-top: 50px;
   z-index: 30;
-  .layout{
+  .layout {
     flex-direction: column;
     gap: 40px;
     max-width: 1690px;
@@ -14,8 +15,8 @@
     background-color: #323537;
     color: #fff;
     outline: none;
-    border: none;
     border-radius: 10px;
+    border: 2px solid transparent;
     padding: 16px 20px;
     font-size: 16px;
     font-weight: 500;
@@ -57,17 +58,17 @@
   .profile {
     width: 100%;
     transition: 0.3s ease;
-      &.open {
-        @media (max-width:1280px){
-          width: 85%;
-        }
-        @media (max-width:768px){
-            width: 70%;
-        }
-        @media (max-width:480px){
-            width: 100%;
-        }
+    &.open {
+      @media (max-width: 1280px) {
+        width: 85%;
       }
+      @media (max-width: 768px) {
+        width: 70%;
+      }
+      @media (max-width: 480px) {
+        width: 100%;
+      }
+    }
     .profile-form {
       width: 50%;
     }
@@ -126,10 +127,10 @@
           width: 32px;
           height: 20px;
           border-radius: 10px;
-          background-color: #80858B;
-          transition: .3s ease;
-          &:hover{
-            background-color: #AFB2B6;
+          background-color: #80858b;
+          transition: 0.3s ease;
+          &:hover {
+            background-color: #afb2b6;
           }
         }
         input.toggle-round + label:before,
@@ -143,12 +144,12 @@
         }
         input.toggle-round + label:before {
           right: 1px;
-          background-color: #80858B;
+          background-color: #80858b;
           border-radius: 10px;
           transition: 0.3s ease;
         }
         input.toggle-round + label:hover::before {
-          background-color: #AFB2B6;
+          background-color: #afb2b6;
         }
         input.toggle-round + label:after {
           width: 16px;
@@ -163,13 +164,13 @@
           background-color: #7b61ff;
         }
         input.toggle-round:checked + label:hover::before {
-          background-color: #917CFF;
+          background-color: #917cff;
         }
         input.toggle-round:checked + label {
           background-color: #7b61ff;
-          transition: .3s ease;
-          &:hover{
-            background-color: #917CFF;
+          transition: 0.3s ease;
+          &:hover {
+            background-color: #917cff;
           }
         }
         input.toggle-round:checked + label:after {
@@ -197,21 +198,21 @@
       border: none;
       color: #fff;
       cursor: pointer;
-      transition: .3s ease;
+      transition: 0.3s ease;
       @media (max-width: 768px) {
         width: 327px;
       }
     }
     .save {
       background-color: #7b61ff;
-      &:hover{
-        background-color: #917CFF;
+      &:hover {
+        background-color: #917cff;
       }
     }
     .cancel {
       background-color: #323537;
-      &:hover{
-        color: #AFB2B6;
+      &:hover {
+        color: #afb2b6;
       }
     }
   }
@@ -235,4 +236,8 @@
     padding-left: 24px;
     width: 85%;
   }
+}
+
+.changes-block {
+  border: 2px solid transparent;
 }

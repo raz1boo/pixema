@@ -23,7 +23,7 @@ export const pixemaAPI = createApi({
     }),
     getMoviesByFilters: build.query<IData, IQuery>({
       query: ({ filters, limit }) =>
-        `/movie?${filters.genre}&search[]=${filters.year}&field[]=year&search[]=${filters.rating}&field=rating.kp&sortField=year&sortType=${filters.sortBy}&limit=${limit}&selectFields=genres name id poster rating &token=${API_KEY}`,
+        `/movie?${filters.genres.map(i=>i.value.length?`search[]=${i.value}&field[]=genres.name`:null).join('&')}&search[]=${filters.year.join('-')}&field[]=year&search[]=${filters.rating.join('-')}&field=rating.kp&sortField=year&sortType=${filters.sortBy}&limit=${limit}&selectFields=genres name id poster rating &token=${API_KEY}`,
     }),
     getMoviesBySearch: build.query<IData, IBaseQuery>({
       query: ({ query, type, limit }) =>

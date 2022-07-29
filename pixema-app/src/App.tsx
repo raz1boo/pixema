@@ -31,7 +31,7 @@ function App() {
   const { theme } = useAppSelector((state) => state.themeReducer);
   document.body.style.backgroundColor = theme === "dark" ? "#000" : "#fff";
   return (
-    <div id="root-2">
+    <>
       {!(
         location.pathname === "/login" ||
         location.pathname === "/registration" ||
@@ -72,7 +72,7 @@ function App() {
       </Routes>
       <ModalFilter />
       <Footer />
-    </div>
+    </>
   );
 }
 

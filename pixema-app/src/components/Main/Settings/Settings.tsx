@@ -31,9 +31,18 @@ const Settings = ({ open, userData: { name, email } }: ISettings) => {
           <h2 style={{ color: theme === "light" ? "#242426" : "#fff" }}>
             Профиль
           </h2>
-          <div className={cn("changes-block", open && "open")}>
+          <div
+            className={cn("changes-block", open && "open")}
+            style={
+              theme === "light"
+                ? { borderColor: "#AFB2B6", backgroundColor: "#fff" }
+                : undefined
+            }
+          >
             <div className="profile-form">
-              <p>Имя</p>
+              <p style={{ color: theme === "light" ? "#242426" : "#fff" }}>
+                Имя
+              </p>
               <input
                 type="text"
                 placeholder="Ваше имя"
@@ -41,16 +50,28 @@ const Settings = ({ open, userData: { name, email } }: ISettings) => {
                 onChange={(e) =>
                   setValue({ name: e.target.value, email: value.email })
                 }
+                style={
+                  theme === "light"
+                    ? { borderColor: "#AFB2B6", backgroundColor: "#fff", color: '#242426' }
+                    : undefined
+                }
               />
             </div>
             <div className="profile-form">
-              <p>Почта</p>
+              <p style={{ color: theme === "light" ? "#242426" : "#fff" }}>
+                Почта
+              </p>
               <input
                 type="text"
                 placeholder="Ваша почта"
                 value={value.email}
                 onChange={(e) =>
                   setValue({ name: value.name, email: e.target.value })
+                }
+                style={
+                  theme === "light"
+                    ? { borderColor: "#AFB2B6", backgroundColor: "#fff", color: '#242426' }
+                    : undefined
                 }
               />
             </div>
@@ -60,21 +81,58 @@ const Settings = ({ open, userData: { name, email } }: ISettings) => {
           <h2 style={{ color: theme === "light" ? "#242426" : "#fff" }}>
             Пароль
           </h2>
-          <div className="changes-block">
+          <div
+            className="changes-block"
+            style={
+              theme === "light"
+                ? { borderColor: "#AFB2B6", backgroundColor: "#fff" }
+                : undefined
+            }
+          >
             <div className="old-password-block">
               <div className="password-form">
-                <p>Пароль</p>
-                <input type="text" placeholder="Ваш пароль" />
+                <p style={{ color: theme === "light" ? "#242426" : "#fff" }}>
+                  Пароль
+                </p>
+                <input
+                  type="text"
+                  placeholder="Ваш пароль"
+                  style={
+                    theme === "light"
+                      ? { borderColor: "#AFB2B6", backgroundColor: "#fff",color: '#242426' }
+                      : undefined
+                  }
+                />
               </div>
             </div>
             <div className="new-password-block">
               <div className="password-form">
-                <p>Новый пароль</p>
-                <input type="text" placeholder="Новый пароль" />
+                <p style={{ color: theme === "light" ? "#242426" : "#fff" }}>
+                  Новый пароль
+                </p>
+                <input
+                  type="text"
+                  placeholder="Новый пароль"
+                  style={
+                    theme === "light"
+                      ? { borderColor: "#AFB2B6", backgroundColor: "#fff",color: '#242426' }
+                      : undefined
+                  }
+                />
               </div>
               <div className="password-form">
-                <p>Подтвердите пароль</p>
-                <input type="password" placeholder="Подтвердите пароль" />
+                <p style={{ color: theme === "light" ? "#242426" : "#fff" }}>
+                  Подтвердите пароль
+                </p>
+                <input
+                  type="password"
+                  placeholder="Подтвердите пароль"
+                  style={
+                    theme === "light"
+                      ? { borderColor: "#AFB2B6", backgroundColor: "#fff",color: '#242426' }
+                      : undefined
+                  }
+                />
               </div>
             </div>
           </div>
@@ -83,9 +141,18 @@ const Settings = ({ open, userData: { name, email } }: ISettings) => {
           <h2 style={{ color: theme === "light" ? "#242426" : "#fff" }}>
             Тема
           </h2>
-          <div className="changes-block">
+          <div
+            className="changes-block"
+            style={
+              theme === "light"
+                ? { borderColor: "#AFB2B6", backgroundColor: "#fff" }
+                : undefined
+            }
+          >
             <div className="description">
-              <p>{theme === "dark" ? "Тёмная тема" : "Светлая тема"}</p>
+              <p style={{ color: theme === "light" ? "#242426" : "#fff" }}>
+                {theme === "dark" ? "Тёмная тема" : "Светлая тема"}
+              </p>
               <p>
                 {theme === "dark"
                   ? "Используется тёмная тема"

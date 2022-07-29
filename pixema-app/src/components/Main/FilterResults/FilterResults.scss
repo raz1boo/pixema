@@ -7,8 +7,39 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  &__markers {
+    padding-top: 20px;
+    display: flex;
+    width: 970px;
+    gap: 10px;
+    flex-wrap: wrap;
+    &__marker {
+      font-size: 16px;
+      border: 2px solid transparent;
+      font-weight: 500;
+      line-height: 24px;
+      color: #ffffff;
+      max-height: 32px;
+      list-style-type: none;
+      white-space: nowrap;
+      align-items: center;
+      display: inline-flex;
+      padding: 4px 8px;
+      background-color: #242426;
+      border-radius: 6px;
+      cursor: pointer;
+      svg {
+        margin-left: 10px;
+        color: #afb2b6;
+        transition: 0.3s ease;
+        &:hover {
+          color: #fff;
+        }
+      }
+    }
+  }
   button {
-    margin-top: 50px;
+    margin-top: 100px;
     border-radius: 40px;
     color: #fff;
     padding: 15px 30px;
@@ -42,12 +73,14 @@
     }
   }
   .layout {
-    padding-top: 0;
+    padding-top: 50px;
     padding-left: 147px;
-    flex-wrap: wrap;
     max-width: 1920px;
     padding-right: 120px;
+    flex-wrap: wrap;
     gap: 40px;
+    display: flex;
+    row-gap: 80px;
   }
   &__null {
     display: flex;

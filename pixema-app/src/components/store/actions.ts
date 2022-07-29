@@ -1,7 +1,7 @@
 import { loadMoreMovies } from "./reducers/loadMore.slice";
 import {
   setFilterRating,
-  setFilterGenre,
+  setFilterGenres,
   setFilterYear,
   setFilterSortBy,
   setVisibleFilter,
@@ -11,7 +11,7 @@ import { setTheme } from "./reducers/theme.slice";
 
 export default {
   loadMoreMovies,
-  setFilterGenre,
+  setFilterGenres,
   setFilterRating,
   setFilterSortBy,
   setFilterYear,

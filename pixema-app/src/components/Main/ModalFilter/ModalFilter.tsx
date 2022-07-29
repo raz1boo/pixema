@@ -1,7 +1,7 @@
 import "./ModalFilter.scss";
 import cn from "classnames";
 import { HiOutlineX } from "react-icons/hi";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useOutsideClick } from "rooks";
 import useScrollBlock from "../../helpers/scrollHook";
 import { filtersSlice } from "../../store/reducers/filters.slice";
@@ -20,20 +20,16 @@ const ModalFilter = () => {
   const [suggestions, setSuggestions] = useState<
     { label: string; value: string }[]
   >([]);
-  const [checkedGenres, setCheckedGenres] = useState<
-    { label: string; value: string }[]
-  >([]);
   const dispatch = useAppDispatch();
-  const { visible, defaultValues } = useAppSelector(
+  const { visible, filters, defaultValues } = useAppSelector(
     (state) => state.filtersReducers
   );
   const [blockScroll, allowScroll] = useScrollBlock();
   visible ? blockScroll() : allowScroll();
-  const [dis, setDis] = useState(true);
   const {
     setFilterYear,
     setFilterRating,
-    setFilterGenre,
+    setFilterGenres,
     setFilterSortBy,
     setVisibleFilter,
     setCheckedFilters,
@@ -42,26 +38,23 @@ const ModalFilter = () => {
     defaultValues,
   });
   const onSubmit = handleSubmit((data) => {
-    const { sortBy, rating, year } = data;
-    const ratingString = `${rating[0]}-${rating[1]}`;
-    const yearString = `${year[0]}-${year[1]}`;
-    const ratings = rating[0] !== rating[1] ? ratingString : rating[0];
-    const years = year[0] !== year[1] ? yearString : year[0];
-    const genre = checkedGenres
-      .map((item) => `search[]=${item.value}&field[]=genres.name`)
-      .join("&");
-    dispatch(setFilterRating(ratings));
-    dispatch(setFilterYear(years));
+    const { sortBy, rating, year, genres } = data;
+    dispatch(setFilterRating(rating));
+    dispatch(setFilterYear(year));
     dispatch(setFilterSortBy(sortBy));
-    dispatch(setFilterGenre(genre));
+    dispatch(setFilterGenres(genres));
     dispatch(setVisibleFilter(false));
-    !_.isEqual(getValues(), defaultValues) && dispatch(setCheckedFilters(true));
+    _.isEqual(getValues(), defaultValues)
+      ? dispatch(setCheckedFilters(false))
+      : dispatch(setCheckedFilters(true));
   });
   const handleReset = () => {
-    setDis(true);
-    reset();
-    setCheckedGenres([]);
-    dispatch(setCheckedFilters(false));
+    reset({
+      genres: defaultValues.genres,
+      rating: defaultValues.rating,
+      year: defaultValues.year,
+      sortBy: defaultValues.sortBy,
+    });
   };
   let matches: { label: string; value: string }[];
   const onChangeHandler = (value: string) => {
@@ -75,24 +68,36 @@ const ModalFilter = () => {
     setSuggestions(matches);
     setText(value);
   };
-  const onSuggestHandler = (value: { label: string; value: string }) => {
+  const onSuggestHandler = () => {
     setText("");
     setSuggestions([]);
-    setCheckedGenres((checkedGenres) => [
-      ...checkedGenres.filter((item) => item.label !== value.label),
-      value,
-    ]);
   };
   const ref = useRef<HTMLDivElement>(null);
   const genresRef = useRef<HTMLDivElement>(null);
   useOutsideClick(ref, () => {
     dispatch(setVisibleFilter(false));
-    !_.isEqual(getValues(), defaultValues) && dispatch(setCheckedFilters(true));
+    _.isEqual(getValues(), defaultValues)
+      ? dispatch(setCheckedFilters(false))
+      : dispatch(setCheckedFilters(true));
+    reset({
+      genres: filters.genres,
+      rating: filters.rating,
+      year: filters.year,
+      sortBy: filters.sortBy,
+    });
   });
   useOutsideClick(genresRef, () => {
     setText("");
     setSuggestions([]);
   });
+  useEffect(() => {
+    reset({
+      genres: filters.genres,
+      rating: filters.rating,
+      year: filters.year,
+      sortBy: filters.sortBy,
+    });
+  }, [filters]);
   return (
     <div className={cn("modal-filter", visible && "active")}>
       <div
@@ -105,8 +110,15 @@ const ModalFilter = () => {
             className="close-button"
             onClick={() => {
               dispatch(setVisibleFilter(false));
-              !_.isEqual(getValues(), defaultValues) &&
-                dispatch(setCheckedFilters(true));
+              _.isEqual(getValues(), defaultValues)
+                ? dispatch(setCheckedFilters(false))
+                : dispatch(setCheckedFilters(true));
+              reset({
+                genres: filters.genres,
+                rating: filters.rating,
+                year: filters.year,
+                sortBy: filters.sortBy,
+              });
             }}
           >
             <HiOutlineX />
@@ -125,22 +137,20 @@ const ModalFilter = () => {
                       <button
                         onClick={() => {
                           onChange("-1");
-                          setDis(true);
                         }}
                         value="-1"
                         name="sort"
-                        disabled={dis}
+                        disabled={getValues().sortBy === "-1"}
                       >
                         Сначала новые
                       </button>
                       <button
                         onClick={() => {
                           onChange("1");
-                          setDis(false);
                         }}
                         value="1"
                         name="sort"
-                        disabled={dis ? false : true}
+                        disabled={getValues().sortBy === "1"}
                       >
                         Сначала старые
                       </button>
@@ -153,47 +163,72 @@ const ModalFilter = () => {
           <div className="modal-filter__genre">
             <h3>Жанры</h3>
             <div className="genre-block">
-              <ul>
-                {checkedGenres.map((genre) => (
-                  <li key={genre.value}>
-                    {genre.label}
-                    <HiOutlineX
-                      onClick={() => {
-                        setCheckedGenres(
-                          checkedGenres.filter(
-                            (item) => item.label !== genre.label
-                          )
-                        );
-                      }}
-                    />
-                  </li>
-                ))}
-                <input
-                  type="text"
-                  maxLength={20}
-                  value={text}
-                  onChange={(e) => onChangeHandler(e.target.value)}
-                  placeholder={checkedGenres.length ? "" : "Введите жанр"}
-                />
-              </ul>
+              <Controller
+                name="genres"
+                control={control}
+                render={({ field: { value, onChange } }) => {
+                  return (
+                    <>
+                      <ul>
+                        <>
+                          {value.map(
+                            (genre) =>
+                              genre.value && (
+                                <li key={genre.value}>
+                                  {genre.label}
+                                  <HiOutlineX
+                                    onClick={() => {
+                                      onChange(
+                                        value.filter(
+                                          (item) => item.label !== genre.label
+                                        )
+                                      );
+                                    }}
+                                  />
+                                </li>
+                              )
+                          )}
+                          <input
+                            type="text"
+                            maxLength={20}
+                            value={text}
+                            onChange={(e) => onChangeHandler(e.target.value)}
+                            placeholder={value[1]?.label ? "" : "Введите жанр"}
+                          />
+                        </>
+                      </ul>
+                      {suggestions && (
+                        <div className="suggestions" ref={genresRef}>
+                          {suggestions.map((item, index) => (
+                            <div
+                              key={index}
+                              onClick={() => {
+                                onChange([
+                                  ...value.filter(
+                                    (i) => i.label !== item.label
+                                  ),
+                                  item,
+                                ]);
+                                onSuggestHandler();
+                              }}
+                              className="suggestion"
+                            >
+                              {item.label}
+                              {value.map(
+                                (element) =>
+                                  element.label === item.label && (
+                                    <FiCheck key={index} />
+                                  )
+                              )}
+                            </div>
+                          ))}
+                        </div>
+                      )}
+                    </>
+                  );
+                }}
+              />
             </div>
-            {suggestions && (
-              <div className="suggestions" ref={genresRef}>
-                {suggestions.map((item, index) => (
-                  <div
-                    key={index}
-                    onClick={() => onSuggestHandler(item)}
-                    className="suggestion"
-                  >
-                    {item.label}
-                    {checkedGenres.map(
-                      (element) =>
-                        element.label === item.label && <FiCheck key={index} />
-                    )}
-                  </div>
-                ))}
-              </div>
-            )}
           </div>
           <div className="modal-filter__years">
             <h3>Год производства</h3>

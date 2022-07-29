@@ -6,11 +6,12 @@ import "./SearchResults.scss";
 import { ImSpinner11 } from "react-icons/im";
 import PersonTab from "../../UI/Tabs/TabsLayout/PersonTab/PersonTab";
 import { useAppSelector } from "../../store/hooks/redux";
+import Loader from "../../UI/Loader/Loader";
 
 const SearchPersonsResults = () => {
   const params = useParams();
   const [limit, setLimit] = useState(10);
-  const { data, isFetching } = useGetPersonsBySearchQuery({
+  const { data, isFetching, isLoading } = useGetPersonsBySearchQuery({
     query: `&search=${params.id}&field=name`,
     limit,
   });
@@ -18,7 +19,9 @@ const SearchPersonsResults = () => {
     setLimit(10);
   }, []);
   const { theme } = useAppSelector((state) => state.themeReducer);
-  return (
+  return isLoading ? (
+    <Loader />
+  ) : (
     <div className="search-results">
       {data?.total ? (
         <>

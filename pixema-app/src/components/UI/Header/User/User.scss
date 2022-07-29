@@ -40,12 +40,12 @@
   height: 0;
   width: 267px;
   overflow: hidden;
-  background-color: #242426;
   border-radius: 10px;
   flex-direction: column;
   display: inline-flex;
   justify-content: center;
   transition: 0.3s ease;
+  background-color: #242426;
   margin-top: 24px;
   hr {
     width: 100%;
@@ -61,13 +61,14 @@
     padding: 15px 20px;
     margin: 0;
     &:hover {
-      color: #7b61ff;
+      color: #7b61ff !important;
     }
   }
 }
 .user-modal_open {
   height: 112px;
   transition: 0.2s ease;
+  border: 2px solid transparent;
 }
 .user-block {
   margin-left: 41px;
