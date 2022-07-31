@@ -1,7 +1,7 @@
 import Movie from "./Movie/Movie";
 import "./Movies.scss";
 import { useGetNewMoviesQuery } from "../../api/PixemaAPI";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Layout from "../../UI/Layout/Layout";
 import { useAppSelector } from "../../store/hooks/redux";
 
@@ -13,6 +13,12 @@ const NewMovies = ({ type }: IMoviesProps) => {
   const [limit, setLimit] = useState(10);
   const { data, isFetching } = useGetNewMoviesQuery({ limit, type });
   const { theme } = useAppSelector((state) => state.themeReducer);
+  const count = limit;
+  useEffect(() => {
+    document.documentElement.clientWidth <= 1366 && setLimit(8);
+    document.documentElement.clientWidth <= 1024 && setLimit(9);
+    document.documentElement.clientWidth < 768 && setLimit(10);
+  }, []);
   return (
     <Layout>
       <div className="movies-block">
@@ -28,7 +34,7 @@ const NewMovies = ({ type }: IMoviesProps) => {
           ))}
         </div>
         <div className="movies-block__button">
-          <button onClick={() => setLimit(limit + 10)}>
+          <button onClick={() => setLimit(limit + count)}>
             {isFetching ? "Загрузка..." : "Показать ещё"}
           </button>
         </div>

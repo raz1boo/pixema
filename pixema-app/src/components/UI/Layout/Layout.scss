@@ -1,10 +1,53 @@
-.layout{
-    max-width: 1920px;
-    display: flex;
-    margin: 0 auto;
-    z-index: 9;
-    position: relative;
-    &.justify-content__space-between{
-        justify-content: space-between;
-    }
+.layout {
+  display: flex;
+  margin: 0 auto;
+  z-index: 9;
+  position: relative;
+  align-items: center;
+  max-width: 1920px;
+  padding-left: 147px;
+  padding-right: 120px;
+  @media (max-width: 1760px) {
+    padding-left: 120px;
+    padding-right: 120px;
+  }
+  @media (max-width: 1730px) {
+    padding-left: 176px;
+    padding-right: 176px;
+  }
+  @media (max-width: 1540px) {
+    padding-left: 120px;
+    padding-right: 120px;
+  }
+  @media (max-width: 1440px) {
+    padding-left: 90px;
+    padding-right: 90px;
+  }
+  @media (max-width: 1200px) {
+    padding-left: 50px;
+    padding-right: 50px;
+  }
+  @media (max-width: 1090px) {
+    padding-left: 38px;
+    padding-right: 38px;
+  }
+  @media (max-width: 1024px) {
+    padding-left: 60px;
+    padding-right: 60px;
+  }
+  @media (max-width: 848px) {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  @media (max-width: 767px) {
+    padding-left: 120px;
+    padding-right: 120px;
+  }
+  @media (max-width: 700px) {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  &.justify-content__space-between {
+    justify-content: space-between;
+  }
 }

@@ -1,5 +1,5 @@
 .player-modal {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   background-color: rgba($color: #000000, $alpha: 0.8);
@@ -17,12 +17,11 @@
     opacity: 1;
   }
   &__content {
-    height: 80vh;
-    width: 70vw;
     position: fixed;
     top: 10vh;
     transition: 0.4s ease;
     transform: scale(0);
+    width: 80%;
     &.active {
       transition: 0.4s ease;
       transform: scale(1);

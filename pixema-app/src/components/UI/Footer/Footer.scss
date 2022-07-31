@@ -1,12 +1,15 @@
-footer{
-    padding-top: 100px;
-    display: flex;
-    justify-content: center;
-    p{
-        color: #AFB2B6;
-        font-weight: 500;
-        line-height: 24px;
-        white-space: nowrap;
-        margin: auto;
-    }
+footer {
+  padding-top: 100px;
+  display: flex;
+  justify-content: center;
+  @media (max-width: 768px) {
+    padding-bottom: 50px;
+  }
+  p {
+    color: #afb2b6;
+    font-weight: 500;
+    line-height: 24px;
+    white-space: nowrap;
+    margin: auto;
+  }
 }

@@ -43,12 +43,13 @@
     }
   }
   .layout {
-    padding-left: 147px;
-    padding-right: 120px;
     flex-wrap: wrap;
     display: flex;
     gap: 40px;
-    row-gap: 100px;
+    align-items: flex-start;
+    @media (max-width: 691px) {
+      justify-content: center;
+    }
   }
   &__null {
     display: flex;

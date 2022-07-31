@@ -6,6 +6,16 @@ import "./Slider.scss";
 import SliderBtn from "./SliderBtn/SliderBtn";
 
 const breakpoints = {
+  320: {
+    slidesPerGroup: 1,
+    slidesPerView: 1,
+    spaceBetween: 30,
+  },
+  730: {
+    slidesPerGroup: 2,
+    slidesPerView: 2,
+    spaceBetween: 30,
+  },
   769: {
     slidesPerGroup: 3,
     slidesPerView: 3,

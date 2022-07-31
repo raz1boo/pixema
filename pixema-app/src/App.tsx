@@ -20,6 +20,8 @@ import SearchPersonsResults from "./components/Main/SearchResults/SearchPersonsR
 import FiltersResults from "./components/Main/FilterResults/FilterResults";
 import { useLocation } from "react-router-dom";
 import { useAppSelector } from "./components/store/hooks/redux";
+import MediaQuery from "react-responsive";
+import Navbar from "./components/UI/Header/Navbar/Navbar";
 
 function App() {
   const location = useLocation();
@@ -72,6 +74,9 @@ function App() {
       </Routes>
       <ModalFilter />
       <Footer />
+      <MediaQuery maxWidth={768}>
+        <Navbar closeBurger={() => setOpen(false)} open={true} />
+      </MediaQuery>
     </>
   );
 }

@@ -7,7 +7,6 @@
   .layout {
     flex-direction: column;
     gap: 40px;
-    max-width: 1690px;
   }
   input {
     width: 100%;
@@ -25,13 +24,6 @@
       color: #80858b;
       font-weight: 500;
       line-height: 24px;
-    }
-    @media (max-width: 768px) {
-      font-size: 14px;
-      padding: 16px 16px;
-    }
-    @media (max-width: 420px) {
-      padding: 16px 10px;
     }
   }
   h2 {
@@ -58,47 +50,61 @@
   .profile {
     width: 100%;
     transition: 0.3s ease;
-    &.open {
-      @media (max-width: 1280px) {
-        width: 85%;
-      }
-      @media (max-width: 768px) {
-        width: 70%;
-      }
-      @media (max-width: 480px) {
-        width: 100%;
-      }
-    }
+    min-width: 350px;
     .profile-form {
       width: 50%;
+      @media (max-width: 768px) {
+        min-width: 327px;
+      }
     }
     .changes-block {
       max-height: 168px;
       display: flex;
       gap: 40px;
+      @media (max-width: 768px) {
+        flex-direction: column;
+        align-items: center;
+        max-height: none;
+      }
     }
   }
   .password {
+    width: 100%;
+    min-width: 350px;
     .changes-block {
       max-height: 280px;
       display: flex;
       gap: 40px;
+      @media (max-width: 768px) {
+        flex-direction: column;
+        align-items: center;
+        max-height: none;
+      }
       .new-password-block {
         display: flex;
         flex-direction: column;
         gap: 24px;
         width: 50%;
+        @media (max-width: 768px) {
+          min-width: 327px;
+        }
       }
       .old-password-block {
         width: 50%;
+        @media (max-width: 768px) {
+          min-width: 327px;
+        }
       }
     }
   }
   .theme {
+    width: 100%;
+    min-width: 353px;
     .changes-block {
       max-height: 100px;
       display: flex;
       justify-content: space-between;
+      min-width: 265px;
       p {
         &:nth-child(1) {
           margin-bottom: 4px;
@@ -181,26 +187,36 @@
   }
   .settings-footer {
     max-height: 56px;
+    min-width: 353px;
     display: flex;
+    width: 100%;
     gap: 40px;
     justify-content: right;
+    @media (max-width: 768px) {
+      flex-wrap: wrap;
+      align-items: center;
+      flex-direction: column-reverse;
+      max-height: none;
+    }
     .footer-button {
       display: flex;
       justify-content: center;
       align-items: center;
-      width: 266px;
+      max-width: 266px;
       border-radius: 10px;
       max-height: 56px;
       padding: 16px 0;
       font-size: 16px;
       font-weight: 600;
+      width: 100%;
       line-height: 24px;
       border: none;
       color: #fff;
       cursor: pointer;
       transition: 0.3s ease;
       @media (max-width: 768px) {
-        width: 327px;
+        min-width: 327px;
+        max-width: none;
       }
     }
     .save {
@@ -215,26 +231,6 @@
         color: #afb2b6;
       }
     }
-  }
-  @media (max-width: 1280px) {
-    padding-left: 176px;
-    width: 72.5%;
-  }
-  @media (max-width: 1024px) {
-    padding-left: 48px;
-    width: 91%;
-  }
-  @media (max-width: 768px) {
-    padding-left: 40px;
-    width: 90%;
-  }
-  @media (max-width: 480px) {
-    padding-left: 32px;
-    width: 87%;
-  }
-  @media (max-width: 480px) {
-    padding-left: 24px;
-    width: 85%;
   }
 }
 

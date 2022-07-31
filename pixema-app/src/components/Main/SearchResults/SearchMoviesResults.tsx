@@ -15,8 +15,11 @@ const SearchMoviesResults = () => {
     query: params.id,
     limit,
   });
+  const count = limit;
   useEffect(() => {
-    setLimit(10);
+    document.documentElement.clientWidth <= 1387 && setLimit(8);
+    document.documentElement.clientWidth <= 1026 && setLimit(9);
+    document.documentElement.clientWidth < 770 && setLimit(10);
   }, []);
   const { theme } = useAppSelector((state) => state.themeReducer);
   return isLoading ? (
@@ -27,7 +30,9 @@ const SearchMoviesResults = () => {
         <>
           <Layout
             className={
-              data?.docs?.length % 10 === 0
+              data?.docs?.length % 10 === 0 ||
+              data?.docs?.length % 8 === 0 ||
+              data?.docs?.length % 9 === 0
                 ? "justify-content__space-between"
                 : undefined
             }
@@ -38,7 +43,7 @@ const SearchMoviesResults = () => {
           </Layout>
           {data?.total > 10 && (
             <button
-              onClick={() => setLimit(limit + 10)}
+              onClick={() => setLimit(limit + count)}
               style={{
                 backgroundColor: theme === "light" ? "#AFB2B6" : "#242426",
               }}

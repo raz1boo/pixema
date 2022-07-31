@@ -1,11 +1,16 @@
 .movie {
   width: 266px;
-  height: 433px;
   position: relative;
   display: flex;
   text-decoration: none;
   flex-direction: column;
   z-index: 22;
+  @media (max-width: 1720px) {
+    width: 208px;
+  }
+  @media (max-width: 600px) {
+    width: 272px;
+  }
   cursor: pointer;
   &:hover h2 {
     color: #7b61ff;
@@ -48,11 +53,16 @@
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
+    @media (max-width: 1720px) {
+      height: 279px;
+    }
+    @media (max-width: 600px) {
+      height: 357px;
+    }
   }
   &__description {
     display: flex;
     flex-direction: column;
-    max-height: 76px;
     h2 {
       font-size: 16px;
       color: #fff;
