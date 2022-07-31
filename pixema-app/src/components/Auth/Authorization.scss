@@ -1,14 +1,55 @@
 .login-logo {
-  padding: 50px 85% 0 50px;
+  @media (max-width: 2000px) {
+    padding: 50px 80% 0 50px;
+  }
+  @media (max-width: 1440px) {
+    padding: 50px 80% 0 50px;
+  }
+  @media (max-width: 1280px) {
+    padding: 50px 75% 0 50px;
+  }
+  @media (max-width: 1024px) {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  @media (max-width: 768px) {
+    padding: 50px auto 0 auto;
+  }
+  @media (max-width: 480px) {
+    padding: 50px auto 0 auto;
+  }
+  @media (max-width: 320px) {
+    padding: 50px auto 0 auto;
+  }
 }
 
 .section-window {
   position: relative;
   color: white;
   .form-window {
-    margin: 100px auto 0;
-    background-color: #242426;
     width: 574px;
+    @media (max-width: 1440px) {
+      width: 574px;
+    }
+    @media (max-width: 1280px) {
+      width: 500px;
+    }
+    @media (max-width: 1024px) {
+      width: 400px;
+    }
+    @media (max-width: 768px) {
+      width: 350px;
+    }
+    @media (max-width: 480px) {
+      width: 300px;
+    }
+    @media (max-width: 320px) {
+      width: 272px;
+    }
+    border: 2px solid transparent;
+    margin: 100px auto 0;
+    background-color: #80858b;
     min-height: 540px;
     display: flex;
     flex-direction: column;
@@ -34,7 +75,7 @@
       background-color: #323537;
       color: #fff;
       outline: none;
-      border: none;
+      border: 2px solid transparent;
       border-radius: 10px;
       padding: 16px 20px;
       font-size: 16px;
