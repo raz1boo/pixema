@@ -56,12 +56,14 @@ const Input = ({ label, type, name, placeholder }: InputPrors) => {
 
   return (
     <>
-      <label style={{
-                  color:
-                    theme === "dark" || location.pathname === "/"
-                      ? "#fff"
-                      : "#242426",
-                }}>{label }</label>
+      <label
+        style={{
+          color:
+            theme === "dark" || location.pathname === "/" ? "#fff" : "#242426",
+        }}
+      >
+        {label}
+      </label>
       {emailDirty && emailError && (
         <div style={{ color: "#ed4337" }}>{emailError}</div>
       )}
@@ -69,12 +71,11 @@ const Input = ({ label, type, name, placeholder }: InputPrors) => {
         <div style={{ color: "#ed4337" }}>{passwordError}</div>
       )}
       <input
-                style={
-                  
-                  theme === "dark" || location.pathname === "/"
-                    ? { backgroundColor: "#323537", borderColor: "transparent"}
-                    : { backgroundColor: "#fff", borderColor: "#AFB2B6", color: "#000"}
-                } 
+        style={
+          theme === "dark" || location.pathname === "/"
+            ? { backgroundColor: "#323537", borderColor: "transparent" }
+            : { backgroundColor: "#fff", borderColor: "#AFB2B6", color: "#000" }
+        }
         onChange={
           type === "email" ? (e) => emailHandler(e) : (e) => passwordHandler(e)
         }

@@ -1,11 +1,11 @@
-import { useLocation } from "react-router-dom"; 
+import { useLocation } from "react-router-dom";
 import { useAppSelector } from "../../store/hooks/redux";
 
 interface SubmitPrors {
   className: string;
   type: string;
   value: string;
-  onClick?:any;
+  onClick?: any;
 }
 
 const Submit = ({ className, type, value }: SubmitPrors) => {
@@ -13,8 +13,7 @@ const Submit = ({ className, type, value }: SubmitPrors) => {
   const location = useLocation();
   return (
     <>
-      <input 
-      className={className} type={type} value={value} />
+      <input className={className} type={type} value={value} />
     </>
   );
 };
