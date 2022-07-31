@@ -1,6 +1,6 @@
 .modal-filter {
   width: 100%;
-  height: 100%;
+  height: 100vh;
   position: absolute;
   top: 0;
   left: 0;
@@ -17,6 +17,7 @@
     max-width: 518px;
     background-color: #242426;
     height: 100vh;
+    max-height: 1300px;
     display: flex;
     justify-content: space-between;
     border-radius: 10px;
@@ -67,6 +68,10 @@
       cursor: pointer;
       svg {
         color: #afb2b6;
+        transition: 0.3s ease;
+        &:hover {
+          color: #fff;
+        }
       }
     }
   }
@@ -124,11 +129,11 @@
   &__genre {
     position: relative;
     .suggestions {
-      max-height: 500px;
+      max-height: 350px;
       width: 100%;
       background-color: #323537;
       position: absolute;
-      margin-top: 8px;
+      margin-top: 15px;
       left: -1px;
       z-index: 888;
       border-radius: 10px;
@@ -203,6 +208,10 @@
         svg {
           margin-left: 10px;
           color: #afb2b6;
+          transition: 0.3s ease;
+          &:hover {
+            color: #fff;
+          }
         }
       }
     }

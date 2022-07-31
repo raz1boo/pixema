@@ -6,11 +6,12 @@ import Movie from "../Movies/Movie/Movie";
 import "./SearchResults.scss";
 import { ImSpinner11 } from "react-icons/im";
 import { useAppSelector } from "../../store/hooks/redux";
+import Loader from "../../UI/Loader/Loader";
 
 const SearchMoviesResults = () => {
   const params = useParams();
   const [limit, setLimit] = useState(10);
-  const { data, isFetching } = useGetMoviesByNameQuery({
+  const { data, isFetching, isLoading } = useGetMoviesByNameQuery({
     query: params.id,
     limit,
   });
@@ -18,7 +19,9 @@ const SearchMoviesResults = () => {
     setLimit(10);
   }, []);
   const { theme } = useAppSelector((state) => state.themeReducer);
-  return (
+  return isLoading ? (
+    <Loader />
+  ) : (
     <div className="search-results">
       {data?.total ? (
         <>

@@ -38,7 +38,7 @@ const SearchList = ({ value, closeClick }: SearchListProps) => {
             <SearchItem key={item.id} item={item} />
           ))}
         </div>
-        <Link to={`/search/movies/${value}`}>
+        <Link to={`/search/films/${value}`}>
           <ButtonBase>Показать все</ButtonBase>
         </Link>
       </>
@@ -52,7 +52,7 @@ const SearchList = ({ value, closeClick }: SearchListProps) => {
           ))}
         </div>
 
-        <Link to={`/search/persons/${value}`}>
+        <Link to={`/search/names/${value}`}>
           <ButtonBase>Показать все</ButtonBase>
         </Link>
       </>

@@ -5,16 +5,16 @@ const initialState = {
   visible: false,
   checkedFilters: false,
   filters: {
-    year: `1990-${getCurrentYear()}`,
-    rating: "1-10",
+    year: [1990, getCurrentYear()],
+    rating: [1, 10],
     sortBy: "-1",
-    genre: "",
+    genres: [{ label: "", value: "" }],
   },
   defaultValues: {
-    sortBy: "-1",
-    rating: [1, 10],
     year: [1990, getCurrentYear()],
-    genre: '',
+    rating: [1, 10],
+    sortBy: "-1",
+    genres: [{ label: "", value: "" }],
   },
 };
 
@@ -28,8 +28,8 @@ export const filtersSlice = createSlice({
     setFilterRating: (state, action) => {
       state.filters.rating = action.payload;
     },
-    setFilterGenre: (state, action) => {
-      state.filters.genre = action.payload;
+    setFilterGenres: (state, action) => {
+      state.filters.genres = action.payload;
     },
     setFilterSortBy: (state, action) => {
       state.filters.sortBy = action.payload;
@@ -44,7 +44,7 @@ export const filtersSlice = createSlice({
 });
 
 export const {
-  setFilterGenre,
+  setFilterGenres,
   setFilterRating,
   setFilterSortBy,
   setFilterYear,

@@ -61,11 +61,8 @@
   }
   .filter-button {
     position: absolute;
-    top: 20px;
-    right: 22px;
-    background-image: url("../../../../../public/assets/icons/filters.png");
-    height: 14px;
-    width: 15px;
+    top: 15px;
+    right: 10px;
     border: none;
     background-color: transparent;
     outline: none;
@@ -73,12 +70,6 @@
     @media (max-width: 480px) {
       right: 50px;
     }
-  }
-  .filter-button_active {
-    background-image: url("../../../../../public/assets/icons/active-filters.png");
-    height: 24px;
-    width: 20px;
-    top: 15px;
   }
   &.burger-menu__open {
     @media (max-width: 480px) {

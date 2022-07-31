@@ -1,8 +1,13 @@
+interface IGenres {
+  label: string;
+  value: string;
+}
+
 interface IFilters {
-  rating: string;
-  year: string;
+  rating: number[];
+  year: number[];
   sortBy?: string;
-  genre: string;
+  genres: IGenres[];
 }
 
 export interface IBaseQuery {

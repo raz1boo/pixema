@@ -6,6 +6,9 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: #000;
+  height: 100vh;
+  overflow-x: hidden;
+  position: relative;
 }
 
 code {
@@ -13,27 +16,14 @@ code {
     monospace;
 }
 #root {
-  height: 100%;
   width: 100%;
   display: flex;
-  justify-content: center;
-  overflow: hidden;
   position: relative;
-  padding-bottom: 64px;
-}
-
-#root-2 {
-  overflow: hidden;
-  height: 100%;
-  display: flex;
-  flex-wrap: nowrap;
-  position: relative;
-  z-index: 0;
   flex-direction: column;
-  justify-content: center;
+  flex-wrap: nowrap;
   align-items: center;
-  width: 100%;
-  max-width: 1920px;
+  padding-bottom: 64px;
+  z-index: 0;
 }
 
 @media screen and (max-width: 480px) {
@@ -43,15 +33,15 @@ code {
   }
 }
 
-html::-webkit-scrollbar {
+body::-webkit-scrollbar {
   width: 7px;
 }
 
-html::-webkit-scrollbar-track {
+body::-webkit-scrollbar-track {
   background-color: #000;
 }
 
-html::-webkit-scrollbar-thumb {
+body::-webkit-scrollbar-thumb {
   background: #7b61ff;
   border-radius: 10px;
 }

@@ -6,9 +6,10 @@
   height: 100%;
   display: flex;
   flex-direction: column;
+  padding-top: 50px;
+  gap: 100px;
   align-items: center;
   button {
-    margin-top: 50px;
     border-radius: 40px;
     color: #fff;
     padding: 15px 30px;
@@ -42,11 +43,10 @@
     }
   }
   .layout {
-    padding-top: 0;
     padding-left: 147px;
-    flex-wrap: wrap;
-    max-width: 1920px;
     padding-right: 120px;
+    flex-wrap: wrap;
+    display: flex;
     gap: 40px;
     row-gap: 100px;
   }

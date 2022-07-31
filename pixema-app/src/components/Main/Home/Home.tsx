@@ -95,7 +95,7 @@ const Home = () => {
             {description}
           </div>
           <div className="background-video-block__button">
-            <Link to={`/movie/${id}`}>Подробнее</Link>
+            <Link to={`/film/${id}`}>Подробнее</Link>
           </div>
         </div>
       )}

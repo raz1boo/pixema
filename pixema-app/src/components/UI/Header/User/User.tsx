@@ -41,8 +41,17 @@ const User = ({
               </h2>
             </div>
             <div className="username center">
-              <h3 className="font-size-16px" style={{color:
-            theme === "dark" || location.pathname === "/" ? "#fff" : "#242426"}}>{username}</h3>
+              <h3
+                className="font-size-16px"
+                style={{
+                  color:
+                    theme === "dark" || location.pathname === "/"
+                      ? "#fff"
+                      : "#242426",
+                }}
+              >
+                {username}
+              </h3>
             </div>
           </div>
           <img
@@ -60,7 +69,17 @@ const User = ({
               </h2>
             </div>
             <div className="username center">
-              <h3 className="font-size-16px">Sign In</h3>
+              <h3
+                className="font-size-16px"
+                style={{
+                  color:
+                    theme === "dark" || location.pathname === "/"
+                      ? "#fff"
+                      : "#242426",
+                }}
+              >
+                Войти
+              </h3>
             </div>
           </div>
           <img
@@ -70,13 +89,45 @@ const User = ({
           />
         </Link>
       )}
-      <div className={cn("user-modal", menu && "user-modal_open")}>
-        <Link to="/settings" className="font-size-16px">
-          Edit Profile
+      <div
+        className={cn("user-modal", menu && "user-modal_open")}
+        style={
+          theme === "dark" || location.pathname === "/"
+            ? { backgroundColor: "#242426", borderColor: "transparent" }
+            : { backgroundColor: "#fff", borderColor: "#AFB2B6" }
+        }
+      >
+        <Link
+          to="/settings"
+          className="font-size-16px"
+          style={{
+            color:
+              theme === "dark" || location.pathname === "/"
+                ? "#fff"
+                : "#242426",
+          }}
+        >
+          Изменить профиль
         </Link>
-        <hr />
-        <p onClick={onClickLogOut} className="font-size-16px">
-          Log Out
+        <hr
+          style={{
+            borderColor:
+              theme === "dark" || location.pathname === "/"
+                ? "#323537"
+                : "#AFB2B6",
+          }}
+        />
+        <p
+          onClick={onClickLogOut}
+          className="font-size-16px"
+          style={{
+            color:
+              theme === "dark" || location.pathname === "/"
+                ? "#fff"
+                : "#242426",
+          }}
+        >
+          Выйти
         </p>
       </div>
     </div>

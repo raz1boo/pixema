@@ -7,7 +7,6 @@ import SearchList from "./components/SearchList/SearchList";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks/redux";
 import { filtersSlice } from "../../../store/reducers/filters.slice";
-import cn from "classnames";
 
 interface ISearch {
   openMenu?: boolean;
@@ -30,7 +29,7 @@ const Search = ({ openMenu }: ISearch) => {
       if (debouncedValue) {
         setVisible(false);
         setValue("");
-        navigate(`/search/movies/${debouncedValue}`, { replace: true });
+        navigate(`/search/films/${debouncedValue}`, { replace: true });
       }
     }
   });
@@ -77,12 +76,25 @@ const Search = ({ openMenu }: ISearch) => {
         </button>
       ) : (
         <button
-          className={cn(
-            "filter-button",
-            checkedFilters && "filter-button_active"
-          )}
+          className="filter-button"
           onClick={() => dispatch(setVisibleFilter(true))}
-        ></button>
+        >
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M5 6L19 6M10 12H19M14 18H19"
+              stroke="#AFB2B6"
+              strokeWidth="2"
+              strokeLinecap="round"
+            />
+            {checkedFilters && <circle cx="3" cy="19" r="3" fill="#7B61FF" />}
+          </svg>
+        </button>
       )}
       {isActive && (
         <SearchList
