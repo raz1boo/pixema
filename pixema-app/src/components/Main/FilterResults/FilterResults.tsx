@@ -22,9 +22,12 @@ const FiltersResults = () => {
     filters,
     limit,
   });
+  const count = limit;
   useEffect(() => {
-    setLimit(10);
-  }, [filters]);
+    document.documentElement.clientWidth <= 1380 && setLimit(8);
+    document.documentElement.clientWidth <= 1026 && setLimit(9);
+    document.documentElement.clientWidth < 770 && setLimit(10);
+  }, []);
   const { theme } = useAppSelector((state) => state.themeReducer);
   const { year, rating, genres } = { ...filters };
   return isLoading ? (
@@ -33,7 +36,7 @@ const FiltersResults = () => {
     <div className="filters-results">
       {!_.isEqual(filters, defaultValues) && (
         <div className="filters-results__markers">
-          {!_.isEqual(filters.year ,defaultValues.year) && (
+          {!_.isEqual(filters.year, defaultValues.year) && (
             <div
               className="filters-results__markers__marker"
               style={{
@@ -42,7 +45,7 @@ const FiltersResults = () => {
                 color: theme === "light" ? "#242426" : "#fff",
               }}
             >
-              {year.join('-')}
+              {year.join("-")}
               <HiOutlineX
                 onClick={() => dispatch(setFilterYear(defaultValues.year))}
                 style={{
@@ -51,7 +54,7 @@ const FiltersResults = () => {
               />
             </div>
           )}
-          {!_.isEqual(filters.rating ,defaultValues.rating) && (
+          {!_.isEqual(filters.rating, defaultValues.rating) && (
             <div
               className="filters-results__markers__marker"
               style={{
@@ -60,7 +63,7 @@ const FiltersResults = () => {
                 color: theme === "light" ? "#242426" : "#fff",
               }}
             >
-              {rating.join('-')}
+              {rating.join("-")}
               <HiOutlineX
                 onClick={() => dispatch(setFilterRating(defaultValues.rating))}
                 style={{
@@ -104,7 +107,9 @@ const FiltersResults = () => {
         <>
           <Layout
             className={
-              data?.docs?.length % 10 === 0
+              data?.docs?.length % 10 === 0 ||
+              data?.docs?.length % 8 === 0 ||
+              data?.docs?.length % 9 === 0
                 ? "justify-content__space-between"
                 : undefined
             }
@@ -115,7 +120,7 @@ const FiltersResults = () => {
           </Layout>
           {data?.total > 10 && (
             <button
-              onClick={() => setLimit(limit + 10)}
+              onClick={() => setLimit(limit + count)}
               style={{
                 backgroundColor: theme === "light" ? "#AFB2B6" : "#242426",
               }}

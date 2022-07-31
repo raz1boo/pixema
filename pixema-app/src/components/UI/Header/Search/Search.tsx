@@ -37,7 +37,6 @@ const Search = ({ openMenu }: ISearch) => {
   const location = useLocation();
   return (
     <label className="search" ref={ref}>
-      {/* <label className={cn("search", openMenu && "burger-menu__open")} ref={ref}> */}
       <input
         type="text"
         placeholder="Фильмы и сериалы"

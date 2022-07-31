@@ -23,25 +23,27 @@ code {
   flex-wrap: nowrap;
   align-items: center;
   padding-bottom: 64px;
+  overflow-x: hidden;
   z-index: 0;
+  height: 100%;
 }
 
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 768px) {
   #root {
-    display: block;
-    padding-bottom: 48px;
+    padding-bottom: 0px;
+    overflow-y: scroll;
   }
 }
 
-body::-webkit-scrollbar {
+#root::-webkit-scrollbar {
   width: 7px;
 }
 
-body::-webkit-scrollbar-track {
+#root::-webkit-scrollbar-track {
   background-color: #000;
 }
 
-body::-webkit-scrollbar-thumb {
+#root::-webkit-scrollbar-thumb {
   background: #7b61ff;
   border-radius: 10px;
 }

@@ -3,7 +3,6 @@ import cn from "classnames";
 import { HiOutlineX } from "react-icons/hi";
 import { useEffect, useRef, useState } from "react";
 import { useOutsideClick } from "rooks";
-import useScrollBlock from "../../helpers/scrollHook";
 import { filtersSlice } from "../../store/reducers/filters.slice";
 import { useAppDispatch, useAppSelector } from "../../store/hooks/redux";
 import { Controller, useForm } from "react-hook-form";
@@ -24,8 +23,8 @@ const ModalFilter = () => {
   const { visible, filters, defaultValues } = useAppSelector(
     (state) => state.filtersReducers
   );
-  const [blockScroll, allowScroll] = useScrollBlock();
-  visible ? blockScroll() : allowScroll();
+  const root = document.getElementById("root") as HTMLElement;
+  root.style.overflowY = visible ? "hidden" : "visible";
   const {
     setFilterYear,
     setFilterRating,
@@ -127,7 +126,6 @@ const ModalFilter = () => {
         <div className="modal-filter__main">
           <div className="modal-filter__sort-by">
             <h3>Год выхода</h3>
-            <div className="sort-switcher">
               <Controller
                 name="sortBy"
                 control={control}
@@ -142,7 +140,7 @@ const ModalFilter = () => {
                         name="sort"
                         disabled={getValues().sortBy === "-1"}
                       >
-                        Сначала новые
+                        Новые
                       </button>
                       <button
                         onClick={() => {
@@ -152,13 +150,12 @@ const ModalFilter = () => {
                         name="sort"
                         disabled={getValues().sortBy === "1"}
                       >
-                        Сначала старые
+                        Старые
                       </button>
                     </label>
                   );
                 }}
               />
-            </div>
           </div>
           <div className="modal-filter__genre">
             <h3>Жанры</h3>

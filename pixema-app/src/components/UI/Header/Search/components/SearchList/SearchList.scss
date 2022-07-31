@@ -2,7 +2,8 @@
   border-radius: 10px;
   overflow: hidden;
   margin-top: 10px;
-  position: relative;
+  position: absolute;
+  width: 100%;
   z-index: 999;
   &__buttons {
     height: 70px;

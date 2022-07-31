@@ -4,7 +4,7 @@ import { MovieFavoriteProps } from "../../../../types/IFavorites";
 import ButtonBase from "../../../../UI/ButtonBase/ButtonBase";
 import cn from "classnames";
 
-const MovieFavorite = ({ id, isFavorite }: MovieFavoriteProps) => {
+const MovieFavorite = ({ id, isFavorite, title }: MovieFavoriteProps) => {
   const { toggleFavorite } = useFavorites();
 
   return (
@@ -14,7 +14,7 @@ const MovieFavorite = ({ id, isFavorite }: MovieFavoriteProps) => {
       startIcon={isFavorite ? <FiCheck /> : <FiBookmark />}
       className={cn("favorite-button", isFavorite && "active")}
     >
-      Буду смотреть
+      {title&&'Буду смотреть'}
     </ButtonBase>
   );
 };

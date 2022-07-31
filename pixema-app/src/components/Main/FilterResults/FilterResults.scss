@@ -10,7 +10,6 @@
   &__markers {
     padding-top: 20px;
     display: flex;
-    width: 970px;
     gap: 10px;
     flex-wrap: wrap;
     &__marker {
@@ -74,13 +73,13 @@
   }
   .layout {
     padding-top: 50px;
-    padding-left: 147px;
-    max-width: 1920px;
-    padding-right: 120px;
     flex-wrap: wrap;
     gap: 40px;
     display: flex;
-    row-gap: 80px;
+    align-items: flex-start;
+    @media (max-width: 691px) {
+      justify-content: center;
+    }
   }
   &__null {
     display: flex;

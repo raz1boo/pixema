@@ -12,11 +12,8 @@
   .layout {
     padding-top: 56px;
     padding-bottom: 56px;
-    padding-left: 147px;
     flex-direction: row;
     flex-wrap: wrap;
-    max-width: 1920px;
-    padding-right: 120px;
   }
 }
 
@@ -30,6 +27,9 @@
   top: -140px;
   justify-content: center;
   overflow: hidden;
+  @media (max-width: 768px) {
+    top: -200px;
+  }
   &__untouch-block {
     position: absolute;
     top: -200px;
@@ -53,6 +53,44 @@
       font-size: 50px;
       margin: 0;
     }
+    @media (max-width: 1760px) {
+      padding-left: 176px;
+      padding-right: 176px;
+    }
+    @media (max-width: 1520px) {
+      padding-left: 120px;
+      padding-right: 120px;
+    }
+    @media (max-width: 1440px) {
+      padding-left: 90px;
+      padding-right: 90px;
+    }
+    @media (max-width: 1200px) {
+      padding-left: 50px;
+      padding-right: 50px;
+    }
+    @media (max-width: 1090px) {
+      padding-left: 38px;
+      padding-right: 38px;
+    }
+    @media (max-width: 1024px) {
+      padding-left: 60px;
+      padding-right: 60px;
+    }
+    @media (max-width: 848px) {
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+    @media (max-width: 768px) {
+      padding-left: 120px;
+      padding-right: 120px;
+      height: 550px;
+    }
+    @media (max-width: 700px) {
+      padding-left: 20px;
+      padding-right: 20px;
+      padding-top: 50px;
+    }
   }
   &__small-description {
     display: flex;
@@ -60,6 +98,12 @@
     align-items: center;
     gap: 10px;
     padding-top: 10px;
+    @media (max-width: 768px){
+      flex-wrap: wrap;
+    }
+    @media (max-width: 360px){
+      width: 360px;
+    }
   }
   &__description {
     padding-top: 20px;
@@ -67,6 +111,14 @@
     font-size: 18px;
     width: 55%;
     line-height: 24px;
+    max-height: 284px;
+    overflow: hidden;
+    @media (max-width: 1520px) {
+      width: 100%;
+    }
+    @media (max-width: 360px) {
+      width: 360px;
+    }
   }
   &__button {
     height: 56px;
@@ -96,5 +148,20 @@
     height: 1100px;
     width: 100vw;
     z-index: 2;
+    @media (max-width: 1770px) {
+      transform: scale(2.5);
+    }
+    @media (max-width: 768px) {
+      transform: scale(3);
+    }
+    @media (max-width: 600px) {
+      transform: scale(4);
+    }
+    @media (max-width: 450px) {
+      transform: scale(5);
+    }
+    @media (max-width: 380px) {
+      transform: scale(6);
+    }
   }
 }

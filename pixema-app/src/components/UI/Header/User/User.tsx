@@ -4,6 +4,7 @@ import cn from "classnames";
 import { useOutsideClick } from "rooks";
 import { useRef, useState } from "react";
 import { useAppSelector } from "../../../store/hooks/redux";
+import MediaQuery from "react-responsive";
 
 interface UserProps {
   username: string;
@@ -40,25 +41,29 @@ const User = ({
                   username.split(" ")[1].split("")[0]}
               </h2>
             </div>
-            <div className="username center">
-              <h3
-                className="font-size-16px"
-                style={{
-                  color:
-                    theme === "dark" || location.pathname === "/"
-                      ? "#fff"
-                      : "#242426",
-                }}
-              >
-                {username}
-              </h3>
-            </div>
+            <MediaQuery minWidth={1025}>
+              <div className="username center">
+                <h3
+                  className="font-size-16px"
+                  style={{
+                    color:
+                      theme === "dark" || location.pathname === "/"
+                        ? "#fff"
+                        : "#242426",
+                  }}
+                >
+                  {username}
+                </h3>
+              </div>
+            </MediaQuery>
           </div>
-          <img
-            src="/assets/icons/bottom-arrow.png"
-            alt="arrow"
-            className={cn("arrow", menu && "arrow-top")}
-          />
+          <MediaQuery minWidth={1025}>
+            <img
+              src="/assets/icons/bottom-arrow.png"
+              alt="arrow"
+              className={cn("arrow", menu && "arrow-top")}
+            />
+          </MediaQuery>
         </section>
       ) : (
         <Link to="/login" className="about-user">
@@ -68,25 +73,29 @@ const User = ({
                 <img src="/assets/icons/user.png" alt="user" />
               </h2>
             </div>
-            <div className="username center">
-              <h3
-                className="font-size-16px"
-                style={{
-                  color:
-                    theme === "dark" || location.pathname === "/"
-                      ? "#fff"
-                      : "#242426",
-                }}
-              >
-                Войти
-              </h3>
-            </div>
+            <MediaQuery minWidth={1025}>
+              <div className="username center">
+                <h3
+                  className="font-size-16px"
+                  style={{
+                    color:
+                      theme === "dark" || location.pathname === "/"
+                        ? "#fff"
+                        : "#242426",
+                  }}
+                >
+                  Войти
+                </h3>
+              </div>
+            </MediaQuery>
           </div>
-          <img
-            src="/assets/icons/right-arrow.png"
-            alt="arrow"
-            className="arrow-right"
-          />
+          <MediaQuery minWidth={1025}>
+            <img
+              src="/assets/icons/right-arrow.png"
+              alt="arrow"
+              className="arrow-right"
+            />
+          </MediaQuery>
         </Link>
       )}
       <div

@@ -5,7 +5,6 @@ import { useGetMovieByIdQuery } from "../../api/PixemaAPI";
 import { convertNumbers } from "../../helpers/convertNumbers";
 import { convertTimestampToDate } from "../../helpers/convertTimestampToDate";
 import { getRandomInt } from "../../helpers/getRandomInt";
-import useScrollBlock from "../../helpers/scrollHook";
 import { useFavorites } from "../../store/hooks/useFavorites";
 import AgeRating from "../../UI/AgeRating/AgeRating";
 import Facts from "../../UI/Facts/Facts";
@@ -20,10 +19,11 @@ import PlayerModal from "./components/PlayerModal/PlayerModal";
 import "./SelectedMovie.scss";
 import cn from "classnames";
 import { useAppSelector } from "../../store/hooks/redux";
+import MediaQuery from "react-responsive";
 
 const SelectedMovie = () => {
   const params = useParams();
-  const { data, isFetching } = useGetMovieByIdQuery(params.id);
+  const { data, isLoading } = useGetMovieByIdQuery(params.id);
   const [active, setActive] = useState(false);
   const [activePlayer, setActivePlayer] = useState(false);
   const { theme } = useAppSelector((state) => state.themeReducer);
@@ -126,19 +126,23 @@ const SelectedMovie = () => {
     },
     {
       title: "Продюссер",
-      value: person("producer")?.map((i) => <p key={i.name}>{i.name}</p>),
+      value: person("producer")?.map((i) => (
+        <p key={i.name + getRandomInt(0, 500)}>{i.name}</p>
+      )),
       condition: person("producer"),
     },
     {
       title: "Художник",
       value: person("design")?.map((i) => (
-        <p key={i.name + getRandomInt(0, 50)}>{i.name}</p>
+        <p key={i.name + getRandomInt(0, 500)}>{i.name}</p>
       )),
       condition: person("design"),
     },
     {
       title: "Монтаж",
-      value: person("editor")?.map((i) => <p key={i.name}>{i.name}</p>),
+      value: person("editor")?.map((i) => (
+        <p key={i.name + getRandomInt(0, 500)}>{i.name}</p>
+      )),
       condition: person("editor"),
     },
   ];
@@ -192,8 +196,8 @@ const SelectedMovie = () => {
       condition: facts?.length,
     },
   ];
-  const [blockScroll, allowScroll] = useScrollBlock();
-  active || activePlayer ? blockScroll() : allowScroll();
+  const root = document.getElementById("root") as HTMLElement;
+  root.style.overflowY = active || activePlayer ? "hidden" : "visible";
   const { favorites } = useFavorites();
   const isFavorite = useMemo(
     () => favorites.includes(Number(id)),
@@ -211,85 +215,161 @@ const SelectedMovie = () => {
         active={activePlayer}
         closeModal={() => setActivePlayer(false)}
       />
-      {!isFetching && (
-        <div className="selected-movie">
-          <div className="selected-movie__top-block">
-            <div className="selected-movie__left-side">
-              <img src={poster?.url} alt={`poster/${id}`} />
-              <MovieFavorite id={id} isFavorite={isFavorite} />
-              <button
-                className={cn("watch-button", activePlayer && "active")}
-                onClick={() => setActivePlayer(true)}
-              >
-                <FiPlay />
-                {`Смотреть ${
-                  (typeNumber === 1 && "фильм") ||
-                  (typeNumber === 2 && "сериал") ||
-                  (typeNumber === 3 && "мультфильм") ||
-                  "фильм"
-                }`}
-              </button>
-              {src?.[0]?.embedUrl && (
-                <div className="trailer-block">
-                  <button onClick={() => setActive(true)}>
+      {!isLoading && (
+        <>
+          <MediaQuery minWidth={769}>
+            <div className="selected-movie">
+              <div className="selected-movie__top-block">
+                <div className="selected-movie__left-side">
+                  <img src={poster?.url} alt={`poster/${id}`} />
+                  <MovieFavorite id={id} isFavorite={isFavorite} title={true} />
+                  <button
+                    className={cn("watch-button", activePlayer && "active")}
+                    onClick={() => setActivePlayer(true)}
+                  >
                     <FiPlay />
-                    Смотреть трейлер
+                    {`Смотреть ${
+                      (typeNumber === 1 && "фильм") ||
+                      (typeNumber === 2 && "сериал") ||
+                      (typeNumber === 3 && "мультфильм") ||
+                      "фильм"
+                    }`}
                   </button>
-                  <img src={src?.[0]?.imgUrl} alt="trailer"></img>
+                  {src?.[0]?.embedUrl && (
+                    <div className="trailer-block">
+                      <button onClick={() => setActive(true)}>
+                        <FiPlay />
+                        Смотреть трейлер
+                      </button>
+                      <img src={src?.[0]?.imgUrl} alt="trailer"></img>
+                    </div>
+                  )}
                 </div>
-              )}
+                <div className="selected-movie__right-side">
+                  <Genres genres={genres} />
+                  <h1 style={{ color: theme === "light" ? "#242426" : "#fff" }}>
+                    {name ? name : enName}
+                  </h1>
+                  <h2>{alternativeName}</h2>
+                  <div className="markers">
+                    <Rating rating={rating} />
+                    <Time movieLength={movieLength} />
+                    <AgeRating ageRating={ageRating} />
+                  </div>
+                  <div
+                    className="selected-movie__description"
+                    style={{ color: theme === "light" ? "#242426" : "#fff" }}
+                  >
+                    {description}
+                  </div>
+                  <div className="selected-movie__column-description">
+                    {items.map(
+                      (item) =>
+                        item.condition && (
+                          <div
+                            className="selected-movie__column-description__block"
+                            key={item.title}
+                          >
+                            <div className="title">{item.title}</div>
+                            <div
+                              className="content"
+                              style={{
+                                color:
+                                  theme === "light"
+                                    ? item.title === "Слоган"
+                                      ? "#afb2b6"
+                                      : "#242426"
+                                    : item.title === "Слоган"
+                                    ? "#afb2b6"
+                                    : "#fff",
+                              }}
+                            >
+                              {item.value}
+                            </div>
+                          </div>
+                        )
+                    )}
+                  </div>
+                </div>
+              </div>
+              <div className="selected-movie__bottom-block">
+                <Tabs tabs={tabs} />
+              </div>
             </div>
-            <div className="selected-movie__right-side">
-              <Genres genres={genres} />
-              <h1 style={{ color: theme === "light" ? "#242426" : "#fff" }}>
-                {name ? name : enName}
-              </h1>
-              <h2>{alternativeName}</h2>
-              <div className="markers">
-                <Rating rating={rating} />
-                <Time movieLength={movieLength} />
-                <AgeRating ageRating={ageRating} />
-              </div>
-              <div
-                className="selected-movie__description"
-                style={{ color: theme === "light" ? "#242426" : "#fff" }}
-              >
-                {description}
-              </div>
-              <div className="selected-movie__column-description">
-                {items.map(
-                  (item) =>
-                    item.condition && (
-                      <div
-                        className="selected-movie__column-description__block"
-                        key={item.title}
-                      >
-                        <div className="title">{item.title}</div>
-                        <div
-                          className="content"
-                          style={{
-                            color:
-                              theme === "light"
-                                ? item.title === "Слоган"
-                                  ? "#afb2b6"
-                                  : "#242426"
-                                : item.title === "Слоган"
-                                ? "#afb2b6"
-                                : "#fff",
-                          }}
-                        >
-                          {item.value}
-                        </div>
-                      </div>
-                    )
+          </MediaQuery>
+          <MediaQuery maxWidth={768}>
+            <div className="selected-movie">
+              <div className="selected-movie__top-block">
+                <Genres genres={genres} />
+                <h1 style={{ color: theme === "light" ? "#242426" : "#fff" }}>
+                  {name ? name : enName}
+                </h1>
+                <h2>{alternativeName}</h2>
+                <div className="markers">
+                  <Rating rating={rating} />
+                  <Time movieLength={movieLength} />
+                  <AgeRating ageRating={ageRating} />
+                </div>
+                <img src={poster?.url} alt={`poster/${id}`} />
+                <div className="selected-movie__buttons-block">
+                  <MovieFavorite id={id} isFavorite={isFavorite} />
+                  <button
+                    className={cn("watch-button", activePlayer && "active")}
+                    onClick={() => setActivePlayer(true)}
+                  >
+                    <FiPlay />
+                  </button>
+                </div>
+                {src?.[0]?.embedUrl && (
+                  <div className="trailer-block">
+                    <button onClick={() => setActive(true)}>
+                      <FiPlay />
+                      Смотреть трейлер
+                    </button>
+                    <img src={src?.[0]?.imgUrl} alt="trailer"></img>
+                  </div>
                 )}
+                <div
+                  className="selected-movie__description"
+                  style={{ color: theme === "light" ? "#242426" : "#fff" }}
+                >
+                  {description}
+                </div>
+                <div className="selected-movie__column-description">
+                  {items.map(
+                    (item) =>
+                      item.condition && (
+                        <div
+                          className="selected-movie__column-description__block"
+                          key={item.title}
+                        >
+                          <div className="title">{item.title}</div>
+                          <div
+                            className="content"
+                            style={{
+                              color:
+                                theme === "light"
+                                  ? item.title === "Слоган"
+                                    ? "#afb2b6"
+                                    : "#242426"
+                                  : item.title === "Слоган"
+                                  ? "#afb2b6"
+                                  : "#fff",
+                            }}
+                          >
+                            {item.value}
+                          </div>
+                        </div>
+                      )
+                  )}
+                </div>
+              </div>
+              <div className="selected-movie__bottom-block">
+                <Tabs tabs={tabs} />
               </div>
             </div>
-          </div>
-          <div className="selected-movie__bottom-block">
-            <Tabs tabs={tabs} />
-          </div>
-        </div>
+          </MediaQuery>
+        </>
       )}
     </>
   );

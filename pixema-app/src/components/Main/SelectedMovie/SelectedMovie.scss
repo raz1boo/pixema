@@ -2,120 +2,193 @@
   padding-left: 147px;
   max-width: 1920px;
   padding-top: 50px;
+  padding-right: 120px;
   width: 100%;
+  @media (max-width: 1760px) {
+    padding-left: 120px;
+    padding-right: 120px;
+  }
+  @media (max-width: 1730px) {
+    padding-left: 176px;
+    padding-right: 176px;
+  }
+  @media (max-width: 1540px) {
+    padding-left: 120px;
+    padding-right: 120px;
+  }
+  @media (max-width: 1440px) {
+    padding-left: 90px;
+    padding-right: 90px;
+  }
+  @media (max-width: 1200px) {
+    padding-left: 50px;
+    padding-right: 50px;
+  }
+  @media (max-width: 1090px) {
+    padding-left: 38px;
+    padding-right: 38px;
+  }
+  @media (max-width: 1024px) {
+    padding-left: 60px;
+    padding-right: 60px;
+  }
+  @media (max-width: 848px) {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  @media (max-width: 767px) {
+    padding-left: 120px;
+    padding-right: 120px;
+  }
+  @media (max-width: 700px) {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
   &__top-block {
     display: flex;
+    @media (max-width: 768px) {
+      flex-direction: column;
+    }
   }
   &__left-side {
     display: flex;
     flex-direction: column;
-    min-width: 300px;
+    max-width: 276px;
+    width: 100%;
     gap: 32px;
-    .favorite-button,
-    .watch-button {
-      outline: none;
-      background-color: #323537;
-      max-height: 56px;
-      padding: 19px;
-      border-radius: 10px;
-      transition: 0.3s;
-      font-weight: 600;
-      border: none;
-      font-size: 18px;
-      color: #fff;
+  }
+  .favorite-button,
+  .watch-button {
+    outline: none;
+    background-color: #323537;
+    max-height: 56px;
+    padding: 19px;
+    width: 100%;
+    border-radius: 10px;
+    transition: 0.3s;
+    font-weight: 600;
+    border: none;
+    font-size: 18px;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    cursor: pointer;
+    span {
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 10px;
-      cursor: pointer;
-      span {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-      svg,
-      path {
-        transition: fill 0.3s ease;
-        fill: transparent;
-      }
-      &.active {
-        background-color: #7b61ff;
-      }
-      &:hover {
-        background-color: #917cff;
-        path {
-          fill: #fff;
-        }
-      }
     }
-    .watch-button {
-      &:hover svg {
+    svg,
+    path {
+      transition: fill 0.3s ease;
+      fill: transparent;
+    }
+    &.active {
+      background-color: #7b61ff;
+    }
+    &:hover {
+      background-color: #917cff;
+      path {
         fill: #fff;
       }
     }
-    img {
-      height: 400px;
-      width: 300px;
-      border-radius: 20px;
+  }
+  &__buttons-block {
+    padding: 20px 0;
+    max-width: 276px;
+    display: flex;
+    gap: 1px;
+  }
+  .favorite-button {
+    @media (max-width: 768px) {
+      border-bottom-right-radius: 0px;
+      border-top-right-radius: 0px;
     }
-    .trailer-block {
-      max-width: 300px;
-      height: 200px;
-      position: relative;
-      img {
-        border-radius: 6px;
-        object-fit: cover;
-        height: 150px;
-        width: 100%;
+  }
+  .watch-button {
+    @media (max-width: 768px) {
+      border-bottom-left-radius: 0px;
+      border-top-left-radius: 0px;
+    }
+    &:hover svg {
+      fill: #fff;
+    }
+  }
+  img {
+    height: 400px;
+    width: 100%;
+    border-radius: 20px;
+    @media (max-width: 900px) {
+      height: 278px;
+    }
+    @media (max-width: 768px) {
+      height: 364px;
+      max-width: 276px;
+    }
+  }
+  .trailer-block {
+    max-width: 300px;
+    position: relative;
+    img {
+      border-radius: 6px;
+      object-fit: cover;
+      height: 150px;
+      width: 100%;
+    }
+    button {
+      svg {
+        transition: fill 0.3s ease;
+        fill: transparent;
       }
-      button {
+      &:hover {
+        background-color: #917cff;
         svg {
-          transition: fill 0.3s ease;
-          fill: transparent;
+          fill: #fff;
         }
-        &:hover {
-          background-color: #917cff;
-          svg {
-            fill: #fff;
-          }
-        }
-        color: #fff;
-        position: absolute;
-        transition: 0.3s ease;
-        top: 110px;
-        left: 10px;
-        border: none;
-        background-color: #7b61ff;
-        padding: 8px 15px 8px 10px;
-        border-radius: 10px;
-        display: inline-flex;
-        font-weight: 600;
-        align-items: center;
-        cursor: pointer;
-        outline: none;
-        gap: 2px;
       }
+      color: #fff;
+      position: absolute;
+      transition: 0.3s ease;
+      top: 110px;
+      left: 10px;
+      border: none;
+      background-color: #7b61ff;
+      padding: 8px 15px 8px 10px;
+      border-radius: 10px;
+      display: inline-flex;
+      font-weight: 600;
+      align-items: center;
+      cursor: pointer;
+      outline: none;
+      gap: 2px;
     }
   }
   &__right-side {
     padding-left: 42px;
-    h1 {
+  }
+  h1 {
+    color: #fff;
+    font-size: 40px;
+    margin: 5px 0 5px;
+  }
+  h2 {
+    color: #afb2b6;
+    font-weight: normal;
+    margin: 0 0 15px;
+  }
+  .markers {
+    display: flex;
+    gap: 20px;
+    @media (max-width: 768px) {
+      padding-bottom: 20px;
+    }
+    .time {
       color: #fff;
-      font-size: 40px;
-      margin: 10px 0 15px;
-    }
-    h2 {
-      color: #afb2b6;
-      font-weight: normal;
-    }
-    .markers {
-      display: flex;
-      gap: 20px;
-      .time{
-        color: #fff;
-      }
     }
   }
+
   &__description {
     padding-top: 40px;
     max-width: 900px;
@@ -123,6 +196,9 @@
     font-size: 16px;
     font-weight: 500;
     line-height: 24px;
+    @media (max-width: 768px) {
+      padding-top: 20px;
+    }
   }
   &__column-description {
     padding-top: 40px;
@@ -131,11 +207,10 @@
     gap: 20px;
     &__block {
       display: flex;
-      gap: 50px;
       .title {
         color: #afb2b6;
         margin: 0;
-        min-width: 200px;
+        min-width: 180px;
       }
       .content {
         margin: 0;
@@ -158,6 +233,5 @@
   }
   &__bottom-block {
     padding-top: 50px;
-    padding-right: 120px;
   }
 }

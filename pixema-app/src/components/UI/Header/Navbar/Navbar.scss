@@ -16,15 +16,44 @@
   z-index: 99;
   pointer-events: none;
   box-shadow: 0 5px 10px rgba($color: #000000, $alpha: 0.7);
-  // @media (max-width: 1024px) {
-  //   top: 120px;
-  // }
-  // @media (max-width: 480px) {
-  //   top: 40px;
-  // }
-  // @media (max-width: 320px) {
-  //   top: 100px;
-  // }
+  @media (max-width: 1760px) {
+    left: 70px;
+  }
+  @media (max-width: 1720px) {
+    left: 125px;
+  }
+  @media (max-width: 1520px) {
+    left: 70px;
+  }
+  @media (max-width: 1440px) {
+    width: 320px;
+    left: 40px;
+  }
+  @media (max-width: 1200px) {
+    left: 0px;
+  }
+  @media (max-width: 1090px) {
+    left: -10px;
+  }
+  @media (max-width: 1024px) {
+    left: 10px;
+  }
+  @media (max-width: 848px) {
+    left: -30px;
+  }
+  @media (max-width: 768px) {
+    left: 0;
+    bottom: 0px;
+    height: 100px;
+    border-radius: 0px;
+    width: 100%;
+    position: sticky;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    padding: 20px;
+    z-index: 9999;
+  }
   a {
     transition: 0.3s ease;
     color: #fff;
@@ -34,6 +63,14 @@
     align-items: center;
     justify-content: left;
     font-weight: 600;
+    p {
+      margin: 0;
+    }
+    @media (max-width: 768px) {
+      flex-direction: column;
+      gap: 10px;
+      height: 50px;
+    }
     &.nav__active,
     &.nav__active path {
       color: #7b61ff;
@@ -52,32 +89,12 @@
     opacity: 1;
     transition: 0.3s ease;
     pointer-events: all;
-    //   right: 25px;
-    //   @media (max-width: 1280px) {
-    //     right: 15px;
-    //   }
-    //   @media (max-width: 1024px) {
-    //     right: 20px;
-    //   }
-    //   @media (max-width: 480px) {
-    //     right: 5px;
-    //     top: 5px;
-    //   }
-    //   @media (max-width: 320px) {
-    //     z-index: 88;
-    //     padding-top: 200px;
-    //     height: 100%;
-    //     overflow-y: hidden;
-    //     padding-left: 115px;
-    //     top: 0;
-    //     width: 320px;
-    //   }
   }
 }
 
 .burger-menu__button {
   height: 56px;
-  width: 56px;
+  min-width: 56px;
   background-color: #7b61ff;
   border-radius: 10px;
   display: flex;
@@ -87,19 +104,9 @@
   z-index: 999;
   position: relative;
   cursor: pointer;
-  // @media (max-width: 1280px) {
-  //   margin-left: 32px;
-  //   margin-right: 0;
-  // }
-  // @media (max-width: 480px) {
-  //   position: absolute;
-  //   top: 30px;
-  //   right: 32px;
-  //   z-index: 99;
-  // }
-  // @media (max-width: 320px) {
-  //   right: 24px;
-  // }
+  @media (max-width: 768px) {
+    display: none;
+  }
 
   .burger {
     margin: auto;

@@ -7,6 +7,12 @@
   text-decoration: none;
   flex-direction: column;
   z-index: 22;
+  @media(max-width:1720px){
+    min-width: 208px;
+  }
+  @media(max-width:768px){
+    min-width: 266px;
+  }
   &:hover h2 {
     color: #7b61ff !important;
   }
@@ -35,6 +41,12 @@
     background-size: cover;
     transition: 0.3s ease;
     position: relative;
+    @media(max-width:1720px){
+      height: 279px;
+    }
+    @media(max-width:768px){
+      height: 357px;
+    }
   }
   &__description {
     display: flex;
