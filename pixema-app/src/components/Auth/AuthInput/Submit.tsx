@@ -2,6 +2,7 @@ interface SubmitPrors {
   className: string;
   type: string;
   value: string;
+  onClick?:any;
 }
 
 const Submit = ({ className, type, value }: SubmitPrors) => {
