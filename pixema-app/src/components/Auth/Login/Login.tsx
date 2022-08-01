@@ -4,11 +4,12 @@ import Logo from "../../UI/Header/Logo/Logo";
 import "./Login.scss";
 import "../../Auth/Authorization.scss";
 import { useAppSelector } from "../../store/hooks/redux";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 const Login = () => {
   const { theme } = useAppSelector((state) => state.themeReducer);
   const location = useLocation();
+  const navigate = useNavigate();
   return (
     <>
       <div className="login-logo">
@@ -48,7 +49,12 @@ const Login = () => {
             placeholder="Введите пароль"
           />
           <Link to="/reset_password">Забыли пароль?</Link>
-          <Submit className="submit" type="submit" value="Войти" />
+          <Submit
+            className="submit"
+            type="submit"
+            value="Войти"
+            onClick={() => navigate("/", { replace: true })}
+          />
           <p
             style={{
               color:

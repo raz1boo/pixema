@@ -55,6 +55,7 @@
       width: 50%;
       @media (max-width: 768px) {
         min-width: 327px;
+        width: 100%;
       }
     }
     .changes-block {
@@ -87,12 +88,14 @@
         width: 50%;
         @media (max-width: 768px) {
           min-width: 327px;
+          width: 100%;
         }
       }
       .old-password-block {
         width: 50%;
         @media (max-width: 768px) {
           min-width: 327px;
+          width: 100%;
         }
       }
     }

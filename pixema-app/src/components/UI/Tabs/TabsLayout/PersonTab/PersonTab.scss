@@ -1,5 +1,5 @@
 .person {
-  min-width: 266px;
+  width: 266px;
   height: 433px;
   position: relative;
   cursor: pointer;
@@ -7,11 +7,11 @@
   text-decoration: none;
   flex-direction: column;
   z-index: 22;
-  @media(max-width:1720px){
-    min-width: 208px;
+  @media (max-width: 1720px) {
+    width: 208px;
   }
-  @media(max-width:768px){
-    min-width: 266px;
+  @media (max-width: 600px) {
+    width: 272px;
   }
   &:hover h2 {
     color: #7b61ff !important;
@@ -36,15 +36,16 @@
     height: 357px;
     padding: 20px;
     border-radius: 20px;
+    width: 100%;
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
     transition: 0.3s ease;
     position: relative;
-    @media(max-width:1720px){
+    @media (max-width: 1720px) {
       height: 279px;
     }
-    @media(max-width:768px){
+    @media (max-width: 600px) {
       height: 357px;
     }
   }

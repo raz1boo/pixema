@@ -1,4 +1,4 @@
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import Input from "../AuthInput/Input";
 import Submit from "../AuthInput/Submit";
 import Logo from "../../UI/Header/Logo/Logo";
@@ -8,6 +8,7 @@ import { useAppSelector } from "../../store/hooks/redux";
 const Registration = () => {
   const { theme } = useAppSelector((state) => state.themeReducer);
   const location = useLocation();
+  const navigate = useNavigate();
   return (
     <>
       <div className="login-logo">
@@ -57,7 +58,12 @@ const Registration = () => {
             name="password"
             placeholder="Повторите пароль"
           />
-          <Submit className="submit" type="submit" value="Регистрация" />
+          <Submit
+            className="submit"
+            type="submit"
+            value="Регистрация"
+            onClick={() => navigate("/", { replace: true })}
+          />
           <p
             style={{
               color:

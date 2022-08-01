@@ -1,3 +1,4 @@
+import MediaQuery from "react-responsive";
 import { useParams } from "react-router-dom";
 import {
   useGetMoviesByIdQuery,
@@ -87,43 +88,88 @@ const SelectedPerson = () => {
   return (
     <>
       {!isFetching && (
-        <div className="selected-person">
-          <div className="selected-person__top-block">
-            <div className="selected-person__left-side">
-              <img src={photo} alt={`img/${id}`} />
-            </div>
-            <div className="selected-person__right-side">
-              <h1 style={{ color: theme === "light" ? "#242426" : "#fff" }}>
-                {name}
-              </h1>
-              <h2>{enName}</h2>
-              <div className="selected-person__column-description">
-                {items.map(
-                  (item) =>
-                    item.condition && (
-                      <div
-                        className="selected-person__column-description__block"
-                        key={item.title}
-                      >
-                        <div className="title">{item.title}</div>
-                        <div
-                          className="content"
-                          style={{
-                            color: theme === "light" ? "#242426" : "#fff",
-                          }}
-                        >
-                          {item.value}
-                        </div>
-                      </div>
-                    )
-                )}
+        <>
+          <MediaQuery minWidth={769}>
+            <div className="selected-person">
+              <div className="selected-person__top-block">
+                <div className="selected-person__left-side">
+                  <img src={photo} alt={`img/${id}`} />
+                </div>
+                <div className="selected-person__right-side">
+                  <h1 style={{ color: theme === "light" ? "#242426" : "#fff" }}>
+                    {name}
+                  </h1>
+                  <h2>{enName}</h2>
+                  <div className="selected-person__column-description">
+                    {items.map(
+                      (item) =>
+                        item.condition && (
+                          <div
+                            className="selected-person__column-description__block"
+                            key={item.title}
+                          >
+                            <div className="title">{item.title}</div>
+                            <div
+                              className="content"
+                              style={{
+                                color: theme === "light" ? "#242426" : "#fff",
+                              }}
+                            >
+                              {item.value}
+                            </div>
+                          </div>
+                        )
+                    )}
+                  </div>
+                </div>
+              </div>
+              <div className="selected-person__bottom-block">
+                <Tabs tabs={tabs} />
               </div>
             </div>
-          </div>
-          <div className="selected-person__bottom-block">
-            <Tabs tabs={tabs} />
-          </div>
-        </div>
+          </MediaQuery>
+          <MediaQuery maxWidth={768}>
+            <div className="selected-person">
+              <div className="selected-person__top-block">
+                <img
+                  src={photo}
+                  alt={`img/${id}`}
+                  className="selected-person__photo"
+                />
+                <div className="selected-person__names">
+                  <h1 style={{ color: theme === "light" ? "#242426" : "#fff" }}>
+                    {name}
+                  </h1>
+                  <h2>{enName}</h2>
+                </div>
+                <div className="selected-person__column-description">
+                  {items.map(
+                    (item) =>
+                      item.condition && (
+                        <div
+                          className="selected-person__column-description__block"
+                          key={item.title}
+                        >
+                          <div className="title">{item.title}</div>
+                          <div
+                            className="content"
+                            style={{
+                              color: theme === "light" ? "#242426" : "#fff",
+                            }}
+                          >
+                            {item.value}
+                          </div>
+                        </div>
+                      )
+                  )}
+                </div>
+              </div>
+              <div className="selected-person__bottom-block">
+                <Tabs tabs={tabs} />
+              </div>
+            </div>
+          </MediaQuery>
+        </>
       )}
     </>
   );

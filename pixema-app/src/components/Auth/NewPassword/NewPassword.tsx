@@ -3,11 +3,12 @@ import Submit from "../AuthInput/Submit";
 import Logo from "../../UI/Header/Logo/Logo";
 import "./NewPassword.scss";
 import { useAppSelector } from "../../store/hooks/redux";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const NewPassword = () => {
   const { theme } = useAppSelector((state) => state.themeReducer);
   const location = useLocation();
+  const navigate = useNavigate();
   return (
     <>
       <div className="login-logo">
@@ -45,7 +46,7 @@ const NewPassword = () => {
             name="password"
             placeholder="Повторите пароль"
           />
-          <Submit className="submit" type="submit" value="Изменить пароль" />
+          <Submit className="submit" type="submit" value="Изменить пароль" onClick={() => navigate("/", { replace: true })} />
         </form>
       </section>
     </>

@@ -3,26 +3,11 @@ import Submit from "../AuthInput/Submit";
 import Logo from "../../UI/Header/Logo/Logo";
 import "./ResetPassword.scss";
 import { useState } from "react";
-import { HiMenuAlt3 } from "react-icons/hi";
 import { useAppSelector } from "../../store/hooks/redux";
 import { useLocation } from "react-router-dom";
 
-// const [isMessageEmail, setMessageEmail] = useState(false);
-
-// const showMessageEmail = () => {
-//   setMessageEmail(!isMessageEmail);
-// };
-
-// const messageEmail = () => {
-//   return (
-//     <h3>
-//       Мы отправили Вам электронное письмо на почту example@gmail.com со ссылкой
-//       для сброса пароля!
-//     </h3>
-//   );
-// };
-
 const ResetPassword = () => {
+  const [isMessageEmail, setMessageEmail] = useState(false);
   const { theme } = useAppSelector((state) => state.themeReducer);
   const location = useLocation();
   return (
@@ -50,7 +35,12 @@ const ResetPassword = () => {
           >
             Восстановить пароль
           </h2>
-          {/* {setMessageEmail && messageEmail} */}
+          {isMessageEmail && (
+            <h3>
+              Мы отправили Вам электронное письмо на почту example@gmail.com со
+              ссылкой для сброса пароля!
+            </h3>
+          )}
           <Input
             label="Почта"
             type="email"
@@ -58,7 +48,7 @@ const ResetPassword = () => {
             placeholder="Введите почту"
           />
           <Submit
-            // onClick={showMessageEmail}
+            onClick={() => setMessageEmail(true)}
             className="submit"
             type="submit"
             value="Восстановить"
