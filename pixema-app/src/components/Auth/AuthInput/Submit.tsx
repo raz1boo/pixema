@@ -7,17 +7,15 @@ interface SubmitPrors {
 
 const Submit = ({ className, type, value, onClick }: SubmitPrors) => {
   return (
-    <>
-      <input
-        className={className}
-        type={type}
-        value={value}
-        onClick={(e) => {
-          e.preventDefault();
-          onClick();
-        }}
-      />
-    </>
+    <input
+      className={className}
+      type={type}
+      value={value}
+      onClick={(e) => {
+        e.preventDefault();
+        onClick();
+      }}
+    />
   );
 };
 
