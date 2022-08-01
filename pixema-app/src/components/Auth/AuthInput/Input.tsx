@@ -22,8 +22,8 @@ const Input = ({ label, type, name, placeholder }: InputPrors) => {
 
   const passwordHandler = (e: any) => {
     setPassword(e.target.value);
-    if (password.length < 3 || password.length > 10) {
-      setPasswordError("Пароль должен быть длиннее 3 и меньше 10 символов");
+    if (password.length < 8) {
+      setPasswordError("Пароль должен быть длиннее 8 символов");
     } else {
       setPasswordError("");
     }
