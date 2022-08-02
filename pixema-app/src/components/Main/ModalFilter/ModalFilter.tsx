@@ -96,7 +96,7 @@ const ModalFilter = () => {
       year: filters.year,
       sortBy: filters.sortBy,
     });
-  }, [filters]);
+  }, [filters, reset]);
   return (
     <div className={cn("modal-filter", visible && "active")}>
       <div
