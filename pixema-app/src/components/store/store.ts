@@ -8,6 +8,7 @@ import { loadReducer } from "./reducers/loadMore.slice";
 import { filtersReducers } from "./reducers/filters.slice";
 import { useMemo } from "react";
 import { themeReducer } from "./reducers/theme.slice";
+import { authReducer } from "./reducers/auth.slice";
 
 let store: AppStore;
 
@@ -17,6 +18,7 @@ export const setupStore = (preloadedState = {}) => {
       loadReducer,
       filtersReducers,
       themeReducer,
+      authReducer,
       [pixemaAPI.reducerPath]: pixemaAPI.reducer,
     },
     preloadedState,
@@ -44,6 +46,7 @@ const rootReducer = combineReducers({
   loadReducer,
   filtersReducers,
   themeReducer,
+  authReducer,
 });
 
 export type AppStore = ReturnType<typeof setupStore>;

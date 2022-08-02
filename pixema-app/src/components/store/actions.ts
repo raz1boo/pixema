@@ -8,6 +8,7 @@ import {
   setCheckedFilters,
 } from "./reducers/filters.slice";
 import { setTheme } from "./reducers/theme.slice";
+import { logout, setUser } from "./reducers/auth.slice";
 
 export default {
   loadMoreMovies,
@@ -18,4 +19,6 @@ export default {
   setVisibleFilter,
   setCheckedFilters,
   setTheme,
+  logout,
+  setUser,
 };

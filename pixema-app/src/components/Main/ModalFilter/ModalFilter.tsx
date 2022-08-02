@@ -78,12 +78,6 @@ const ModalFilter = () => {
     _.isEqual(getValues(), defaultValues)
       ? dispatch(setCheckedFilters(false))
       : dispatch(setCheckedFilters(true));
-    reset({
-      genres: filters.genres,
-      rating: filters.rating,
-      year: filters.year,
-      sortBy: filters.sortBy,
-    });
   });
   useOutsideClick(genresRef, () => {
     setText("");
@@ -112,12 +106,6 @@ const ModalFilter = () => {
               _.isEqual(getValues(), defaultValues)
                 ? dispatch(setCheckedFilters(false))
                 : dispatch(setCheckedFilters(true));
-              reset({
-                genres: filters.genres,
-                rating: filters.rating,
-                year: filters.year,
-                sortBy: filters.sortBy,
-              });
             }}
           >
             <HiOutlineX />
