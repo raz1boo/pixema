@@ -11,15 +11,22 @@ import Loader from "../../UI/Loader/Loader";
 const SearchPersonsResults = () => {
   const params = useParams();
   const [limit, setLimit] = useState(10);
-  const count = limit;
   const { data, isFetching, isLoading } = useGetPersonsBySearchQuery({
     query: `&search=${params.id}&field=name`,
     limit,
   });
+  const [count, setCount] = useState(10);
   useEffect(() => {
-    document.documentElement.clientWidth <= 1387 && setLimit(8);
-    document.documentElement.clientWidth <= 1026 && setLimit(9);
-    document.documentElement.clientWidth < 770 && setLimit(10);
+    if (document.documentElement.clientWidth <= 1366) {
+      setLimit(8);
+      setCount(8);
+    } else if (document.documentElement.clientWidth <= 1024) {
+      setLimit(9);
+      setCount(9);
+    } else if (document.documentElement.clientWidth < 768) {
+      setLimit(10);
+      setCount(10);
+    }
   }, []);
   const { theme } = useAppSelector((state) => state.themeReducer);
   return isLoading ? (
