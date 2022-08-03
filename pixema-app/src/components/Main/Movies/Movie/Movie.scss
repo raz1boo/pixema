@@ -31,6 +31,12 @@
     height: 358px;
     background-color: rgba(#000, 0);
     transition: 0.3s ease;
+    @media (max-width: 1720px) {
+      height: 279px;
+    }
+    @media (max-width: 600px) {
+      height: 357px;
+    }
   }
   &__markers {
     display: flex;
