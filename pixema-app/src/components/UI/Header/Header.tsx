@@ -9,16 +9,12 @@ import { useLocation } from "react-router-dom";
 import MediaQuery from "react-responsive";
 
 interface IHeader {
-  username: string;
-  onClickLogOut: () => void;
   open: boolean;
   openFunct: () => void;
   closeFunction: () => void;
 }
 
 function Header({
-  username,
-  onClickLogOut,
   open,
   openFunct,
   closeFunction,
@@ -46,13 +42,7 @@ function Header({
         <MediaQuery minWidth={769}>
           <Search />
         </MediaQuery>
-        <User
-          username={username}
-          onClickLogOut={onClickLogOut}
-          openBurger={open}
-          openBurgerFunction={openFunct}
-          closeBurger={closeFunction}
-        />
+        <User />
         <MediaQuery maxWidth={768}>
           <Search />
         </MediaQuery>

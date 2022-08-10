@@ -4,7 +4,6 @@ import "./App.css";
 import ModalFilter from "./components/Main/ModalFilter/ModalFilter";
 import Settings from "./components/Main/Settings/Settings";
 import Home from "./components/Main/Home/Home";
-import { IUser } from "./components/types/IUser";
 import Registration from "./components/Auth/Registration/Registration";
 import Login from "./components/Auth/Login/Login";
 import ResetPassword from "./components/Auth/ResetPassword/ResetPassword";
@@ -25,10 +24,6 @@ import Navbar from "./components/UI/Header/Navbar/Navbar";
 
 function App() {
   const location = useLocation();
-  const [dataUser, setDataUser] = useState<IUser>({
-    name: "Artem Lapetsky",
-    email: "a.lapitsky@gmail.com",
-  });
   const [open, setOpen] = useState(false);
   const { theme } = useAppSelector((state) => state.themeReducer);
   document.body.style.backgroundColor = theme === "dark" ? "#000" : "#fff";
@@ -41,8 +36,6 @@ function App() {
         location.pathname === "/reset_password"
       ) && (
         <Header
-          username={dataUser.name}
-          onClickLogOut={() => setDataUser({ name: "", email: "" })}
           open={open}
           openFunct={() => setOpen(!open)}
           closeFunction={() => setOpen(false)}
@@ -52,7 +45,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route
           path="/settings"
-          element={<Settings open={open} userData={dataUser} />}
+          element={<Settings />}
         />
         <Route path="/favorites" element={<Favorites />} />
         <Route path="/film/">

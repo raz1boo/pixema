@@ -85,6 +85,9 @@
       padding-left: 20px;
       padding-right: 20px;
     }
+    @media (max-width: 500px) {
+      padding-top: 50px;
+    }
   }
   &__small-description {
     display: flex;

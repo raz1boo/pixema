@@ -30,7 +30,9 @@ const SearchPersonsResults = () => {
   }, []);
   const { theme } = useAppSelector((state) => state.themeReducer);
   return isLoading ? (
-    <Loader />
+    <div style={{ paddingTop: "150px" }}>
+      <Loader />
+    </div>
   ) : (
     <div className="search-results">
       {data?.total ? (
@@ -39,7 +41,8 @@ const SearchPersonsResults = () => {
             className={
               data?.docs?.length % 10 === 0 ||
               data?.docs?.length % 8 === 0 ||
-              data?.docs?.length % 9 === 0
+              data?.docs?.length % 9 === 0 ||
+              data?.docs?.length % 5 === 0
                 ? "justify-content__space-between"
                 : undefined
             }
@@ -49,20 +52,22 @@ const SearchPersonsResults = () => {
             ))}
           </Layout>
           {data?.total > 10 && (
-            <button
-              onClick={() => setLimit(limit + count)}
-              style={{
-                backgroundColor: theme === "light" ? "#AFB2B6" : "#242426",
-              }}
-            >
-              {isFetching ? (
-                <span>Загрузка...</span>
-              ) : (
-                <span>
-                  Показать ещё <ImSpinner11 />
-                </span>
-              )}
-            </button>
+            <div className="button-layout">
+              <button
+                onClick={() => setLimit(limit + count)}
+                style={{
+                  backgroundColor: theme === "light" ? "#AFB2B6" : "#242426",
+                }}
+              >
+                {isFetching ? (
+                  <span>Загрузка...</span>
+                ) : (
+                  <span>
+                    Показать ещё <ImSpinner11 />
+                  </span>
+                )}
+              </button>
+            </div>
           )}
         </>
       ) : (

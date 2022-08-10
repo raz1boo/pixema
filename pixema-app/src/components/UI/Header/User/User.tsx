@@ -3,32 +3,22 @@ import "./User.scss";
 import cn from "classnames";
 import { useOutsideClick } from "rooks";
 import { useRef, useState } from "react";
-import { useAppSelector } from "../../../store/hooks/redux";
+import { useAppDispatch, useAppSelector } from "../../../store/hooks/redux";
 import MediaQuery from "react-responsive";
+import { authSlice } from "../../../store/reducers/auth.slice";
 
-interface UserProps {
-  username: string;
-  onClickLogOut: () => void;
-  openBurger: boolean;
-  openBurgerFunction: () => void;
-  closeBurger: () => void;
-}
-
-const User = ({
-  username,
-  onClickLogOut,
-  openBurger,
-  openBurgerFunction,
-  closeBurger,
-}: UserProps) => {
+const User = () => {
   const [menu, openMenu] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
   useOutsideClick(ref, () => openMenu(false));
   const { theme } = useAppSelector((state) => state.themeReducer);
   const location = useLocation();
+  const { currentUser, isAuth } = useAppSelector((state) => state.authReducer);
+  const dispatch = useAppDispatch();
+  const { logout } = authSlice.actions;
   return (
     <div className="user-block">
-      {username ? (
+      {isAuth ? (
         <section
           className="about-user"
           ref={ref}
@@ -37,8 +27,8 @@ const User = ({
           <div className="user center">
             <div className="initials center">
               <h2 className="font-size-20px">
-                {username.split(" ")[0].split("")[0] +
-                  username.split(" ")[1].split("")[0]}
+                {currentUser.name.split(" ")[0].split("")[0] +
+                  currentUser.name.split(" ")[1].split("")[0]}
               </h2>
             </div>
             <MediaQuery minWidth={1025}>
@@ -52,7 +42,7 @@ const User = ({
                         : "#242426",
                   }}
                 >
-                  {username}
+                  {currentUser.name}
                 </h3>
               </div>
             </MediaQuery>
@@ -127,7 +117,7 @@ const User = ({
           }}
         />
         <p
-          onClick={onClickLogOut}
+          onClick={() => dispatch(logout())}
           className="font-size-16px"
           style={{
             color:

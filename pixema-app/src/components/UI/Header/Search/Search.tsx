@@ -8,11 +8,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks/redux";
 import { filtersSlice } from "../../../store/reducers/filters.slice";
 
-interface ISearch {
-  openMenu?: boolean;
-}
-
-const Search = ({ openMenu }: ISearch) => {
+const Search = () => {
   const dispatch = useAppDispatch();
   const { checkedFilters } = useAppSelector((state) => state.filtersReducers);
   const { setVisibleFilter } = filtersSlice.actions;

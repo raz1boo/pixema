@@ -3,12 +3,15 @@
   box-sizing: content-box;
   position: relative;
   z-index: 11;
-  height: 100%;
   display: flex;
   flex-direction: column;
   padding-top: 50px;
   gap: 100px;
-  align-items: center;
+  .button-layout{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
   button {
     border-radius: 40px;
     color: #fff;
