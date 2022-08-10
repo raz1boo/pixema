@@ -7,13 +7,19 @@ interface InputPrors {
   type: string;
   name: string;
   placeholder: string;
+  onChange?: (name: string) => void;
 }
 
-const Input = ({ label, type, name, placeholder }: InputPrors) => {
+const Input = ({
+  label,
+  type,
+  name,
+  placeholder,
+  onChange,
+}: InputPrors) => {
   const [email, setEmail] = useState("");
   const [emailDirty, setEmailDirty] = useState(false);
   const [emailError, setEmailError] = useState("Почта не может быть пустой");
-
   const [password, setPassword] = useState("");
   const [passwordDirty, setPasswordDirty] = useState(false);
   const [passwordError, setPasswordError] = useState(
@@ -76,9 +82,10 @@ const Input = ({ label, type, name, placeholder }: InputPrors) => {
             ? { backgroundColor: "#323537", borderColor: "transparent" }
             : { backgroundColor: "#fff", borderColor: "#AFB2B6", color: "#000" }
         }
-        onChange={
-          type === "email" ? (e) => emailHandler(e) : (e) => passwordHandler(e)
-        }
+        onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+          type === "email" ? emailHandler(e) : passwordHandler(e);
+          onChange && onChange(e.target.value);
+        }}
         onBlur={(e) => blurHandler(e)}
         type={type}
         name={name}
