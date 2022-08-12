@@ -3,7 +3,8 @@ import {
   configureStore,
   PreloadedState,
 } from "@reduxjs/toolkit";
-import { pixemaAPI } from "../api/PixemaAPI";
+import { pixemaAPI } from "../requests/pixemaAPI";
+import { authRequests } from "../requests/authorization";
 import { loadReducer } from "./reducers/loadMore.slice";
 import { filtersReducers } from "./reducers/filters.slice";
 import { useMemo } from "react";
@@ -20,10 +21,13 @@ export const setupStore = (preloadedState = {}) => {
       themeReducer,
       authReducer,
       [pixemaAPI.reducerPath]: pixemaAPI.reducer,
+      [authRequests.reducerPath]: authRequests.reducer,
     },
     preloadedState,
     middleware: (getDefaultMiddleware) =>
-      getDefaultMiddleware().concat(pixemaAPI.middleware),
+      getDefaultMiddleware()
+        .concat(authRequests.middleware)
+        .concat(pixemaAPI.middleware),
   });
 };
 

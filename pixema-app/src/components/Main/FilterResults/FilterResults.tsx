@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useGetMoviesByFiltersQuery } from "../../api/PixemaAPI";
+import { useGetMoviesByFiltersQuery } from "../../requests/pixemaAPI";
 import Layout from "../../UI/Layout/Layout";
 import Movie from "../Movies/Movie/Movie";
 import "./FilterResults.scss";
@@ -24,13 +24,13 @@ const FiltersResults = () => {
   });
   const [count, setCount] = useState(10);
   useEffect(() => {
-    if (document.documentElement.clientWidth <= 1366) {
+    if (document.documentElement.clientWidth <= 1366 && document.documentElement.clientWidth > 1024) {
       setLimit(8);
       setCount(8);
-    } else if (document.documentElement.clientWidth <= 1024) {
+    } else if (document.documentElement.clientWidth <= 1024 && document.documentElement.clientWidth > 734) {
       setLimit(9);
       setCount(9);
-    } else if (document.documentElement.clientWidth < 768) {
+    } else if (document.documentElement.clientWidth < 735) {
       setLimit(10);
       setCount(10);
     }

@@ -1,31 +1,82 @@
 import "./Settings.scss";
 import { useEffect, useState } from "react";
-import Layout from "../../UI/Layout/Layout";
 import { themeSlice } from "../../store/reducers/theme.slice";
 import { useAppDispatch, useAppSelector } from "../../store/hooks/redux";
-import { Link } from "react-router-dom";
 import { authSlice } from "../../store/reducers/auth.slice";
+import {
+  usePatchEmailMutation,
+  usePatchPasswordMutation,
+  usePatchUserNameMutation,
+} from "../../requests/authorization";
+import getCookie from "../../helpers/getCookies";
+import Layout from "../../UI/Layout/Layout";
+import Input from "../../Auth/AuthInput/Input";
+import { Link } from "react-router-dom";
 
 const Settings = () => {
   const { setTheme } = themeSlice.actions;
   const { setUser } = authSlice.actions;
+  const [patchEmail] = usePatchEmailMutation();
+  const [patchPassword] = usePatchPasswordMutation();
+  const [patchUserName] = usePatchUserNameMutation();
   const { currentUser, isAuth } = useAppSelector((state) => state.authReducer);
-  const [value, setValue] = useState({
-    name: currentUser.name,
-    email: currentUser.email,
-  });
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [oldPassword, setOldPassword] = useState("");
+  const [password, setPassword] = useState("");
+  const [passwordConfirmation, setPasswordConfirmation] = useState("");
+  const changeName = (name: string) => {
+    setName(name);
+  };
+
+  const changeEmail = (email: string) => {
+    setEmail(email);
+  };
+
+  const changePassword = (password: string) => {
+    setPassword(password);
+  };
+  const changePasswordConfirmation = (passwordConfirmation: string) => {
+    setPasswordConfirmation(passwordConfirmation);
+  };
+  const changeOldPassword = (password: string) => {
+    setOldPassword(password);
+  };
+  const accessCookie = getCookie("access");
   const { theme } = useAppSelector((state) => state.themeReducer);
   const dispatch = useAppDispatch();
   useEffect(() => {
     localStorage.setItem("theme", theme);
-    localStorage.setItem(
-      "user",
-      JSON.stringify({ isAuth: isAuth, currentUser: currentUser })
-    );
-  }, [theme, currentUser, isAuth]);
+    setEmail(currentUser?.email);
+    setName(currentUser?.username);
+  }, [theme, currentUser, setEmail, setName]);
   const handlerSave = () => {
-    dispatch(setUser(value));
+    dispatch(setUser({ username: name, id: currentUser?.id, email: email }));
+    name !== currentUser?.username &&
+      patchUserName({
+        username: name,
+        id: currentUser?.id,
+        token: accessCookie,
+      })
+        .unwrap()
+        .then((username) => console.log("username", username));
+    email !== currentUser?.email &&
+      patchEmail({ token: accessCookie, email, password })
+        .unwrap()
+        .then((newEmail) => console.log("newEmail", newEmail));
+    oldPassword &&
+      passwordConfirmation &&
+      password &&
+      patchPassword({
+        token: accessCookie,
+        new_password: password,
+        old_password: oldPassword,
+      })
+        .unwrap()
+        .then((newPassword) => console.log("newPassword", newPassword));
   };
+  console.log(currentUser);
+
   return (
     <div className="main-block settings">
       <Layout>
@@ -47,44 +98,26 @@ const Settings = () => {
                   <p style={{ color: theme === "light" ? "#242426" : "#fff" }}>
                     Имя
                   </p>
-                  <input
+                  <Input
+                    value={name}
                     type="text"
-                    placeholder="Ваше имя"
-                    value={value.name}
-                    onChange={(e) =>
-                      setValue({ name: e.target.value, email: value.email })
-                    }
-                    style={
-                      theme === "light"
-                        ? {
-                            borderColor: "#AFB2B6",
-                            backgroundColor: "#fff",
-                            color: "#242426",
-                          }
-                        : undefined
-                    }
+                    name="name"
+                    placeholder="Введите имя"
+                    onChange={changeName}
+                    autoComplete="new-password"
                   />
                 </div>
                 <div className="profile-form">
                   <p style={{ color: theme === "light" ? "#242426" : "#fff" }}>
                     Почта
                   </p>
-                  <input
-                    type="text"
-                    placeholder="Ваша почта"
-                    value={value.email}
-                    onChange={(e) =>
-                      setValue({ name: value.name, email: e.target.value })
-                    }
-                    style={
-                      theme === "light"
-                        ? {
-                            borderColor: "#AFB2B6",
-                            backgroundColor: "#fff",
-                            color: "#242426",
-                          }
-                        : undefined
-                    }
+                  <Input
+                    value={email}
+                    type="email"
+                    name="email"
+                    placeholder="Введите почту"
+                    onChange={changeEmail}
+                    autoComplete="new-password"
                   />
                 </div>
               </div>
@@ -108,18 +141,13 @@ const Settings = () => {
                     >
                       Пароль
                     </p>
-                    <input
-                      type="text"
-                      placeholder="Ваш пароль"
-                      style={
-                        theme === "light"
-                          ? {
-                              borderColor: "#AFB2B6",
-                              backgroundColor: "#fff",
-                              color: "#242426",
-                            }
-                          : undefined
-                      }
+                    <Input
+                      value={oldPassword}
+                      type="password"
+                      name="password"
+                      placeholder="Введите пароль"
+                      onChange={changeOldPassword}
+                      autoComplete="new-password"
                     />
                   </div>
                 </div>
@@ -130,18 +158,13 @@ const Settings = () => {
                     >
                       Новый пароль
                     </p>
-                    <input
-                      type="text"
-                      placeholder="Новый пароль"
-                      style={
-                        theme === "light"
-                          ? {
-                              borderColor: "#AFB2B6",
-                              backgroundColor: "#fff",
-                              color: "#242426",
-                            }
-                          : undefined
-                      }
+                    <Input
+                      value={password}
+                      type="password"
+                      name="password"
+                      placeholder="Введите новый пароль"
+                      onChange={changePassword}
+                      autoComplete="new-password"
                     />
                   </div>
                   <div className="password-form">
@@ -150,18 +173,13 @@ const Settings = () => {
                     >
                       Подтвердите пароль
                     </p>
-                    <input
+                    <Input
                       type="password"
-                      placeholder="Подтвердите пароль"
-                      style={
-                        theme === "light"
-                          ? {
-                              borderColor: "#AFB2B6",
-                              backgroundColor: "#fff",
-                              color: "#242426",
-                            }
-                          : undefined
-                      }
+                      name="password"
+                      placeholder="Повторите пароль"
+                      onChange={changePasswordConfirmation}
+                      autoComplete="new-password"
+                      value={passwordConfirmation}
                     />
                   </div>
                 </div>
@@ -205,14 +223,16 @@ const Settings = () => {
             </div>
           </div>
         </div>
-        <div className="settings-footer">
-          <Link to="/" className="footer-button cancel">
-            Закрыть
-          </Link>
-          <button className="footer-button save" onClick={handlerSave}>
-            Сохранить
-          </button>
-        </div>
+        {isAuth && (
+          <div className="settings-footer">
+            <Link to="/" className="footer-button cancel">
+              Закрыть
+            </Link>
+            <button className="footer-button save" onClick={handlerSave}>
+              Сохранить
+            </button>
+          </div>
+        )}
       </Layout>
     </div>
   );

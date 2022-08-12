@@ -22,3 +22,48 @@ export interface IQuery extends IBaseQuery {
   name?: string | string[] | undefined;
   id?: string | string[] | undefined;
 }
+
+export interface IAuth {
+  email: string;
+  id?: number;
+  username: string;
+}
+
+export interface ISignUp extends IAuth {
+  password: string;
+}
+
+export interface IToken {
+  refresh?: string;
+  access: string;
+}
+
+export interface ICreateToken {
+  email: string;
+  password: string;
+}
+
+export interface IPatchUserName {
+  token?: string;
+  username: string;
+  id: number;
+}
+
+export interface ISetEmail {
+  token?: string;
+  new_password?: string;
+  old_password?: string;
+  email?: string;
+  password?: string;
+}
+
+export interface IActivate {
+  uid: string;
+  token: string;
+}
+
+export interface IResetPassword {
+  uid: string;
+  token: string;
+  password: string;
+}

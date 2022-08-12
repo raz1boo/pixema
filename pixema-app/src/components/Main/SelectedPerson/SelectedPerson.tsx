@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import {
   useGetMoviesByIdQuery,
   useGetPersonByIdQuery,
-} from "../../api/PixemaAPI";
+} from "../../requests/pixemaAPI";
 import { convertTimestampToDate } from "../../helpers/convertTimestampToDate";
 import { useAppSelector } from "../../store/hooks/redux";
 import Facts from "../../UI/Facts/Facts";

@@ -5,7 +5,7 @@ import Rating from "../../UI/Rating/Rating";
 import AgeRating from "../../UI/AgeRating/AgeRating";
 import Genres from "../../UI/Genres/Genres";
 import { useState } from "react";
-import { useGetNewMoviesQuery } from "../../api/PixemaAPI";
+import { useGetNewMoviesQuery } from "../../requests/pixemaAPI";
 import { useAppSelector } from "../../store/hooks/redux";
 import { getCurrentDate } from "../../helpers/getCurrentDate";
 import { getRandomInt } from "../../helpers/getRandomInt";

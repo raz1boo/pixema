@@ -3,7 +3,7 @@
   box-sizing: content-box;
   position: relative;
   padding-top: 50px;
-  min-height: 490px;
+  height: 100%;
   z-index: 30;
   .layout {
     flex-direction: column;
@@ -60,7 +60,8 @@
       }
     }
     .changes-block {
-      max-height: 168px;
+      height: 200px;
+      box-sizing: border-box;
       display: flex;
       gap: 40px;
       @media (max-width: 768px) {
@@ -74,7 +75,8 @@
     width: 100%;
     min-width: 350px;
     .changes-block {
-      max-height: 280px;
+      height: 300px;
+      box-sizing: border-box;
       display: flex;
       gap: 40px;
       @media (max-width: 768px) {

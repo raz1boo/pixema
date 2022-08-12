@@ -5,13 +5,13 @@ import Logo from "../../UI/Header/Logo/Logo";
 import "./Registration.scss";
 import { useAppSelector } from "../../store/hooks/redux";
 import { useState } from "react";
+import { usePostSignUpMutation } from "../../requests/authorization";
 
 const Registration = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
-
   const { theme } = useAppSelector((state) => state.themeReducer);
   const location = useLocation();
   const navigate = useNavigate();
@@ -31,19 +31,23 @@ const Registration = () => {
   const changePasswordConfirmation = (passwordConfirmation: string) => {
     setPasswordConfirmation(passwordConfirmation);
   };
-
+  const [postSignUp] = usePostSignUpMutation();
   const registerUser = () => {
-    fetch("https://studapi.teachmeskills.by/auth/users/", {
-      method: "POST",
-      body: JSON.stringify({
-        username: name,
-        email: email,
-        password: password,
-      }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    postSignUp({
+      username: name,
+      email: email,
+      password: password,
+    })
+      .unwrap()
+      .then((data) => {
+        if (data) {
+          navigate("/confirm_registration", { replace: true });
+          localStorage.setItem(
+            "futureUser",
+            JSON.stringify({ email: data.email })
+          );
+        }
+      });
   };
 
   return (
@@ -51,7 +55,7 @@ const Registration = () => {
       <div className="login-logo">
         <Logo />
       </div>
-      <section className="section-window">
+      <section className="section-window registration">
         <form
           action=""
           className="registration-form-window form-window"
@@ -72,11 +76,13 @@ const Registration = () => {
             Регистрация
           </h2>
           <Input
-            label="Имя"
+            label="Логин"
             type="text"
             name="name"
-            placeholder="Введите имя"
+            placeholder="Введите логин"
             onChange={changeName}
+            value={name}
+            autoComplete="new-password"
           />
           <Input
             label="Почта"
@@ -84,6 +90,7 @@ const Registration = () => {
             name="email"
             placeholder="Введите почту"
             onChange={changeEmail}
+            value={email}
           />
           <Input
             label="Пароль"
@@ -91,6 +98,8 @@ const Registration = () => {
             name="password"
             placeholder="Введите пароль"
             onChange={changePassword}
+            value={password}
+            autoComplete="new-password"
           />
           <Input
             label="Подтверждение пароля"
@@ -98,15 +107,14 @@ const Registration = () => {
             name="password"
             placeholder="Повторите пароль"
             onChange={changePasswordConfirmation}
+            value={passwordConfirmation}
+            autoComplete="new-password"
           />
           <Submit
             className="submit"
             type="submit"
             value="Регистрация"
-            onClick={() => {
-              navigate("/", { replace: true });
-              registerUser();
-            }}
+            onClick={registerUser}
           />
           <p
             style={{

@@ -27,8 +27,7 @@ const User = () => {
           <div className="user center">
             <div className="initials center">
               <h2 className="font-size-20px">
-                {currentUser.name.split(" ")[0].split("")[0] +
-                  currentUser.name.split(" ")[1].split("")[0]}
+                {currentUser?.username.split(" ")[0].split("")[0]}
               </h2>
             </div>
             <MediaQuery minWidth={1025}>
@@ -42,7 +41,7 @@ const User = () => {
                         : "#242426",
                   }}
                 >
-                  {currentUser.name}
+                  {currentUser?.username}
                 </h3>
               </div>
             </MediaQuery>
@@ -117,7 +116,11 @@ const User = () => {
           }}
         />
         <p
-          onClick={() => dispatch(logout())}
+          onClick={() => {
+            dispatch(logout());
+            document.cookie = "access=;";
+            document.cookie = "refresh=;";
+          }}
           className="font-size-16px"
           style={{
             color:

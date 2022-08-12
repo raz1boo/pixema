@@ -1,6 +1,6 @@
 import Movie from "./Movie/Movie";
 import "./Movies.scss";
-import { useGetNewMoviesQuery } from "../../api/PixemaAPI";
+import { useGetNewMoviesQuery } from "../../requests/pixemaAPI";
 import { useEffect, useState } from "react";
 import Layout from "../../UI/Layout/Layout";
 import { useAppSelector } from "../../store/hooks/redux";
@@ -15,13 +15,13 @@ const NewMovies = ({ type }: IMoviesProps) => {
   const { theme } = useAppSelector((state) => state.themeReducer);
   const [count, setCount] = useState(10);
   useEffect(() => {
-    if (document.documentElement.clientWidth <= 1366) {
+    if (document.documentElement.clientWidth <= 1366 && document.documentElement.clientWidth > 1024) {
       setLimit(8);
       setCount(8);
-    } else if (document.documentElement.clientWidth <= 1024) {
+    } else if (document.documentElement.clientWidth <= 1024 && document.documentElement.clientWidth > 734) {
       setLimit(9);
       setCount(9);
-    } else if (document.documentElement.clientWidth < 768) {
+    } else if (document.documentElement.clientWidth < 735) {
       setLimit(10);
       setCount(10);
     }

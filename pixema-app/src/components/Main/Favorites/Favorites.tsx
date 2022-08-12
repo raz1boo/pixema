@@ -1,4 +1,4 @@
-import { useGetMoviesByIdQuery } from "../../api/PixemaAPI";
+import { useGetMoviesByIdQuery } from "../../requests/pixemaAPI";
 import { useFavorites } from "../../store/hooks/useFavorites";
 import Layout from "../../UI/Layout/Layout";
 import Movie from "../Movies/Movie/Movie";

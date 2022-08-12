@@ -4,12 +4,26 @@ import Logo from "../../UI/Header/Logo/Logo";
 import "./ResetPassword.scss";
 import { useState } from "react";
 import { useAppSelector } from "../../store/hooks/redux";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useResetPasswordMutation } from "../../requests/authorization";
 
 const ResetPassword = () => {
-  const [isMessageEmail, setMessageEmail] = useState(false);
   const { theme } = useAppSelector((state) => state.themeReducer);
   const location = useLocation();
+  const navigate = useNavigate();
+  const [resetPassword] = useResetPasswordMutation();
+  const [email, setEmail] = useState("");
+  const handlerClick = () => {
+    resetPassword(email);
+    navigate("/new_password", { replace: true });
+    localStorage.setItem(
+      "futureResetPassword",
+      JSON.stringify({ email: email })
+    );
+  };
+  const changeEmail = (email: string) => {
+    setEmail(email);
+  };
   return (
     <>
       <div className="login-logo">
@@ -35,20 +49,16 @@ const ResetPassword = () => {
           >
             Восстановить пароль
           </h2>
-          {isMessageEmail && (
-            <h3>
-              Мы отправили Вам электронное письмо на почту example@gmail.com со
-              ссылкой для сброса пароля!
-            </h3>
-          )}
           <Input
             label="Почта"
             type="email"
             name="email"
             placeholder="Введите почту"
+            value={email}
+            onChange={changeEmail}
           />
           <Submit
-            onClick={() => setMessageEmail(true)}
+            onClick={handlerClick}
             className="submit"
             type="submit"
             value="Восстановить"

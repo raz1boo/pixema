@@ -2,7 +2,7 @@ import { useState } from "react";
 import {
   useGetMoviesBySearchQuery,
   useGetPersonsBySearchQuery,
-} from "../../../../../api/PixemaAPI";
+} from "../../../../../requests/pixemaAPI";
 import ButtonBase from "../../../../ButtonBase/ButtonBase";
 import Loader from "../../../../Loader/Loader";
 import SearchItem from "../SearchItem/SearchItem";

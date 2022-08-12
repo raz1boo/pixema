@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react";
 import { FiPlay } from "react-icons/fi";
 import { useParams } from "react-router-dom";
-import { useGetMovieByIdQuery } from "../../api/PixemaAPI";
+import { useGetMovieByIdQuery } from "../../requests/pixemaAPI";
 import { convertNumbers } from "../../helpers/convertNumbers";
 import { convertTimestampToDate } from "../../helpers/convertTimestampToDate";
 import { getRandomInt } from "../../helpers/getRandomInt";

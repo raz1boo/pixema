@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { useGetPersonsBySearchQuery } from "../../api/PixemaAPI";
+import { useGetPersonsBySearchQuery } from "../../requests/pixemaAPI";
 import Layout from "../../UI/Layout/Layout";
 import "./SearchResults.scss";
 import { ImSpinner11 } from "react-icons/im";
@@ -17,13 +17,13 @@ const SearchPersonsResults = () => {
   });
   const [count, setCount] = useState(10);
   useEffect(() => {
-    if (document.documentElement.clientWidth <= 1366) {
+    if (document.documentElement.clientWidth <= 1366 && document.documentElement.clientWidth > 1024) {
       setLimit(8);
       setCount(8);
-    } else if (document.documentElement.clientWidth <= 1024) {
+    } else if (document.documentElement.clientWidth <= 1024 && document.documentElement.clientWidth > 734) {
       setLimit(9);
       setCount(9);
-    } else if (document.documentElement.clientWidth < 768) {
+    } else if (document.documentElement.clientWidth < 735) {
       setLimit(10);
       setCount(10);
     }

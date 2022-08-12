@@ -1,13 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const defaultUser = {
+const initialState = {
   isAuth: false,
-  currentUser: { email: "", name: "" },
+  currentUser: { email: "", id: 0, username: "" },
 };
-
-const initialState = JSON.parse(
-  localStorage.getItem("user") || JSON.stringify(defaultUser)
-);
 
 export const authSlice = createSlice({
   name: "auth",
@@ -18,12 +14,12 @@ export const authSlice = createSlice({
       state.isAuth = true;
     },
     logout: (state) => {
-      state.currentUser = { email: "", name: "" };
+      state.currentUser = { email: "", id: 0, username: "" };
       state.isAuth = false;
     },
   },
 });
 
-export const { setUser, logout } = authSlice.actions;
+export const { setUser, logout} = authSlice.actions;
 
 export const authReducer = authSlice.reducer;

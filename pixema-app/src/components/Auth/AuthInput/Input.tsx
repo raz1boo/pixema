@@ -3,11 +3,13 @@ import { useLocation } from "react-router-dom";
 import { useAppSelector } from "../../store/hooks/redux";
 
 interface InputPrors {
-  label: string;
+  label?: string;
   type: string;
   name: string;
   placeholder: string;
   onChange?: (name: string) => void;
+  autoComplete?: string;
+  value: string;
 }
 
 const Input = ({
@@ -16,6 +18,8 @@ const Input = ({
   name,
   placeholder,
   onChange,
+  autoComplete,
+  value,
 }: InputPrors) => {
   const [email, setEmail] = useState("");
   const [emailDirty, setEmailDirty] = useState(false);
@@ -62,19 +66,17 @@ const Input = ({
 
   return (
     <>
-      <label
-        style={{
-          color:
-            theme === "dark" || location.pathname === "/" ? "#fff" : "#242426",
-        }}
-      >
-        {label}
-      </label>
-      {emailDirty && emailError && (
-        <div style={{ color: "#ed4337" }}>{emailError}</div>
-      )}
-      {passwordDirty && passwordError && (
-        <div style={{ color: "#ed4337" }}>{passwordError}</div>
+      {label && (
+        <label
+          style={{
+            color:
+              theme === "dark" || location.pathname === "/"
+                ? "#fff"
+                : "#242426",
+          }}
+        >
+          {label}
+        </label>
       )}
       <input
         style={
@@ -90,7 +92,15 @@ const Input = ({
         type={type}
         name={name}
         placeholder={placeholder}
-      />
+        autoComplete={autoComplete}
+        value={value}
+        />
+        {emailDirty && emailError && (
+          <div style={{ color: "#ed4337" }}>{emailError}</div>
+        )}
+        {passwordDirty && passwordError && (
+          <div style={{ color: "#ed4337" }}>{passwordError}</div>
+        )}
     </>
   );
 };

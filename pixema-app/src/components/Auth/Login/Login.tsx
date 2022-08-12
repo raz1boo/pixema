@@ -5,11 +5,34 @@ import "./Login.scss";
 import "../../Auth/Authorization.scss";
 import { useAppSelector } from "../../store/hooks/redux";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useCreateTokenMutation } from "../../requests/authorization";
 
 const Login = () => {
   const { theme } = useAppSelector((state) => state.themeReducer);
   const location = useLocation();
   const navigate = useNavigate();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [createToken, { data }] = useCreateTokenMutation();
+
+  const changeEmail = (email: string) => {
+    setEmail(email);
+  };
+
+  const changePassword = (password: string) => {
+    setPassword(password);
+  };
+  const authUser = async () => {
+    await createToken({ email, password })
+      .unwrap()
+      .then((data) => data && navigate("/", { replace: true }));
+  };
+
+  useEffect(() => {
+    document.cookie = `access=${data ? data?.access : ""}`;
+    document.cookie = `refresh=${data ? data?.refresh : ""}`;
+  }, [data]);
   return (
     <>
       <div className="login-logo">
@@ -41,19 +64,23 @@ const Login = () => {
             type="email"
             name="email"
             placeholder="Введите почту"
+            onChange={changeEmail}
+            value={email}
           />
           <Input
             label="Пароль"
             type="password"
             name="password"
             placeholder="Введите пароль"
+            value={password}
+            onChange={changePassword}
           />
           <Link to="/reset_password">Забыли пароль?</Link>
           <Submit
             className="submit"
             type="submit"
             value="Войти"
-            onClick={() => navigate("/", { replace: true })}
+            onClick={authUser}
           />
           <p
             style={{
