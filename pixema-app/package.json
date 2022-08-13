@@ -1,4 +1,5 @@
 {
+  "homepage": "https://raz1boo.github.io/pixema/",
   "name": "pixema-app",
   "version": "0.1.0",
   "private": true,
@@ -43,6 +44,8 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -66,6 +69,7 @@
     ]
   },
   "devDependencies": {
-    "@types/lodash.memoize": "^4.1.7"
+    "@types/lodash.memoize": "^4.1.7",
+    "gh-pages": "^4.0.0"
   }
 }
