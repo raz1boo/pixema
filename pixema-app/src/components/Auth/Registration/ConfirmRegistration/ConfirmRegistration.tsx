@@ -43,7 +43,7 @@ const ConfirmRegistration = () => {
     }, 1000);
     setTimeout(() => {
       clearInterval(timerId);
-    }, 6000);
+    }, 60000);
   };
   return (
     <>

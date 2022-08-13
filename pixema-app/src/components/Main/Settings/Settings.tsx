@@ -4,7 +4,6 @@ import { themeSlice } from "../../store/reducers/theme.slice";
 import { useAppDispatch, useAppSelector } from "../../store/hooks/redux";
 import { authSlice } from "../../store/reducers/auth.slice";
 import {
-  usePatchEmailMutation,
   usePatchPasswordMutation,
   usePatchUserNameMutation,
 } from "../../requests/authorization";
@@ -16,23 +15,16 @@ import { Link } from "react-router-dom";
 const Settings = () => {
   const { setTheme } = themeSlice.actions;
   const { setUser } = authSlice.actions;
-  const [patchEmail] = usePatchEmailMutation();
   const [patchPassword] = usePatchPasswordMutation();
   const [patchUserName] = usePatchUserNameMutation();
   const { currentUser, isAuth } = useAppSelector((state) => state.authReducer);
   const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
   const [oldPassword, setOldPassword] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
   const changeName = (name: string) => {
     setName(name);
   };
-
-  const changeEmail = (email: string) => {
-    setEmail(email);
-  };
-
   const changePassword = (password: string) => {
     setPassword(password);
   };
@@ -47,11 +39,10 @@ const Settings = () => {
   const dispatch = useAppDispatch();
   useEffect(() => {
     localStorage.setItem("theme", theme);
-    setEmail(currentUser?.email);
     setName(currentUser?.username);
-  }, [theme, currentUser, setEmail, setName]);
+  }, [theme, currentUser, setName]);
   const handlerSave = () => {
-    dispatch(setUser({ username: name, id: currentUser?.id, email: email }));
+    dispatch(setUser({ username: name, id: currentUser?.id, email: currentUser?.email }));
     name !== currentUser?.username &&
       patchUserName({
         username: name,
@@ -60,10 +51,6 @@ const Settings = () => {
       })
         .unwrap()
         .then((username) => console.log("username", username));
-    email !== currentUser?.email &&
-      patchEmail({ token: accessCookie, email, password })
-        .unwrap()
-        .then((newEmail) => console.log("newEmail", newEmail));
     oldPassword &&
       passwordConfirmation &&
       password &&
@@ -112,12 +99,12 @@ const Settings = () => {
                     Почта
                   </p>
                   <Input
-                    value={email}
-                    type="email"
-                    name="email"
+                    value={currentUser?.email}
+                    type="text"
+                    name="name"
                     placeholder="Введите почту"
-                    onChange={changeEmail}
-                    autoComplete="new-password"
+                    autoComplete="off"
+                    
                   />
                 </div>
               </div>

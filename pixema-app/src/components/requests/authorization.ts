@@ -62,20 +62,6 @@ export const authRequests = createApi({
         }),
       }),
     }),
-    patchEmail: build.mutation<IAuth, ISetEmail>({
-      query: ({ token, email, password }) => ({
-        url: "/users/set_email/",
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-        method: "POST",
-        body: JSON.stringify({
-          current_password: password,
-          new_email: email,
-        }),
-      }),
-    }),
     patchPassword: build.mutation<IAuth, ISetEmail>({
       query: ({ token, new_password, old_password }) => ({
         url: "/users/set_password/",
@@ -164,7 +150,6 @@ export const {
   useCreateTokenMutation,
   usePostSignUpMutation,
   usePatchUserNameMutation,
-  usePatchEmailMutation,
   usePatchPasswordMutation,
   useActivateEmailMutation,
   useResendActivateEmailMutation,
@@ -178,7 +163,6 @@ export const {
   createToken,
   postSignUp,
   patchUserName,
-  patchEmail,
   patchPassword,
   activateEmail,
   resendActivateEmail,

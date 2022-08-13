@@ -45,7 +45,7 @@ const NewPassword = () => {
     }, 1000);
     setTimeout(() => {
       clearInterval(timerId);
-    }, 6000);
+    }, 60000);
   };
   const [resetPasswordConfirm] = useResetPasswordConfirmMutation();
   const handlerResetPassword = () => {
