@@ -1,4 +1,4 @@
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Input from "../AuthInput/Input";
 import Submit from "../AuthInput/Submit";
 import Logo from "../../UI/Header/Logo/Logo";
@@ -13,7 +13,6 @@ const Registration = () => {
   const [password, setPassword] = useState("");
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
   const { theme } = useAppSelector((state) => state.themeReducer);
-  const location = useLocation();
   const navigate = useNavigate();
 
   const changeName = (name: string) => {
@@ -60,7 +59,7 @@ const Registration = () => {
           action=""
           className="registration-form-window form-window"
           style={
-            theme === "dark" || location.pathname === "/"
+            theme === "dark"
               ? { backgroundColor: "#242426", borderColor: "transparent" }
               : { backgroundColor: "#fff", borderColor: "#AFB2B6" }
           }
@@ -68,7 +67,7 @@ const Registration = () => {
           <h2
             style={{
               color:
-                theme === "dark" || location.pathname === "/"
+                theme === "dark"
                   ? "#fff"
                   : "#242426",
             }}
@@ -119,7 +118,7 @@ const Registration = () => {
           <p
             style={{
               color:
-                theme === "dark" || location.pathname === "/"
+                theme === "dark"
                   ? "#fff"
                   : "#80858b",
             }}

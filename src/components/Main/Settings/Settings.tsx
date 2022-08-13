@@ -42,7 +42,13 @@ const Settings = () => {
     setName(currentUser?.username);
   }, [theme, currentUser, setName]);
   const handlerSave = () => {
-    dispatch(setUser({ username: name, id: currentUser?.id, email: currentUser?.email }));
+    dispatch(
+      setUser({
+        username: name,
+        id: currentUser?.id,
+        email: currentUser?.email,
+      })
+    );
     name !== currentUser?.username &&
       patchUserName({
         username: name,
@@ -62,8 +68,6 @@ const Settings = () => {
         .unwrap()
         .then((newPassword) => console.log("newPassword", newPassword));
   };
-  console.log(currentUser);
-
   return (
     <div className="main-block settings">
       <Layout>
@@ -104,7 +108,6 @@ const Settings = () => {
                     name="name"
                     placeholder="Введите почту"
                     autoComplete="off"
-                    
                   />
                 </div>
               </div>

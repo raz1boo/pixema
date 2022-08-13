@@ -44,13 +44,13 @@ const Search = () => {
         value={value}
         style={{
           backgroundColor:
-            theme === "dark" || location.pathname === "/" ? "#242426" : "#fff",
+            theme === "dark" || location.pathname === "/pixema" ? "#242426" : "#fff",
           borderColor:
-            theme === "dark" || location.pathname === "/"
+            theme === "dark" || location.pathname === "/pixema"
               ? "transparent"
               : "#AFB2B6",
           color:
-            theme === "dark" || location.pathname === "/" ? "#fff" : "#242426",
+            theme === "dark" || location.pathname === "/pixema" ? "#fff" : "#242426",
         }}
       />
       {value ? (
@@ -62,7 +62,7 @@ const Search = () => {
           }}
           style={{
             color:
-              theme === "dark" || location.pathname === "/"
+              theme === "dark" || location.pathname === "/pixema"
                 ? "#fff"
                 : "#afb2b6",
           }}

@@ -3,7 +3,7 @@ import Submit from "../AuthInput/Submit";
 import Logo from "../../UI/Header/Logo/Logo";
 import "./NewPassword.scss";
 import { useAppSelector } from "../../store/hooks/redux";
-import { useLocation, useNavigate } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
 import { useState } from "react";
 import {
   useResetPasswordConfirmMutation,
@@ -12,7 +12,6 @@ import {
 
 const NewPassword = () => {
   const { theme } = useAppSelector((state) => state.themeReducer);
-  const location = useLocation();
   const navigate = useNavigate();
   const [uid, setUid] = useState("");
   const [token, setToken] = useState("");
@@ -61,7 +60,7 @@ const NewPassword = () => {
         <p
           style={{
             color:
-              theme === "dark" || location.pathname === "/"
+              theme === "dark"
                 ? "#fff"
                 : "#242426",
           }}
@@ -82,7 +81,7 @@ const NewPassword = () => {
           action=""
           className="form-window new-password-form-window"
           style={
-            theme === "dark" || location.pathname === "/"
+            theme === "dark"
               ? { backgroundColor: "#242426", borderColor: "transparent" }
               : { backgroundColor: "#fff", borderColor: "#AFB2B6" }
           }
@@ -90,7 +89,7 @@ const NewPassword = () => {
           <h2
             style={{
               color:
-                theme === "dark" || location.pathname === "/"
+                theme === "dark"
                   ? "#fff"
                   : "#242426",
             }}
@@ -142,7 +141,7 @@ const NewPassword = () => {
           <p
             style={{
               color:
-                theme === "dark" || location.pathname === "/"
+                theme === "dark"
                   ? "#fff"
                   : "#80858b",
             }}

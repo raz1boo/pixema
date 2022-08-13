@@ -38,7 +38,6 @@ function App() {
   const [refreshToken, { data: refresh }] = useRefreshTokenMutation();
   const dispatch = useAppDispatch();
   const { setUser } = authSlice.actions;
-  const { currentUser } = useAppSelector((state) => state.authReducer);
   const accessCookie = getCookie("access");
   const refreshCookie = getCookie("refresh");
   useMemo(() => {
@@ -58,8 +57,6 @@ function App() {
   useEffect(() => {
     data && dispatch(setUser(data));
   }, [data, dispatch, setUser]);
-  console.log(currentUser);
-
   return (
     <>
       {!(
@@ -76,7 +73,7 @@ function App() {
         />
       )}
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/pixema" element={<Home />} />
         <Route path="/settings" element={<Settings />} />
         <Route path="/favorites" element={<Favorites />} />
         <Route path="/film/">

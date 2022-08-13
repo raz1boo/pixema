@@ -36,7 +36,7 @@ const User = () => {
                   className="font-size-16px"
                   style={{
                     color:
-                      theme === "dark" || location.pathname === "/"
+                      theme === "dark" || location.pathname === "/pixema"
                         ? "#fff"
                         : "#242426",
                   }}
@@ -48,7 +48,7 @@ const User = () => {
           </div>
           <MediaQuery minWidth={1025}>
             <img
-              src="/assets/icons/bottom-arrow.png"
+              src="/pixema/assets/icons/bottom-arrow.png"
               alt="arrow"
               className={cn("arrow", menu && "arrow-top")}
             />
@@ -59,7 +59,10 @@ const User = () => {
           <div className="user center">
             <div className="initials center">
               <h2 className="font-size-20px">
-                <img src="/assets/icons/user.png" alt="user" />
+                <img
+                  src="/pixema/assets/icons/user.png"
+                  alt="user"
+                />
               </h2>
             </div>
             <MediaQuery minWidth={1025}>
@@ -68,7 +71,7 @@ const User = () => {
                   className="font-size-16px"
                   style={{
                     color:
-                      theme === "dark" || location.pathname === "/"
+                      theme === "dark" || location.pathname === "/pixema"
                         ? "#fff"
                         : "#242426",
                   }}
@@ -80,7 +83,7 @@ const User = () => {
           </div>
           <MediaQuery minWidth={1025}>
             <img
-              src="/assets/icons/right-arrow.png"
+              src="/pixema/assets/icons/right-arrow.png"
               alt="arrow"
               className="arrow-right"
             />
@@ -90,7 +93,7 @@ const User = () => {
       <div
         className={cn("user-modal", menu && "user-modal_open")}
         style={
-          theme === "dark" || location.pathname === "/"
+          theme === "dark" || location.pathname === "/pixema"
             ? { backgroundColor: "#242426", borderColor: "transparent" }
             : { backgroundColor: "#fff", borderColor: "#AFB2B6" }
         }
@@ -100,7 +103,7 @@ const User = () => {
           className="font-size-16px"
           style={{
             color:
-              theme === "dark" || location.pathname === "/"
+              theme === "dark" || location.pathname === "/pixema"
                 ? "#fff"
                 : "#242426",
           }}
@@ -110,7 +113,7 @@ const User = () => {
         <hr
           style={{
             borderColor:
-              theme === "dark" || location.pathname === "/"
+              theme === "dark" || location.pathname === "/pixema"
                 ? "#323537"
                 : "#AFB2B6",
           }}
@@ -124,7 +127,7 @@ const User = () => {
           className="font-size-16px"
           style={{
             color:
-              theme === "dark" || location.pathname === "/"
+              theme === "dark" || location.pathname === "/pixema"
                 ? "#fff"
                 : "#242426",
           }}

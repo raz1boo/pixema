@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   useActivateEmailMutation,
   useResendActivateEmailMutation,
@@ -15,7 +15,6 @@ const ConfirmRegistration = () => {
   const [token, setToken] = useState("");
   const [timer, setTimer] = useState(0);
   const { theme } = useAppSelector((state) => state.themeReducer);
-  const location = useLocation();
   const navigate = useNavigate();
   const changeUid = (uid: string) => {
     setUid(uid);
@@ -53,10 +52,7 @@ const ConfirmRegistration = () => {
       <section className="section-window activation">
         <p
           style={{
-            color:
-              theme === "dark" || location.pathname === "/"
-                ? "#fff"
-                : "#242426",
+            color: theme === "dark" ? "#fff" : "#242426",
           }}
         >
           На вашу почту <span>{futureUser.email}</span> отправлено сообщение с
@@ -75,17 +71,14 @@ const ConfirmRegistration = () => {
           action=""
           className="registration-form-window form-window"
           style={
-            theme === "dark" || location.pathname === "/"
+            theme === "dark"
               ? { backgroundColor: "#242426", borderColor: "transparent" }
               : { backgroundColor: "#fff", borderColor: "#AFB2B6" }
           }
         >
           <h2
             style={{
-              color:
-                theme === "dark" || location.pathname === "/"
-                  ? "#fff"
-                  : "#242426",
+              color: theme === "dark" ? "#fff" : "#242426",
             }}
           >
             Активация
@@ -114,20 +107,14 @@ const ConfirmRegistration = () => {
           />
           <p
             style={{
-              color:
-                theme === "dark" || location.pathname === "/"
-                  ? "#fff"
-                  : "#80858b",
+              color: theme === "dark" ? "#fff" : "#80858b",
             }}
           >
             У вас уже есть аккаунт? <Link to="/login">Вход</Link>
           </p>
           <p
             style={{
-              color:
-                theme === "dark" || location.pathname === "/"
-                  ? "#fff"
-                  : "#80858b",
+              color: theme === "dark" ? "#fff" : "#80858b",
             }}
           >
             Отправить ключ заново?

@@ -4,12 +4,11 @@ import Logo from "../../UI/Header/Logo/Logo";
 import "./ResetPassword.scss";
 import { useState } from "react";
 import { useAppSelector } from "../../store/hooks/redux";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useResetPasswordMutation } from "../../requests/authorization";
 
 const ResetPassword = () => {
   const { theme } = useAppSelector((state) => state.themeReducer);
-  const location = useLocation();
   const navigate = useNavigate();
   const [resetPassword] = useResetPasswordMutation();
   const [email, setEmail] = useState("");
@@ -34,17 +33,14 @@ const ResetPassword = () => {
           action=""
           className="form-window reset-password-form-window"
           style={
-            theme === "dark" || location.pathname === "/"
+            theme === "dark"
               ? { backgroundColor: "#242426", borderColor: "transparent" }
               : { backgroundColor: "#fff", borderColor: "#AFB2B6" }
           }
         >
           <h2
             style={{
-              color:
-                theme === "dark" || location.pathname === "/"
-                  ? "#fff"
-                  : "#242426",
+              color: theme === "dark" ? "#fff" : "#242426",
             }}
           >
             Восстановить пароль

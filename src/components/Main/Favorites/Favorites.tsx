@@ -22,7 +22,7 @@ const Favorites = () => {
         </Layout>
       ) : (
         <div className="favorites__null">
-          <img src="/assets/icons/favorite-null.png" alt="null" />
+          <img src="/pixema/assets/icons/favorite-null.png" alt="null" />
           <h2>Список избранного пуст</h2>
         </div>
       )}

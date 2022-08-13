@@ -4,13 +4,12 @@ import Logo from "../../UI/Header/Logo/Logo";
 import "./Login.scss";
 import "../../Auth/Authorization.scss";
 import { useAppSelector } from "../../store/hooks/redux";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useCreateTokenMutation } from "../../requests/authorization";
 
 const Login = () => {
   const { theme } = useAppSelector((state) => state.themeReducer);
-  const location = useLocation();
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -26,7 +25,7 @@ const Login = () => {
   const authUser = async () => {
     await createToken({ email, password })
       .unwrap()
-      .then((data) => data && navigate("/", { replace: true }));
+      .then((data) => data && navigate("/pixema", { replace: true }));
   };
 
   useEffect(() => {
@@ -43,17 +42,14 @@ const Login = () => {
           action=""
           className="form-window login-form-window"
           style={
-            theme === "dark" || location.pathname === "/"
+            theme === "dark"
               ? { backgroundColor: "#242426", borderColor: "transparent" }
               : { backgroundColor: "#fff", borderColor: "#AFB2B6" }
           }
         >
           <h2
             style={{
-              color:
-                theme === "dark" || location.pathname === "/"
-                  ? "#fff"
-                  : "#242426",
+              color: theme === "dark" ? "#fff" : "#242426",
             }}
           >
             Вход
@@ -84,10 +80,7 @@ const Login = () => {
           />
           <p
             style={{
-              color:
-                theme === "dark" || location.pathname === "/"
-                  ? "#fff"
-                  : "#80858b",
+              color: theme === "dark" ? "#fff" : "#80858b",
             }}
           >
             У Вас нет аккаунта? <Link to="/registration">Регистрация</Link>
