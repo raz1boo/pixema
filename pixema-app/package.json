@@ -1,8 +1,8 @@
 {
-  "homepage": "https://raz1boo.github.io/pixema/",
   "name": "pixema-app",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://raz1boo.github.io/pixema/",
   "dependencies": {
     "@reduxjs/toolkit": "^1.8.3",
     "@testing-library/jest-dom": "^5.16.4",
