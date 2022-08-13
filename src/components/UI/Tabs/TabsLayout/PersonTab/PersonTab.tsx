@@ -11,7 +11,7 @@ const PersonTab = ({ item }: PersonTabProps) => {
   const { name, id, photo, description } = item;
   const { theme } = useAppSelector((state) => state.themeReducer);
   return (
-    <Link to={`/name/${id}`} className="person">
+    <Link to={`/pixema/name/${id}`} className="person">
       <div
         style={{ backgroundImage: `url(${photo})` }}
         className="person__photo"

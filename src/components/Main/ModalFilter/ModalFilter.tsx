@@ -260,7 +260,7 @@ const ModalFilter = () => {
             Очистить фильтр
           </ButtonBase>
           <ButtonBase className="footer-button results" onClick={onSubmit}>
-            <Link to="/filter">Показать результаты</Link>
+            <Link to="/pixema/filter">Показать результаты</Link>
           </ButtonBase>
         </div>
       </div>

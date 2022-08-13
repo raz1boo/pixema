@@ -71,7 +71,7 @@ const Login = () => {
             value={password}
             onChange={changePassword}
           />
-          <Link to="/reset_password">Забыли пароль?</Link>
+          <Link to="/pixema/reset_password">Забыли пароль?</Link>
           <Submit
             className="submit"
             type="submit"
@@ -83,7 +83,7 @@ const Login = () => {
               color: theme === "dark" ? "#fff" : "#80858b",
             }}
           >
-            У Вас нет аккаунта? <Link to="/registration">Регистрация</Link>
+            У Вас нет аккаунта? <Link to="/pixema/registration">Регистрация</Link>
           </p>
         </form>
       </section>

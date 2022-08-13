@@ -29,7 +29,7 @@ const ConfirmRegistration = () => {
   const handlerActivateEmail = () => {
     activateEmail({ uid, token })
       .unwrap()
-      .then((data) => data && navigate("/login", { replace: true }));
+      .then((data) => data && navigate("/pixema/login", { replace: true }));
   };
   const [resendActivateEmail] = useResendActivateEmailMutation();
   const resendActivation = () => {
@@ -110,7 +110,7 @@ const ConfirmRegistration = () => {
               color: theme === "dark" ? "#fff" : "#80858b",
             }}
           >
-            У вас уже есть аккаунт? <Link to="/login">Вход</Link>
+            У вас уже есть аккаунт? <Link to="/pixema/login">Вход</Link>
           </p>
           <p
             style={{

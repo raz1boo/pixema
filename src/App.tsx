@@ -60,11 +60,11 @@ function App() {
   return (
     <>
       {!(
-        location.pathname === "/login" ||
-        location.pathname === "/registration" ||
-        location.pathname === "/new_password" ||
-        location.pathname === "/confirm_registration" ||
-        location.pathname === "/reset_password"
+        location.pathname === "/pixema/login" ||
+        location.pathname === "/pixema/registration" ||
+        location.pathname === "/pixema/new_password" ||
+        location.pathname === "/pixema/confirm_registration" ||
+        location.pathname === "/pixema/reset_password"
       ) && (
         <Header
           open={open}
@@ -73,36 +73,41 @@ function App() {
         />
       )}
       <Routes>
-        <Route path="/pixema" element={<Home />} />
-        <Route path="/settings" element={<Settings />} />
-        <Route path="/favorites" element={<Favorites />} />
-        <Route path="/film/">
-          <Route path=":id" element={<SelectedMovie />} />
+        <Route path="/pixema/">
+          <Route path="" element={<Home />} />
+          <Route path="settings" element={<Settings />} />
+          <Route path="favorites" element={<Favorites />} />
+          <Route path="film/">
+            <Route path=":id" element={<SelectedMovie />} />
+          </Route>
+          <Route path="name/">
+            <Route path=":id" element={<SelectedPerson />} />
+          </Route>
+          <Route path="filter" element={<FiltersResults />} />
+          <Route path="search/">
+            <Route path="films/:id" element={<SearchMoviesResults />} />
+            <Route path="names/:id" element={<SearchPersonsResults />} />
+          </Route>
+          <Route
+            path="confirm_registration"
+            element={<ConfirmRegistration />}
+          />
+          <Route path="registration" element={<Registration />} />
+          <Route path="login" element={<Login />} />
+          <Route path="reset_password" element={<ResetPassword />} />
+          <Route path="new_password" element={<NewPassword />} />
         </Route>
-        <Route path="/name/">
-          <Route path=":id" element={<SelectedPerson />} />
-        </Route>
-        <Route path="/filter" element={<FiltersResults />} />
-        <Route path="/search/">
-          <Route path="films/:id" element={<SearchMoviesResults />} />
-          <Route path="names/:id" element={<SearchPersonsResults />} />
-        </Route>
-        <Route path="/confirm_registration" element={<ConfirmRegistration />} />
-        <Route path="/registration" element={<Registration />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/reset_password" element={<ResetPassword />} />
-        <Route path="/new_password" element={<NewPassword />} />
         <Route element={<NotFound />} path="*" />
       </Routes>
       <ModalFilter />
       <Footer />
       <MediaQuery maxWidth={768}>
         {!(
-          location.pathname === "/login" ||
-          location.pathname === "/registration" ||
-          location.pathname === "/new_password" ||
-          location.pathname === "/confirm_registration" ||
-          location.pathname === "/reset_password"
+          location.pathname === "/pixema/login" ||
+          location.pathname === "/pixema/registration" ||
+          location.pathname === "/pixema/new_password" ||
+          location.pathname === "/pixema/confirm_registration" ||
+          location.pathname === "/pixema/reset_password"
         ) && <Navbar closeBurger={() => setOpen(false)} open={true} />}
       </MediaQuery>
     </>

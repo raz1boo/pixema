@@ -40,7 +40,7 @@ const Registration = () => {
       .unwrap()
       .then((data) => {
         if (data) {
-          navigate("/confirm_registration", { replace: true });
+          navigate("/pixema/confirm_registration", { replace: true });
           localStorage.setItem(
             "futureUser",
             JSON.stringify({ email: data.email })
@@ -123,7 +123,7 @@ const Registration = () => {
                   : "#80858b",
             }}
           >
-            У вас уже есть аккаунт? <Link to="/login">Вход</Link>
+            У вас уже есть аккаунт? <Link to="/pixema/login">Вход</Link>
           </p>
         </form>
       </section>

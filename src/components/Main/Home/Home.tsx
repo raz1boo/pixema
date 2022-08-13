@@ -95,7 +95,7 @@ const Home = () => {
             {description}
           </div>
           <div className="background-video-block__button">
-            <Link to={`/film/${id}`}>Подробнее</Link>
+            <Link to={`/pixema/film/${id}`}>Подробнее</Link>
           </div>
         </div>
       )}

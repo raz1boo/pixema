@@ -14,7 +14,7 @@ const ResetPassword = () => {
   const [email, setEmail] = useState("");
   const handlerClick = () => {
     resetPassword(email);
-    navigate("/new_password", { replace: true });
+    navigate("/pixema/new_password", { replace: true });
     localStorage.setItem(
       "futureResetPassword",
       JSON.stringify({ email: email })

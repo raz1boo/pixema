@@ -37,7 +37,7 @@ const Navbar = ({ open, closeBurger, openBurgerFunction }: INav) => {
           <Link
             key={path.value}
             id={path.value}
-            to={path.value === "home" ? "/pixema" : path.value}
+            to={path.value === "home" ? "/pixema" : `/pixema/${path.value}`}
             className={cn(
               params.pathname === `/${path.value}` && "nav__active",
               params.pathname === "/pixema" && path.value === "home"

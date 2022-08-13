@@ -49,7 +49,7 @@ const NewPassword = () => {
   const [resetPasswordConfirm] = useResetPasswordConfirmMutation();
   const handlerResetPassword = () => {
     resetPasswordConfirm({ uid, token, password });
-    navigate("/login", { replace: true });
+    navigate("/pixema/login", { replace: true });
   };
   return (
     <>

@@ -13,7 +13,7 @@ const NotFound = () => {
         Возможно, она была перемещена, или вы просто неверно указали адрес
         страницы.
       </p>
-      <Link to="/" style={{ color: theme === "light" ? "#242426" : "#fff" }}>
+      <Link to="/pixema" style={{ color: theme === "light" ? "#242426" : "#fff" }}>
         Вернуться на главную
       </Link>
     </section>

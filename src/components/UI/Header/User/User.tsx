@@ -55,7 +55,7 @@ const User = () => {
           </MediaQuery>
         </section>
       ) : (
-        <Link to="/login" className="about-user">
+        <Link to="/pixema/login" className="about-user">
           <div className="user center">
             <div className="initials center">
               <h2 className="font-size-20px">
@@ -99,7 +99,7 @@ const User = () => {
         }
       >
         <Link
-          to="/settings"
+          to="/pixema/settings"
           className="font-size-16px"
           style={{
             color:

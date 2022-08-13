@@ -25,7 +25,7 @@ const Search = () => {
       if (debouncedValue) {
         setVisible(false);
         setValue("");
-        navigate(`/search/films/${debouncedValue}`, { replace: true });
+        navigate(`/pixema/search/films/${debouncedValue}`, { replace: true });
       }
     }
   });
