@@ -10,8 +10,8 @@ const Logo = ({ open }: ILogo) => {
   const { theme } = useAppSelector((state) => state.themeReducer);
   const location = useLocation();
   return (
-    <Link to="/pixema" className="logo">
-      {theme === "dark" || location.pathname === "/pixema" || open ? (
+    <Link to="/" className="logo">
+      {theme === "dark" || location.pathname === "/" || open ? (
         <img src="/pixema/pixema.png" alt="logo" />
       ) : (
         <img src="/pixema/pixema-light.png" alt="logo" />

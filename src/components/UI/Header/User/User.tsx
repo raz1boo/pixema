@@ -36,7 +36,7 @@ const User = () => {
                   className="font-size-16px"
                   style={{
                     color:
-                      theme === "dark" || location.pathname === "/pixema"
+                      theme === "dark" || location.pathname === "/"
                         ? "#fff"
                         : "#242426",
                   }}
@@ -55,7 +55,7 @@ const User = () => {
           </MediaQuery>
         </section>
       ) : (
-        <Link to="/pixema/login" className="about-user">
+        <Link to="/login" className="about-user">
           <div className="user center">
             <div className="initials center">
               <h2 className="font-size-20px">
@@ -71,7 +71,7 @@ const User = () => {
                   className="font-size-16px"
                   style={{
                     color:
-                      theme === "dark" || location.pathname === "/pixema"
+                      theme === "dark" || location.pathname === "/"
                         ? "#fff"
                         : "#242426",
                   }}
@@ -93,17 +93,17 @@ const User = () => {
       <div
         className={cn("user-modal", menu && "user-modal_open")}
         style={
-          theme === "dark" || location.pathname === "/pixema"
+          theme === "dark" || location.pathname === "/"
             ? { backgroundColor: "#242426", borderColor: "transparent" }
             : { backgroundColor: "#fff", borderColor: "#AFB2B6" }
         }
       >
         <Link
-          to="/pixema/settings"
+          to="/settings"
           className="font-size-16px"
           style={{
             color:
-              theme === "dark" || location.pathname === "/pixema"
+              theme === "dark" || location.pathname === "/"
                 ? "#fff"
                 : "#242426",
           }}
@@ -113,7 +113,7 @@ const User = () => {
         <hr
           style={{
             borderColor:
-              theme === "dark" || location.pathname === "/pixema"
+              theme === "dark" || location.pathname === "/"
                 ? "#323537"
                 : "#AFB2B6",
           }}
@@ -127,7 +127,7 @@ const User = () => {
           className="font-size-16px"
           style={{
             color:
-              theme === "dark" || location.pathname === "/pixema"
+              theme === "dark" || location.pathname === "/"
                 ? "#fff"
                 : "#242426",
           }}

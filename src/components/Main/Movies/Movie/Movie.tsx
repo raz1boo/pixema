@@ -18,7 +18,7 @@ const Movie = ({ docs }: any) => {
             item === docs?.id && <FavoriteSmallButton key={item} id={item} />
         )}
       </div>
-      <Link to={`/pixema/film/${docs?.id}`}>
+      <Link to={`/film/${docs?.id}`}>
         <div
           style={{ backgroundImage: `url(${docs?.poster?.url})` }}
           className="movie__poster"

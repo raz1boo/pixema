@@ -210,11 +210,12 @@ const SelectedMovie = () => {
         active={active}
         closeModal={() => setActive(false)}
       />
+      {!isLoading &&
       <PlayerModal
         id={id}
         active={activePlayer}
         closeModal={() => setActivePlayer(false)}
-      />
+      />}
       {!isLoading && (
         <>
           <MediaQuery minWidth={769}>

@@ -246,7 +246,7 @@ function kbp(self) {
         if (kinobd.parentNode && parseInt(kinobd.parentNode.offsetHeight) && parseInt(kinobd.parentNode.offsetHeight) >= 370) {
             h = parseInt(kinobd.parentNode.offsetHeight);
         } else {
-            h = 370;
+            h = 600;
         }
     } else if (parseInt(kinobd.offsetHeight) && w / 3 < parseInt(kinobd.offsetHeight)) {
         h = parseInt(kinobd.offsetHeight);
@@ -256,8 +256,8 @@ function kbp(self) {
         h = w / 2;
     }
 
-    var style = 'width:100%;height:' + h + 'px;border:0;margin:0;padding:0;overflow:hidden;position:relative;';
-    //var style = 'width:100%;height:100%;border:0;margin:0;padding:0;overflow:hidden;position:relative;';
+    // var style = 'width:100%;height:' + h + 'px;border:0;margin:0;padding:0;overflow:hidden;position:relative;';
+    var style = 'width:100%;height:100%;border:0;margin:0;padding:0;overflow:hidden;position:relative;';
     //var style = 'width:100%;height:100%;border:0;margin:0;padding:0;overflow:hidden;position:relative;';
     i.setAttribute('style', style);
     i.setAttribute('width', w);

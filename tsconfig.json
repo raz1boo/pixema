@@ -22,5 +22,5 @@
   },
   "include": [
     "src"
-, "public/getData.js"  ]
+, "public/getData.js", "public/player.js"  ]
 }

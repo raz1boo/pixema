@@ -215,7 +215,7 @@ const Settings = () => {
         </div>
         {isAuth && (
           <div className="settings-footer">
-            <Link to="/pixema" className="footer-button cancel">
+            <Link to="/" className="footer-button cancel">
               Закрыть
             </Link>
             <button className="footer-button save" onClick={handlerSave}>

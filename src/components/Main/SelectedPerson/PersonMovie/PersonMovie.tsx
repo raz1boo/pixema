@@ -7,7 +7,7 @@ import { useAppSelector } from "../../../store/hooks/redux";
 const PersonMovie = ({ docs }: any) => {
   const { theme } = useAppSelector((state) => state.themeReducer);
   return (
-    <Link to={`/pixema/film/${docs.id}`} className="person-movie">
+    <Link to={`/film/${docs.id}`} className="person-movie">
       <div
         style={{ backgroundImage: `url(${docs?.poster?.url})` }}
         className="person-movie__poster"

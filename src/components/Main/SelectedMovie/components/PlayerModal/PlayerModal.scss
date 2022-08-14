@@ -21,11 +21,29 @@
     top: 10vh;
     transition: 0.4s ease;
     transform: scale(0);
-    width: 80%;
+    height: 80vh;
+    width: 70%;
     &.active {
       transition: 0.4s ease;
       transform: scale(1);
     }
+    @media (max-width: 1720px) {
+      width: 140vh;
+    }
+    @media (max-width: 1520px) {
+      width: 120vh;
+      height: 70vh;
+    }
+    @media (max-width: 1520px) {
+      width: 100vh;
+      height: 60vh;
+      top: 20vh;
+    }
+    @media (max-width: 1100px) {
+      width: 90%;
+      height: 50%;
+    }
+
     #kinobd {
       height: 100%;
       width: 100%;

@@ -15,13 +15,10 @@ const IPlayerModal = ({ id, active, closeModal }: IPlayer) => {
   useOutsideClick(ref, closeModal);
   useEffect(() => {
     const script = document.createElement("script");
-    script.src = "/player.js";
+    script.src = "pixema/player.js";
     document.body.appendChild(script);
-
-    return () => {
-      script.remove();
-    };
-  });
+    script.remove();
+  }, [id]);
   return (
     <div className={cn("player-modal", active && "active")}>
       <div className="player-modal__close-button" onClick={closeModal}>
