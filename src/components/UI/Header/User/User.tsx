@@ -48,7 +48,8 @@ const User = () => {
           </div>
           <MediaQuery minWidth={1025}>
             <img
-              src="/pixema/assets/icons/bottom-arrow.png"
+              src="/assets/icons/bottom-arrow.png"
+              // src="/pixema/assets/icons/bottom-arrow.png"
               alt="arrow"
               className={cn("arrow", menu && "arrow-top")}
             />
@@ -60,7 +61,8 @@ const User = () => {
             <div className="initials center">
               <h2 className="font-size-20px">
                 <img
-                  src="/pixema/assets/icons/user.png"
+                  src="/assets/icons/user.png"
+                  // src="/pixema/assets/icons/user.png"
                   alt="user"
                 />
               </h2>
@@ -83,7 +85,8 @@ const User = () => {
           </div>
           <MediaQuery minWidth={1025}>
             <img
-              src="/pixema/assets/icons/right-arrow.png"
+              src="/assets/icons/right-arrow.png"
+              // src="/pixema/assets/icons/right-arrow.png"
               alt="arrow"
               className="arrow-right"
             />

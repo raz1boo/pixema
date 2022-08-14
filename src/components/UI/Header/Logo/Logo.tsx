@@ -12,9 +12,11 @@ const Logo = ({ open }: ILogo) => {
   return (
     <Link to="/" className="logo">
       {theme === "dark" || location.pathname === "/" || open ? (
-        <img src="/pixema/pixema.png" alt="logo" />
+        <img src="/pixema.png" alt="logo" />
+        // <img src="/pixema/pixema.png" alt="logo" />
       ) : (
-        <img src="/pixema/pixema-light.png" alt="logo" />
+        <img src="/pixema-light.png" alt="logo" />
+        // <img src="/pixema/pixema-light.png" alt="logo" />
       )}
     </Link>
   );

@@ -17,10 +17,16 @@ const SearchPersonsResults = () => {
   });
   const [count, setCount] = useState(10);
   useEffect(() => {
-    if (document.documentElement.clientWidth <= 1366 && document.documentElement.clientWidth > 1024) {
+    if (
+      document.documentElement.clientWidth <= 1366 &&
+      document.documentElement.clientWidth > 1024
+    ) {
       setLimit(8);
       setCount(8);
-    } else if (document.documentElement.clientWidth <= 1024 && document.documentElement.clientWidth > 734) {
+    } else if (
+      document.documentElement.clientWidth <= 1024 &&
+      document.documentElement.clientWidth > 734
+    ) {
       setLimit(9);
       setCount(9);
     } else if (document.documentElement.clientWidth < 735) {
@@ -72,7 +78,8 @@ const SearchPersonsResults = () => {
         </>
       ) : (
         <div className="search-results__null">
-          <img src="/pixema/assets/icons/search-null.png" alt="null" />
+          <img src="/assets/icons/search-null.png" alt="null" />
+          {/* <img src="/pixema/assets/icons/search-null.png" alt="null" /> */}
           <h2>По вашему запросу ничего не найдено</h2>
         </div>
       )}

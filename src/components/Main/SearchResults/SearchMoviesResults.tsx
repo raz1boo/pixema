@@ -78,7 +78,8 @@ const SearchMoviesResults = () => {
         </>
       ) : (
         <div className="search-results__null">
-          <img src="/pixema/assets/icons/search-null.png" alt="null" />
+          <img src="/assets/icons/search-null.png" alt="null" />
+          {/* <img src="/pixema/assets/icons/search-null.png" alt="null" /> */}
           <h2>По вашему запросу ничего не найдено</h2>
         </div>
       )}
