@@ -15,7 +15,7 @@ const IPlayerModal = ({ id, active, closeModal }: IPlayer) => {
   useOutsideClick(ref, closeModal);
   useEffect(() => {
     const script = document.createElement("script");
-    script.src = "/player.js";
+    script.src = "film/pixema/player.js";
     document.body.appendChild(script);
     script.remove();
   }, [id]);
