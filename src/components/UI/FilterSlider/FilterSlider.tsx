@@ -59,7 +59,12 @@ const FiltersSlider = ({ values, onChange, step, min, max }: SliderProps) => {
           value={values[0]}
           onChange={(e: ChangeEvent<HTMLInputElement>) => {
             const sanitizedValue = sanitizeValues(
-              parseInt(e?.target.value || String(min))
+              parseInt(
+                (+e?.target.value > min &&
+                  +e?.target.value > max &&
+                  e?.target.value) ||
+                  String(min)
+              )
             );
             onChange([sanitizedValue, values[1]]);
           }}
@@ -72,7 +77,12 @@ const FiltersSlider = ({ values, onChange, step, min, max }: SliderProps) => {
           value={values[1]}
           onChange={(e: ChangeEvent<HTMLInputElement>) => {
             const sanitizedValue = sanitizeValues(
-              parseInt(e?.target.value || String(max))
+              parseInt(
+                (+e?.target.value < max &&
+                  +e?.target.value > min &&
+                  e?.target.value) ||
+                  String(max)
+              )
             );
             onChange([values[0], sanitizedValue]);
           }}

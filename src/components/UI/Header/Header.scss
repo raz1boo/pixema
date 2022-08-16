@@ -3,6 +3,8 @@ header {
   width: 100%;
   position: relative;
   transition: 0.3s ease;
+  margin: 0 auto;
+  max-width: 1920px;
   background: linear-gradient(180deg, rgba(black,0.7), transparent);
   z-index: 40;
   @media (max-width: 768px) {

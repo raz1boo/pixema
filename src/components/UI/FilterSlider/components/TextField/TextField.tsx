@@ -29,7 +29,6 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
       <label className={cn(className, "numeric-slider")}>
         {label && <span>{label}</span>}
         <input
-          data-testid="input"
           ref={ref}
           value={value}
           onChange={onChange}

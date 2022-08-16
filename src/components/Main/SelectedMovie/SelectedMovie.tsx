@@ -161,7 +161,7 @@ const SelectedMovie = () => {
       txt: `Похожие ${
         (typeNumber === 1 && "фильмы") ||
         (typeNumber === 2 && "сериалы") ||
-        (typeNumber === 3 && "мультфильмы")
+        ((typeNumber === 3 || typeNumber === 5) && "мультфильмы")
       }`,
       content: (
         <TabsLayout
@@ -169,7 +169,7 @@ const SelectedMovie = () => {
           title={`Похожие ${
             (typeNumber === 1 && "фильмы") ||
             (typeNumber === 2 && "сериалы") ||
-            (typeNumber === 3 && "мультфильмы")
+            ((typeNumber === 3 || typeNumber === 5) && "мультфильмы")
           } (${similars?.length})`}
         />
       ),
@@ -210,7 +210,7 @@ const SelectedMovie = () => {
         active={active}
         closeModal={() => setActive(false)}
       />
-      {(!isLoading && activePlayer) && (
+      {!isLoading && activePlayer && (
         <PlayerModal
           id={id}
           active={activePlayer}

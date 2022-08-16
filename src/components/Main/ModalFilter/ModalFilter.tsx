@@ -178,7 +178,7 @@ const ModalFilter = () => {
                             maxLength={20}
                             value={text}
                             onChange={(e) => onChangeHandler(e.target.value)}
-                            placeholder={value[1]?.label ? "" : "Введите жанр"}
+                            placeholder={value[1]?.label ? "" : "Выберите жанр"}
                           />
                         </>
                       </ul>

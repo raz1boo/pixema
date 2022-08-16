@@ -4,12 +4,16 @@
   position: relative;
   z-index: 11;
   display: flex;
+  margin: 0 auto;
+  max-width: 1920px;
   flex-direction: column;
   &__markers {
     padding-top: 20px;
     display: flex;
     gap: 10px;
     flex-wrap: wrap;
+    padding-left: 147px;
+    padding-right: 120px;
     @media (max-width: 1760px) {
       padding-left: 120px;
       padding-right: 120px;

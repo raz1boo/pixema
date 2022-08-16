@@ -50,6 +50,7 @@ const Settings = () => {
       })
     );
     name !== currentUser?.username &&
+      name &&
       patchUserName({
         username: name,
         id: currentUser?.id,
