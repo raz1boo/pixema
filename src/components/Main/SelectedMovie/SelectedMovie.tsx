@@ -61,7 +61,7 @@ const SelectedMovie = () => {
         embedUrl: `https://www.youtube.com/embed/${
           regex.exec(video.url)?.[1]
         }?mute=0&showinfo=0&iv_load_policy=3&autoplay=1&controls=1&rel=0&modestbranding=1`,
-        imgUrl: `http://img.youtube.com/vi/${
+        imgUrl: `https://img.youtube.com/vi/${
           regex.exec(video.url)?.[1]
         }/hqdefault.jpg`,
       };
@@ -210,12 +210,13 @@ const SelectedMovie = () => {
         active={active}
         closeModal={() => setActive(false)}
       />
-      {!isLoading &&
-      <PlayerModal
-        id={id}
-        active={activePlayer}
-        closeModal={() => setActivePlayer(false)}
-      />}
+      {(!isLoading && activePlayer) && (
+        <PlayerModal
+          id={id}
+          active={activePlayer}
+          closeModal={() => setActivePlayer(false)}
+        />
+      )}
       {!isLoading && (
         <>
           <MediaQuery minWidth={769}>
