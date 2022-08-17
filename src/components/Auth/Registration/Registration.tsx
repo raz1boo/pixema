@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import Input from "../AuthInput/Input";
 import Submit from "../AuthInput/Submit";
 import Logo from "../../UI/Header/Logo/Logo";
@@ -6,6 +6,8 @@ import "./Registration.scss";
 import { useAppSelector } from "../../store/hooks/redux";
 import { useState } from "react";
 import { usePostSignUpMutation } from "../../requests/authorization";
+import { ILogin } from "../Login/Login.interface";
+import { SubmitHandler, useForm } from "react-hook-form";
 
 const Registration = () => {
   const [name, setName] = useState("");
@@ -14,6 +16,22 @@ const Registration = () => {
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
   const { theme } = useAppSelector((state) => state.themeReducer);
   const navigate = useNavigate();
+  const location = useLocation();
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm<ILogin>(
+    { mode: "onChange" } //Ошибка срабатывает при изменении поля
+  );
+
+  const onSubmit: SubmitHandler<ILogin> = (data) => {
+    alert(`your email ${data.email}`);
+    alert(`your password ${data.password}`); //Отправить на сервер
+    reset();
+  };
 
   const changeName = (name: string) => {
     setName(name);
@@ -56,6 +74,7 @@ const Registration = () => {
       </div>
       <section className="section-window registration">
         <form
+          onSubmit={handleSubmit(onSubmit)}
           action=""
           className="registration-form-window form-window"
           style={
@@ -66,50 +85,155 @@ const Registration = () => {
         >
           <h2
             style={{
-              color:
-                theme === "dark"
-                  ? "#fff"
-                  : "#242426",
+              color: theme === "dark" ? "#fff" : "#242426",
             }}
           >
             Регистрация
           </h2>
-          <Input
-            label="Логин"
+
+          <label
+            style={{
+              color:
+                theme === "dark" || location.pathname === "/"
+                  ? "#fff"
+                  : "#242426",
+            }}
+          >
+            Логин
+          </label>
+          <input
+            style={
+              theme === "dark" || location.pathname === "/"
+                ? { backgroundColor: "#323537", borderColor: "transparent" }
+                : {
+                    backgroundColor: "#fff",
+                    borderColor: "#AFB2B6",
+                    color: "#000",
+                  }
+            }
             type="text"
             name="name"
             placeholder="Введите логин"
-            onChange={changeName}
             value={name}
+            onChange={(event) => changeName(event.target.value)}
             autoComplete="new-password"
           />
-          <Input
-            label="Почта"
-            type="email"
-            name="email"
+
+          <label
+            style={{
+              color:
+                theme === "dark" || location.pathname === "/"
+                  ? "#fff"
+                  : "#242426",
+            }}
+          >
+            Почта
+          </label>
+          <input
+            style={
+              theme === "dark" || location.pathname === "/"
+                ? { backgroundColor: "#323537", borderColor: "transparent" }
+                : {
+                    backgroundColor: "#fff",
+                    borderColor: "#AFB2B6",
+                    color: "#000",
+                  }
+            }
+            {...register("email", {
+              required: "Почта не может быть пустой",
+              pattern: {
+                value:
+                  /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/,
+                message: "Некорректная почта",
+              },
+            })}
+            type="text"
             placeholder="Введите почту"
-            onChange={changeEmail}
-            value={email}
+            // onChange={(event) => changeEmail(event.target.value)}
+            // value={email}
           />
-          <Input
-            label="Пароль"
+
+          {errors.email && (
+            <div style={{ color: "#ed4337" }}>{errors.email.message}</div>
+          )}
+
+          <label
+            style={{
+              color:
+                theme === "dark" || location.pathname === "/"
+                  ? "#fff"
+                  : "#242426",
+            }}
+          >
+            Пароль
+          </label>
+          <input
+            style={
+              theme === "dark" || location.pathname === "/"
+                ? { backgroundColor: "#323537", borderColor: "transparent" }
+                : {
+                    backgroundColor: "#fff",
+                    borderColor: "#AFB2B6",
+                    color: "#000",
+                  }
+            }
+            {...register("password", {
+              required: "Пароль не может быть пустым",
+              pattern: {
+                value: /(?=.*[0-9])(?=.*[a-zA-Z]).{8,30}/,
+                message:
+                  "Пароль должен состоять из букв латинского алфавита (A-z) и арабских цифр (0-9)",
+              },
+            })}
             type="password"
-            name="password"
             placeholder="Введите пароль"
-            onChange={changePassword}
-            value={password}
-            autoComplete="new-password"
+            // value={password}
+            // onChange={(event) => changePassword(event.target.value)}
           />
-          <Input
-            label="Подтверждение пароля"
+
+          {errors.password && (
+            <div style={{ color: "#ed4337" }}>{errors.password.message}</div>
+          )}
+
+          <label
+            style={{
+              color:
+                theme === "dark" || location.pathname === "/"
+                  ? "#fff"
+                  : "#242426",
+            }}
+          >
+            Подтверждение пароля
+          </label>
+          <input
+            style={
+              theme === "dark" || location.pathname === "/"
+                ? { backgroundColor: "#323537", borderColor: "transparent" }
+                : {
+                    backgroundColor: "#fff",
+                    borderColor: "#AFB2B6",
+                    color: "#000",
+                  }
+            }
+            {...register("passwordConfirm", {
+              required: "Пароль не может быть пустым",
+              pattern: {
+                value: / /,
+                message: "Пароли должны совпадать",
+              },
+            })}
             type="password"
-            name="password"
             placeholder="Повторите пароль"
-            onChange={changePasswordConfirmation}
-            value={passwordConfirmation}
-            autoComplete="new-password"
+            // onChange={(event) => changePasswordConfirmation(event.target.value)}
+            // value={passwordConfirmation}
+            // autoComplete="new-password"
           />
-          <Submit
+
+          {errors.password && (
+            <div style={{ color: "#ed4337" }}>{errors.password.message}</div>
+          )}
+
+          <input
             className="submit"
             type="submit"
             value="Регистрация"
@@ -117,10 +241,7 @@ const Registration = () => {
           />
           <p
             style={{
-              color:
-                theme === "dark"
-                  ? "#fff"
-                  : "#80858b",
+              color: theme === "dark" ? "#fff" : "#80858b",
             }}
           >
             У вас уже есть аккаунт? <Link to="/login">Вход</Link>

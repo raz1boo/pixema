@@ -4,18 +4,18 @@ import Logo from "../../UI/Header/Logo/Logo";
 import "./Login.scss";
 import "../../Auth/Authorization.scss";
 import { useAppSelector } from "../../store/hooks/redux";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useCreateTokenMutation } from "../../requests/authorization";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { ILogin } from "./Login.interface";
-import { useLocation } from "react-router-dom";
 
 const Login = () => {
   const { theme } = useAppSelector((state) => state.themeReducer);
+  const navigate = useNavigate();
   const location = useLocation();
-  // const [email, setEmail] = useState("");
-  // const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [createToken, { data }] = useCreateTokenMutation();
 
   const {
@@ -33,23 +33,23 @@ const Login = () => {
     reset();
   };
 
-  // const changeEmail = (email: string) => {
-  //   setEmail(email);
-  // };
+  const changeEmail = (email: string) => {
+    setEmail(email);
+  };
 
-  // const changePassword = (password: string) => {
-  //   setPassword(password);
-  // };
-  // const authUser = async () => {
-  //   await createToken({ email, password })
-  //     .unwrap()
-  //     .then((data) => data && navigate("/", { replace: true }));
-  // };
+  const changePassword = (password: string) => {
+    setPassword(password);
+  };
+  const authUser = async () => {
+    await createToken({ email, password })
+      .unwrap()
+      .then((data) => data && navigate("/", { replace: true }));
+  };
 
-  // useEffect(() => {
-  //   document.cookie = `access=${data ? data?.access : ""}`;
-  //   document.cookie = `refresh=${data ? data?.refresh : ""}`;
-  // }, [data]);
+  useEffect(() => {
+    document.cookie = `access=${data ? data?.access : ""}`;
+    document.cookie = `refresh=${data ? data?.refresh : ""}`;
+  }, [data]);
 
   return (
     <>
@@ -104,8 +104,8 @@ const Login = () => {
             })}
             type="text"
             placeholder="Введите почту"
-            // value={email}
-            // onChange={(event) => changeEmail(event.target.value)}
+            value={email}
+            onChange={(event) => changeEmail(event.target.value)}
           />
 
           {errors.email && (
@@ -141,8 +141,8 @@ const Login = () => {
             })}
             type="password"
             placeholder="Введите пароль"
-            // value={password}
-            // onChange={(event) => changePassword(event.target.value)}
+            value={password}
+            onChange={(event) => changePassword(event.target.value)}
           />
 
           {errors.password && (
@@ -155,7 +155,7 @@ const Login = () => {
             className="submit"
             type="submit"
             value="Войти"
-            // onClick={authUser}
+            onClick={authUser}
           />
           <p
             style={{
