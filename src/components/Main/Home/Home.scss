@@ -95,10 +95,10 @@
     align-items: center;
     gap: 10px;
     padding-top: 10px;
-    @media (max-width: 768px){
+    @media (max-width: 768px) {
       flex-wrap: wrap;
     }
-    @media (max-width: 360px){
+    @media (max-width: 360px) {
       width: 360px;
     }
   }
@@ -108,7 +108,7 @@
     font-size: 18px;
     width: 55%;
     line-height: 24px;
-    max-height: 284px;
+    max-height: 184px;
     overflow: hidden;
     @media (max-width: 1520px) {
       width: 100%;

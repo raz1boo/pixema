@@ -6,8 +6,10 @@
   display: flex;
   flex-direction: column;
   padding-top: 50px;
+  max-width: 1920px;
+  margin: 0 auto;
   gap: 100px;
-  .button-layout{
+  .button-layout {
     width: 100%;
     display: flex;
     justify-content: center;

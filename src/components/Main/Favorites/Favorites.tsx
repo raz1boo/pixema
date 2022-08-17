@@ -13,7 +13,16 @@ const Favorites = () => {
   return (
     <div className="favorites">
       {favorites.length ? (
-        <Layout>
+        <Layout
+          className={
+            countFavorites % 10 === 0 ||
+            countFavorites % 8 === 0 ||
+            countFavorites % 9 === 0 ||
+            countFavorites % 5 === 0
+              ? "justify-content__space-between"
+              : undefined
+          }
+        >
           {countFavorites !== 1 ? (
             data?.docs.map((item) => <Movie key={item.id} docs={item} />)
           ) : (
@@ -23,7 +32,6 @@ const Favorites = () => {
       ) : (
         <div className="favorites__null">
           <img src="/assets/icons/favorite-null.png" alt="null" />
-          {/* <img src="/pixema/assets/icons/favorite-null.png" alt="null" /> */}
           <h2>Список избранного пуст</h2>
         </div>
       )}
