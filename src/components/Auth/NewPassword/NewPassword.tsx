@@ -9,7 +9,7 @@ import {
   useResetPasswordConfirmMutation,
   useResetPasswordMutation,
 } from "../../requests/authorization";
-import { ILogin } from "../../types/ILogin";
+import { IAuthorization } from "../../types/IAuthorization";
 import { SubmitHandler, useForm } from "react-hook-form";
 
 const NewPassword = () => {
@@ -30,11 +30,11 @@ const NewPassword = () => {
     handleSubmit,
     formState: { errors },
     reset,
-  } = useForm<ILogin>({ mode: "onChange" });
+  } = useForm<IAuthorization>({ mode: "onChange" });
 
-  const onSubmit: SubmitHandler<ILogin> = (data) => {
-    alert(`your email ${data.email}`);
+  const onSubmit: SubmitHandler<IAuthorization> = (data) => {
     alert(`your password ${data.password}`);
+    alert(`your password ${data.passwordConfirm}`);
     reset();
   };
   const changeToken = (token: string) => {

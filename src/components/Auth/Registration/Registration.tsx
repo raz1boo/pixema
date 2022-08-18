@@ -6,7 +6,7 @@ import "./Registration.scss";
 import { useAppSelector } from "../../store/hooks/redux";
 import { useState } from "react";
 import { usePostSignUpMutation } from "../../requests/authorization";
-import { ILogin } from "../../types/ILogin";
+import { IAuthorization } from "../../types/IAuthorization";
 import { SubmitHandler, useForm } from "react-hook-form";
 
 const Registration = () => {
@@ -23,13 +23,15 @@ const Registration = () => {
     handleSubmit,
     formState: { errors },
     reset,
-  } = useForm<ILogin>(
+  } = useForm<IAuthorization>(
     { mode: "onChange" }
   );
 
-  const onSubmit: SubmitHandler<ILogin> = (data) => {
+  const onSubmit: SubmitHandler<IAuthorization> = (data) => {
+    alert(`your login ${data.login}`);
     alert(`your email ${data.email}`);
     alert(`your password ${data.password}`);
+    alert(`your password confirm ${data.passwordConfirm}`);
     reset();
   };
 

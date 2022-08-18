@@ -7,7 +7,7 @@ import { useAppSelector } from "../../store/hooks/redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useResetPasswordMutation } from "../../requests/authorization";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { ILogin } from "../../types/ILogin";
+import { IAuthorization } from "../../types/IAuthorization";
 
 const ResetPassword = () => {
   const {
@@ -15,9 +15,9 @@ const ResetPassword = () => {
     handleSubmit,
     formState: { errors },
     reset,
-  } = useForm<ILogin>({ mode: "onChange" });
+  } = useForm<IAuthorization>({ mode: "onChange" });
 
-  const onSubmit: SubmitHandler<ILogin> = (data) => {
+  const onSubmit: SubmitHandler<IAuthorization> = (data) => {
     alert(`your email ${data.email}`);
     reset();
   };

@@ -8,7 +8,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useCreateTokenMutation } from "../../requests/authorization";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { ILogin } from "../../types/ILogin";
+import { IAuthorization } from "../../types/IAuthorization";
 
 const Login = () => {
   const { theme } = useAppSelector((state) => state.themeReducer);
@@ -23,11 +23,11 @@ const Login = () => {
     handleSubmit,
     formState: { errors },
     reset,
-  } = useForm<ILogin>(
+  } = useForm<IAuthorization>(
     { mode: "onChange" }
   );
 
-  const onSubmit: SubmitHandler<ILogin> = (data) => {
+  const onSubmit: SubmitHandler<IAuthorization> = (data) => {
     alert(`your email ${data.email}`);
     alert(`your password ${data.password}`);
     reset();
