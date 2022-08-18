@@ -4,7 +4,7 @@ import Logo from "../../UI/Header/Logo/Logo";
 import "./ResetPassword.scss";
 import { useState } from "react";
 import { useAppSelector } from "../../store/hooks/redux";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useResetPasswordMutation } from "../../requests/authorization";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { IAuthorization } from "../../types/IAuthorization";
@@ -23,7 +23,6 @@ const ResetPassword = () => {
   };
   const { theme } = useAppSelector((state) => state.themeReducer);
   const navigate = useNavigate();
-   const location = useLocation();
   const [resetPassword] = useResetPasswordMutation();
   const [email, setEmail] = useState("");
   const handlerClick = () => {
@@ -62,7 +61,7 @@ const ResetPassword = () => {
           </h2>
           <input
             style={
-              theme === "dark" || location.pathname === "/"
+              theme === "dark"
                 ? { backgroundColor: "#323537", borderColor: "transparent" }
                 : {
                     backgroundColor: "#fff",

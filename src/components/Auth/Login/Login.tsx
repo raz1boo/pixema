@@ -4,7 +4,7 @@ import Logo from "../../UI/Header/Logo/Logo";
 import "./Login.scss";
 import "../../Auth/Authorization.scss";
 import { useAppSelector } from "../../store/hooks/redux";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useCreateTokenMutation } from "../../requests/authorization";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -13,7 +13,6 @@ import { IAuthorization } from "../../types/IAuthorization";
 const Login = () => {
   const { theme } = useAppSelector((state) => state.themeReducer);
   const navigate = useNavigate();
-  const location = useLocation();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [createToken, { data }] = useCreateTokenMutation();
@@ -23,9 +22,7 @@ const Login = () => {
     handleSubmit,
     formState: { errors },
     reset,
-  } = useForm<IAuthorization>(
-    { mode: "onChange" }
-  );
+  } = useForm<IAuthorization>({ mode: "onChange" });
 
   const onSubmit: SubmitHandler<IAuthorization> = (data) => {
     alert(`your email ${data.email}`);
@@ -76,17 +73,14 @@ const Login = () => {
           </h2>
           <label
             style={{
-              color:
-                theme === "dark" || location.pathname === "/"
-                  ? "#fff"
-                  : "#242426",
+              color: theme === "dark" ? "#fff" : "#242426",
             }}
           >
             Почта
           </label>
           <input
             style={
-              theme === "dark" || location.pathname === "/"
+              theme === "dark"
                 ? { backgroundColor: "#323537", borderColor: "transparent" }
                 : {
                     backgroundColor: "#fff",
@@ -114,17 +108,14 @@ const Login = () => {
 
           <label
             style={{
-              color:
-                theme === "dark" || location.pathname === "/"
-                  ? "#fff"
-                  : "#242426",
+              color: theme === "dark" ? "#fff" : "#242426",
             }}
           >
             Пароль
           </label>
           <input
             style={
-              theme === "dark" || location.pathname === "/"
+              theme === "dark"
                 ? { backgroundColor: "#323537", borderColor: "transparent" }
                 : {
                     backgroundColor: "#fff",
@@ -136,7 +127,8 @@ const Login = () => {
               required: "Пароль не может быть пустым",
               pattern: {
                 value: /(?=.*[0-9])(?=.*[a-zA-Z]).{8,30}/,
-                message: "Пароль должен состоять из букв латинского алфавита (A-z) и арабских цифр (0-9)",
+                message:
+                  "Пароль должен состоять из букв латинского алфавита (A-z) и арабских цифр (0-9)",
               },
             })}
             type="password"
@@ -164,30 +156,6 @@ const Login = () => {
           >
             У Вас нет аккаунта? <Link to="/registration">Регистрация</Link>
           </p>
-
-          {/* <Input
-            label="Почта"
-            type="email"
-            name="email"
-            placeholder="Введите почту"
-            onChange={changeEmail}
-            value={email}
-          />
-          <Input
-            label="Пароль"
-            type="password"
-            name="password"
-            placeholder="Введите пароль"
-            value={password}
-            onChange={changePassword}
-          />
-          <Link to="/reset_password">Забыли пароль?</Link>
-          <Submit
-            className="submit"
-            type="submit"
-            value="Войти"
-            onClick={authUser}
-          /> */}
         </form>
       </section>
     </>

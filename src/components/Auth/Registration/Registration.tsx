@@ -1,4 +1,4 @@
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Input from "../AuthInput/Input";
 import Submit from "../AuthInput/Submit";
 import Logo from "../../UI/Header/Logo/Logo";
@@ -16,16 +16,13 @@ const Registration = () => {
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
   const { theme } = useAppSelector((state) => state.themeReducer);
   const navigate = useNavigate();
-  const location = useLocation();
 
   const {
     register,
     handleSubmit,
     formState: { errors },
     reset,
-  } = useForm<IAuthorization>(
-    { mode: "onChange" }
-  );
+  } = useForm<IAuthorization>({ mode: "onChange" });
 
   const onSubmit: SubmitHandler<IAuthorization> = (data) => {
     alert(`your login ${data.login}`);
@@ -95,17 +92,14 @@ const Registration = () => {
 
           <label
             style={{
-              color:
-                theme === "dark" || location.pathname === "/"
-                  ? "#fff"
-                  : "#242426",
+              color: theme === "dark" ? "#fff" : "#242426",
             }}
           >
             Логин
           </label>
           <input
             style={
-              theme === "dark" || location.pathname === "/"
+              theme === "dark"
                 ? { backgroundColor: "#323537", borderColor: "transparent" }
                 : {
                     backgroundColor: "#fff",
@@ -123,17 +117,14 @@ const Registration = () => {
 
           <label
             style={{
-              color:
-                theme === "dark" || location.pathname === "/"
-                  ? "#fff"
-                  : "#242426",
+              color: theme === "dark" ? "#fff" : "#242426",
             }}
           >
             Почта
           </label>
           <input
             style={
-              theme === "dark" || location.pathname === "/"
+              theme === "dark"
                 ? { backgroundColor: "#323537", borderColor: "transparent" }
                 : {
                     backgroundColor: "#fff",
@@ -161,17 +152,14 @@ const Registration = () => {
 
           <label
             style={{
-              color:
-                theme === "dark" || location.pathname === "/"
-                  ? "#fff"
-                  : "#242426",
+              color: theme === "dark" ? "#fff" : "#242426",
             }}
           >
             Пароль
           </label>
           <input
             style={
-              theme === "dark" || location.pathname === "/"
+              theme === "dark"
                 ? { backgroundColor: "#323537", borderColor: "transparent" }
                 : {
                     backgroundColor: "#fff",
@@ -199,17 +187,14 @@ const Registration = () => {
 
           <label
             style={{
-              color:
-                theme === "dark" || location.pathname === "/"
-                  ? "#fff"
-                  : "#242426",
+              color: theme === "dark" ? "#fff" : "#242426",
             }}
           >
             Подтверждение пароля
           </label>
           <input
             style={
-              theme === "dark" || location.pathname === "/"
+              theme === "dark"
                 ? { backgroundColor: "#323537", borderColor: "transparent" }
                 : {
                     backgroundColor: "#fff",

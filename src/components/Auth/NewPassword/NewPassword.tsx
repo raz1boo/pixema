@@ -3,7 +3,7 @@ import Submit from "../AuthInput/Submit";
 import Logo from "../../UI/Header/Logo/Logo";
 import "./NewPassword.scss";
 import { useAppSelector } from "../../store/hooks/redux";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import {
   useResetPasswordConfirmMutation,
@@ -15,7 +15,6 @@ import { SubmitHandler, useForm } from "react-hook-form";
 const NewPassword = () => {
   const { theme } = useAppSelector((state) => state.themeReducer);
   const navigate = useNavigate();
-  const location = useLocation();
   const [uid, setUid] = useState("");
   const [token, setToken] = useState("");
   const [timer, setTimer] = useState(0);
@@ -127,17 +126,14 @@ const NewPassword = () => {
 
           <label
             style={{
-              color:
-                theme === "dark" || location.pathname === "/"
-                  ? "#fff"
-                  : "#242426",
+              color: theme === "dark" ? "#fff" : "#242426",
             }}
           >
             Пароль
           </label>
           <input
             style={
-              theme === "dark" || location.pathname === "/"
+              theme === "dark"
                 ? { backgroundColor: "#323537", borderColor: "transparent" }
                 : {
                     backgroundColor: "#fff",
@@ -166,17 +162,14 @@ const NewPassword = () => {
 
           <label
             style={{
-              color:
-                theme === "dark" || location.pathname === "/"
-                  ? "#fff"
-                  : "#242426",
+              color: theme === "dark" ? "#fff" : "#242426",
             }}
           >
             Подтверждение пароля
           </label>
           <input
             style={
-              theme === "dark" || location.pathname === "/"
+              theme === "dark"
                 ? { backgroundColor: "#323537", borderColor: "transparent" }
                 : {
                     backgroundColor: "#fff",
