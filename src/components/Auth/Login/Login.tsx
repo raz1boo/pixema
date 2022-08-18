@@ -8,7 +8,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useCreateTokenMutation } from "../../requests/authorization";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { ILogin } from "./Login.interface";
+import { ILogin } from "../../types/ILogin";
 
 const Login = () => {
   const { theme } = useAppSelector((state) => state.themeReducer);
@@ -24,12 +24,12 @@ const Login = () => {
     formState: { errors },
     reset,
   } = useForm<ILogin>(
-    { mode: "onChange" } //Ошибка срабатывает при изменении поля
+    { mode: "onChange" }
   );
 
   const onSubmit: SubmitHandler<ILogin> = (data) => {
     alert(`your email ${data.email}`);
-    alert(`your password ${data.password}`); //Отправить на сервер
+    alert(`your password ${data.password}`);
     reset();
   };
 
