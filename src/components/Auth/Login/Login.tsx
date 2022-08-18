@@ -1,5 +1,3 @@
-// import Input from "../AuthInput/Input";
-// import Submit from "../AuthInput/Submit";
 import Logo from "../../UI/Header/Logo/Logo";
 import "./Login.scss";
 import "../../Auth/Authorization.scss";
@@ -8,39 +6,29 @@ import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useCreateTokenMutation } from "../../requests/authorization";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { IAuthorization } from "../../types/IAuthorization";
+import { ICreateToken } from "../../types/IQuery";
 
 const Login = () => {
   const { theme } = useAppSelector((state) => state.themeReducer);
   const navigate = useNavigate();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const [createToken, { data }] = useCreateTokenMutation();
+  const [error, setError] = useState({ data: { detail: "" } });
 
   const {
     register,
     handleSubmit,
-    formState: { errors },
-    reset,
-  } = useForm<IAuthorization>({ mode: "onChange" });
+    formState: { errors, isValid },
+  } = useForm<ICreateToken>(
+    {
+      mode: "onChange",
+    } //Ошибка срабатывает при изменении
+  );
 
-  const onSubmit: SubmitHandler<IAuthorization> = (data) => {
-    alert(`your email ${data.email}`);
-    alert(`your password ${data.password}`);
-    reset();
-  };
-
-  const changeEmail = (email: string) => {
-    setEmail(email);
-  };
-
-  const changePassword = (password: string) => {
-    setPassword(password);
-  };
-  const authUser = async () => {
-    await createToken({ email, password })
+  const onSubmit: SubmitHandler<ICreateToken> = async (auth) => {
+    await createToken({ email: auth?.email, password: auth?.password })
       .unwrap()
-      .then((data) => data && navigate("/", { replace: true }));
+      .then((data) => data && navigate("/", { replace: true }))
+      .catch((error) => setError(error));
   };
 
   useEffect(() => {
@@ -92,18 +80,17 @@ const Login = () => {
               required: "Почта не может быть пустой",
               pattern: {
                 value:
-                  /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/,
+                  /^(([^<>()[\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
                 message: "Некорректная почта",
               },
             })}
-            type="text"
+            type="email"
+            name="email"
             placeholder="Введите почту"
-            value={email}
-            onChange={(event) => changeEmail(event.target.value)}
           />
 
-          {errors.email && (
-            <div style={{ color: "#ed4337" }}>{errors.email.message}</div>
+          {errors?.email && (
+            <div style={{ color: "#ed4337" }}>{errors?.email?.message}</div>
           )}
 
           <label
@@ -130,15 +117,23 @@ const Login = () => {
                 message:
                   "Пароль должен состоять из букв латинского алфавита (A-z) и арабских цифр (0-9)",
               },
+              minLength: {
+                value: 8,
+                message: "Минимум 8 символов",
+              },
             })}
+            name="password"
             type="password"
             placeholder="Введите пароль"
-            value={password}
-            onChange={(event) => changePassword(event.target.value)}
           />
 
-          {errors.password && (
-            <div style={{ color: "#ed4337" }}>{errors.password.message}</div>
+          {errors?.password ? (
+            <div style={{ color: "#ed4337" }}>{errors?.password?.message}</div>
+          ) : (
+            error?.data?.detail ===
+              "No active account found with the given credentials" && (
+              <div style={{ color: "#ed4337" }}>Неверная почта или пароль</div>
+            )
           )}
 
           <Link to="/reset_password">Забыли пароль?</Link>
@@ -147,7 +142,7 @@ const Login = () => {
             className="submit"
             type="submit"
             value="Войти"
-            onClick={authUser}
+            disabled={!isValid}
           />
           <p
             style={{

@@ -1,33 +1,31 @@
 import { useState } from "react";
+import { SubmitHandler, useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import {
   useActivateEmailMutation,
   useResendActivateEmailMutation,
 } from "../../../requests/authorization";
 import { useAppSelector } from "../../../store/hooks/redux";
+import { IActivate } from "../../../types/IQuery";
 import Logo from "../../../UI/Header/Logo/Logo";
-import Input from "../../AuthInput/Input";
-import Submit from "../../AuthInput/Submit";
 import "./ConfirmRegistration.scss";
 
 const ConfirmRegistration = () => {
-  const [uid, setUid] = useState("");
-  const [token, setToken] = useState("");
   const [timer, setTimer] = useState(0);
   const { theme } = useAppSelector((state) => state.themeReducer);
   const navigate = useNavigate();
-  const changeUid = (uid: string) => {
-    setUid(uid);
-  };
-  const changeToken = (token: string) => {
-    setToken(token);
-  };
   const futureUser = JSON.parse(
     localStorage.getItem("futureUser") || '{"email":""}'
   );
+  const {
+    register,
+    handleSubmit,
+    getValues,
+    formState: { errors, isValid },
+  } = useForm<IActivate>({ mode: "onChange" });
   const [activateEmail] = useActivateEmailMutation();
-  const handlerActivateEmail = () => {
-    activateEmail({ uid, token })
+  const onSubmit: SubmitHandler<IActivate> = (auth) => {
+    activateEmail({ uid: auth?.uid, token: auth?.token })
       .unwrap()
       .then((data) => data && navigate("/login", { replace: true }));
   };
@@ -68,6 +66,7 @@ const ConfirmRegistration = () => {
           токен
         </p>
         <form
+          onSubmit={handleSubmit(onSubmit)}
           action=""
           className="registration-form-window form-window"
           style={
@@ -83,27 +82,69 @@ const ConfirmRegistration = () => {
           >
             Активация
           </h2>
-          <Input
-            label="Идентификатор пользователя (Uid)"
+          <label
+            style={{
+              color: theme === "dark" ? "#fff" : "#242426",
+            }}
+          >
+            Идентификатор пользователя (Uid)
+          </label>
+          <input
+            style={
+              theme === "dark"
+                ? { backgroundColor: "#323537", borderColor: "transparent" }
+                : {
+                    backgroundColor: "#fff",
+                    borderColor: "#AFB2B6",
+                    color: "#000",
+                  }
+            }
+            {...register("uid", {
+              required: "Uid не может быть пустым",
+            })}
+            autoComplete="new-password"
             type="text"
             name="uid"
-            placeholder="Введите uid"
-            onChange={changeUid}
-            value={uid}
+            placeholder="Введите идентификатор пользователя (Uid)"
           />
-          <Input
-            label="Токен"
+
+          {errors?.uid && (
+            <div style={{ color: "#ed4337" }}>{errors?.uid?.message}</div>
+          )}
+          <label
+            style={{
+              color: theme === "dark" ? "#fff" : "#242426",
+            }}
+          >
+            Токен
+          </label>
+          <input
+            style={
+              theme === "dark"
+                ? { backgroundColor: "#323537", borderColor: "transparent" }
+                : {
+                    backgroundColor: "#fff",
+                    borderColor: "#AFB2B6",
+                    color: "#000",
+                  }
+            }
+            {...register("token", {
+              required: "Токен не может быть пустым",
+            })}
+            autoComplete="new-password"
             type="text"
             name="token"
             placeholder="Введите токен"
-            onChange={changeToken}
-            value={token}
           />
-          <Submit
+
+          {errors?.token && (
+            <div style={{ color: "#ed4337" }}>{errors?.token?.message}</div>
+          )}
+          <input
             className="submit"
             type="submit"
             value="Активация"
-            onClick={handlerActivateEmail}
+            disabled={!isValid}
           />
           <p
             style={{
@@ -121,7 +162,7 @@ const ConfirmRegistration = () => {
             {timer !== 0 ? (
               <span> {timer} сек</span>
             ) : (
-              <span onClick={resendActivation}> Отправить</span>
+              <span onClick={resendActivation} style={{cursor:'pointer'}}> Отправить</span>
             )}
           </p>
         </form>

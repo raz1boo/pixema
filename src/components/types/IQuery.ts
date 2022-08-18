@@ -31,6 +31,8 @@ export interface IAuth {
 
 export interface ISignUp extends IAuth {
   password: string;
+  cpassword?: string;
+  npassword?: string;
 }
 
 export interface IToken {
@@ -49,12 +51,10 @@ export interface IPatchUserName {
   id: number;
 }
 
-export interface ISetEmail {
+export interface IPatchPassword {
   token?: string;
   new_password?: string;
-  old_password?: string;
-  email?: string;
-  password?: string;
+  current_password?: string;
 }
 
 export interface IActivate {
@@ -66,4 +66,5 @@ export interface IResetPassword {
   uid: string;
   token: string;
   password: string;
+  cpassword?: string;
 }

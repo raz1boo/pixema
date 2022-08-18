@@ -53,6 +53,7 @@
   position: relative;
   margin-top: 24px;
   z-index: 9999;
+  box-shadow: 0 5px 10px rgb(0 0 0 / 70%);
   @media (max-width: 1024px) {
     position: absolute;
     right: 0px;

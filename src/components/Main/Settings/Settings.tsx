@@ -9,68 +9,72 @@ import {
 } from "../../requests/authorization";
 import getCookie from "../../helpers/getCookies";
 import Layout from "../../UI/Layout/Layout";
-import Input from "../../Auth/AuthInput/Input";
 import { Link } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import { ISignUp } from "../../types/IQuery";
 
 const Settings = () => {
   const { setTheme } = themeSlice.actions;
   const { setUser } = authSlice.actions;
+  const [error, setError] = useState({ data: { username: [""] } });
+  const [passwordError, setPasswordError] = useState({
+    data: { new_password: [""], current_password: [""] },
+  });
   const [patchPassword] = usePatchPasswordMutation();
   const [patchUserName] = usePatchUserNameMutation();
   const { currentUser, isAuth } = useAppSelector((state) => state.authReducer);
-  const [name, setName] = useState("");
-  const [oldPassword, setOldPassword] = useState("");
-  const [password, setPassword] = useState("");
-  const [passwordConfirmation, setPasswordConfirmation] = useState("");
-  const changeName = (name: string) => {
-    setName(name);
-  };
-  const changePassword = (password: string) => {
-    setPassword(password);
-  };
-  const changePasswordConfirmation = (passwordConfirmation: string) => {
-    setPasswordConfirmation(passwordConfirmation);
-  };
-  const changeOldPassword = (password: string) => {
-    setOldPassword(password);
-  };
   const accessCookie = getCookie("access");
   const { theme } = useAppSelector((state) => state.themeReducer);
   const dispatch = useAppDispatch();
-  useEffect(() => {
-    localStorage.setItem("theme", theme);
-    setName(currentUser?.username);
-  }, [theme, currentUser, setName]);
+  const {
+    register,
+    formState: { errors },
+    getValues,
+    reset,
+  } = useForm<ISignUp>({
+    mode: "onBlur",
+    defaultValues: {
+      username: currentUser?.username,
+    },
+  });
   const handlerSave = () => {
+    const { username, password, npassword, cpassword } = getValues();
     dispatch(
       setUser({
-        username: name,
+        username: username,
         id: currentUser?.id,
         email: currentUser?.email,
       })
     );
-    name !== currentUser?.username &&
-      name &&
+    username !== currentUser?.username &&
       patchUserName({
-        username: name,
+        username: username,
         id: currentUser?.id,
         token: accessCookie,
       })
         .unwrap()
-        .then((username) => console.log("username", username));
-    oldPassword &&
-      passwordConfirmation &&
+        .catch((error) => setError(error));
+    cpassword &&
+      npassword &&
       password &&
       patchPassword({
         token: accessCookie,
-        new_password: password,
-        old_password: oldPassword,
+        new_password: npassword,
+        current_password: password,
       })
         .unwrap()
-        .then((newPassword) => console.log("newPassword", newPassword));
+        .catch((error) => setPasswordError(error));
+    reset();
   };
+  useEffect(() => {
+    localStorage.setItem("theme", theme);
+    reset({ username: currentUser?.username });
+  }, [theme, reset, currentUser]);
   return (
-    <div className="main-block settings">
+    <div
+      className="main-block settings"
+      style={isAuth ? { height: "none" } : { height: "100%" }}
+    >
       <Layout>
         {isAuth && (
           <>
@@ -88,28 +92,62 @@ const Settings = () => {
               >
                 <div className="profile-form">
                   <p style={{ color: theme === "light" ? "#242426" : "#fff" }}>
-                    Имя
+                    Логин
                   </p>
-                  <Input
-                    value={name}
-                    type="text"
-                    name="name"
-                    placeholder="Введите имя"
-                    onChange={changeName}
+                  <input
+                    style={
+                      theme === "dark"
+                        ? {
+                            backgroundColor: "#323537",
+                            borderColor: "transparent",
+                          }
+                        : {
+                            backgroundColor: "#fff",
+                            borderColor: "#AFB2B6",
+                            color: "#000",
+                          }
+                    }
+                    {...register("username", {
+                      required: "Логин не может быть пустым",
+                      pattern: {
+                        value: /^\S+$/,
+                        message: "Некорректный логин",
+                      },
+                      minLength: {
+                        value: 5,
+                        message: "Минимум 5 символов",
+                      },
+                      maxLength: {
+                        value: 25,
+                        message: "Максимум 25 символов",
+                      },
+                    })}
                     autoComplete="new-password"
+                    type="text"
+                    name="username"
+                    placeholder="Введите логин"
                   />
+
+                  {errors?.username ? (
+                    <div style={{ color: "#ed4337" }}>
+                      {errors?.username?.message}
+                    </div>
+                  ) : (
+                    error?.data?.username[0] ===
+                      "A user with that username already exists." && (
+                      <div style={{ color: "#ed4337" }}>
+                        Данный логин уже используется
+                      </div>
+                    )
+                  )}
                 </div>
                 <div className="profile-form">
                   <p style={{ color: theme === "light" ? "#242426" : "#fff" }}>
                     Почта
                   </p>
-                  <Input
-                    value={currentUser?.email}
-                    type="text"
-                    name="name"
-                    placeholder="Введите почту"
-                    autoComplete="off"
-                  />
+                  <div className="profile-form__email">
+                    {currentUser?.email}
+                  </div>
                 </div>
               </div>
             </div>
@@ -132,14 +170,46 @@ const Settings = () => {
                     >
                       Пароль
                     </p>
-                    <Input
-                      value={oldPassword}
-                      type="password"
-                      name="password"
-                      placeholder="Введите пароль"
-                      onChange={changeOldPassword}
+                    <input
+                      style={
+                        theme === "dark"
+                          ? {
+                              backgroundColor: "#323537",
+                              borderColor: "transparent",
+                            }
+                          : {
+                              backgroundColor: "#fff",
+                              borderColor: "#AFB2B6",
+                              color: "#000",
+                            }
+                      }
+                      {...register("password", {
+                        required: "Пароль не может быть пустым",
+                        pattern: {
+                          value: /(?=.*[0-9])(?=.*[a-zA-Z]).{8,30}/,
+                          message:
+                            "Пароль должен состоять из букв латинского алфавита (A-z) и арабских цифр (0-9)",
+                        },
+                        minLength: {
+                          value: 8,
+                          message: "Минимум 8 символов",
+                        },
+                      })}
                       autoComplete="new-password"
+                      type="password"
+                      placeholder="Введите пароль"
                     />
+
+                    {errors?.password ? (
+                      <div style={{ color: "#ed4337" }}>
+                        {errors?.password?.message}
+                      </div>
+                    ) : (
+                      passwordError?.data?.current_password?.[0] ===
+                        "Invalid password." && (
+                        <div style={{ color: "#ed4337" }}>Неверный пароль</div>
+                      )
+                    )}
                   </div>
                 </div>
                 <div className="new-password-block">
@@ -149,14 +219,48 @@ const Settings = () => {
                     >
                       Новый пароль
                     </p>
-                    <Input
-                      value={password}
-                      type="password"
-                      name="password"
-                      placeholder="Введите новый пароль"
-                      onChange={changePassword}
+                    <input
+                      style={
+                        theme === "dark"
+                          ? {
+                              backgroundColor: "#323537",
+                              borderColor: "transparent",
+                            }
+                          : {
+                              backgroundColor: "#fff",
+                              borderColor: "#AFB2B6",
+                              color: "#000",
+                            }
+                      }
+                      {...register("npassword", {
+                        required: "Пароль не может быть пустым",
+                        pattern: {
+                          value: /(?=.*[0-9])(?=.*[a-zA-Z]).{8,30}/,
+                          message:
+                            "Пароль должен состоять из букв латинского алфавита (A-z) и арабских цифр (0-9)",
+                        },
+                        minLength: {
+                          value: 8,
+                          message: "Минимум 8 символов",
+                        },
+                      })}
                       autoComplete="new-password"
+                      type="password"
+                      placeholder="Введите пароль"
                     />
+
+                    {errors?.npassword ? (
+                      <div style={{ color: "#ed4337" }}>
+                        {errors?.npassword?.message}
+                      </div>
+                    ) : (
+                      passwordError?.data?.new_password?.[0] ===
+                        "This password is too common." && (
+                        <div style={{ color: "#ed4337" }}>
+                          Этот пароль слишком распространен
+                        </div>
+                      )
+                    )}
                   </div>
                   <div className="password-form">
                     <p
@@ -164,14 +268,46 @@ const Settings = () => {
                     >
                       Подтвердите пароль
                     </p>
-                    <Input
-                      type="password"
-                      name="password"
-                      placeholder="Повторите пароль"
-                      onChange={changePasswordConfirmation}
+                    <input
+                      style={
+                        theme === "dark"
+                          ? {
+                              backgroundColor: "#323537",
+                              borderColor: "transparent",
+                            }
+                          : {
+                              backgroundColor: "#fff",
+                              borderColor: "#AFB2B6",
+                              color: "#000",
+                            }
+                      }
+                      {...register("cpassword", {
+                        required: "Пароль не может быть пустым",
+                        pattern: {
+                          value: /(?=.*[0-9])(?=.*[a-zA-Z]).{8,30}/,
+                          message:
+                            "Пароль должен состоять из букв латинского алфавита (A-z) и арабских цифр (0-9)",
+                        },
+                        minLength: {
+                          value: 8,
+                          message: "Минимум 8 символов",
+                        },
+                        validate: (value) => {
+                          const { npassword } = getValues();
+                          return npassword === value || "Пароль не совпадает";
+                        },
+                      })}
                       autoComplete="new-password"
-                      value={passwordConfirmation}
+                      name="cpassword"
+                      type="password"
+                      placeholder="Подтверждение пароля"
                     />
+
+                    {errors?.cpassword && (
+                      <div style={{ color: "#ed4337" }}>
+                        {errors?.cpassword?.message}
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>
@@ -219,7 +355,17 @@ const Settings = () => {
             <Link to="/" className="footer-button cancel">
               Закрыть
             </Link>
-            <button className="footer-button save" onClick={handlerSave}>
+            <button
+              className="footer-button save"
+              onClick={handlerSave}
+              disabled={
+                (errors?.password ||
+                  errors?.cpassword ||
+                  errors?.npassword ||
+                  errors?.username) &&
+                true
+              }
+            >
               Сохранить
             </button>
           </div>

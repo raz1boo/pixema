@@ -1,40 +1,27 @@
-import Input from "../AuthInput/Input";
-import Submit from "../AuthInput/Submit";
 import Logo from "../../UI/Header/Logo/Logo";
 import "./ResetPassword.scss";
-import { useState } from "react";
 import { useAppSelector } from "../../store/hooks/redux";
 import { useNavigate } from "react-router-dom";
 import { useResetPasswordMutation } from "../../requests/authorization";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { IAuthorization } from "../../types/IAuthorization";
 
 const ResetPassword = () => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    reset,
-  } = useForm<IAuthorization>({ mode: "onChange" });
-
-  const onSubmit: SubmitHandler<IAuthorization> = (data) => {
-    alert(`your email ${data.email}`);
-    reset();
-  };
   const { theme } = useAppSelector((state) => state.themeReducer);
   const navigate = useNavigate();
   const [resetPassword] = useResetPasswordMutation();
-  const [email, setEmail] = useState("");
-  const handlerClick = () => {
-    resetPassword(email);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isValid },
+  } = useForm<{ email: string }>({ mode: "onChange" });
+
+  const onSubmit: SubmitHandler<{ email: string }> = (auth) => {
+    resetPassword(auth?.email);
     navigate("/new_password", { replace: true });
     localStorage.setItem(
       "futureResetPassword",
-      JSON.stringify({ email: email })
+      JSON.stringify({ email: auth?.email })
     );
-  };
-  const changeEmail = (email: string) => {
-    setEmail(email);
   };
   return (
     <>
@@ -59,6 +46,13 @@ const ResetPassword = () => {
           >
             Восстановить пароль
           </h2>
+          <label
+            style={{
+              color: theme === "dark" ? "#fff" : "#242426",
+            }}
+          >
+            Почта
+          </label>
           <input
             style={
               theme === "dark"
@@ -73,24 +67,22 @@ const ResetPassword = () => {
               required: "Почта не может быть пустой",
               pattern: {
                 value:
-                  /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/,
+                  /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
                 message: "Некорректная почта",
               },
             })}
-            type="text"
+            type="email"
+            name="email"
             placeholder="Введите почту"
-            // value={email}
-            // onChange={(event) => changeEmail(event.target.value)}
           />
-
-          {errors.email && (
-            <div style={{ color: "#ed4337" }}>{errors.email.message}</div>
-          )}
+          <div style={{ color: "#ed4337", height: "15px" }}>
+            {errors?.email?.message}
+          </div>
           <input
             className="submit"
             type="submit"
             value="Восстановить"
-            // onClick={handlerClick}
+            disabled={!isValid}
           />
         </form>
       </section>

@@ -6,7 +6,7 @@ import {
   ICreateToken,
   IPatchUserName,
   IResetPassword,
-  ISetEmail,
+  IPatchPassword,
   ISignUp,
   IToken,
 } from "../types/IQuery";
@@ -62,8 +62,8 @@ export const authRequests = createApi({
         }),
       }),
     }),
-    patchPassword: build.mutation<IAuth, ISetEmail>({
-      query: ({ token, new_password, old_password }) => ({
+    patchPassword: build.mutation<IAuth, IPatchPassword>({
+      query: ({ token, new_password, current_password }) => ({
         url: "/users/set_password/",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -71,7 +71,7 @@ export const authRequests = createApi({
         },
         method: "POST",
         body: JSON.stringify({
-          current_password: old_password,
+          current_password: current_password,
           new_password: new_password,
         }),
       }),

@@ -1,5 +1,3 @@
-import Input from "../AuthInput/Input";
-import Submit from "../AuthInput/Submit";
 import Logo from "../../UI/Header/Logo/Logo";
 import "./NewPassword.scss";
 import { useAppSelector } from "../../store/hooks/redux";
@@ -9,44 +7,23 @@ import {
   useResetPasswordConfirmMutation,
   useResetPasswordMutation,
 } from "../../requests/authorization";
-import { IAuthorization } from "../../types/IAuthorization";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { IResetPassword } from "../../types/IQuery";
 
 const NewPassword = () => {
   const { theme } = useAppSelector((state) => state.themeReducer);
   const navigate = useNavigate();
-  const [uid, setUid] = useState("");
-  const [token, setToken] = useState("");
   const [timer, setTimer] = useState(0);
   const futureResetPassword = JSON.parse(
     localStorage.getItem("futureResetPassword") || '{"email":""}'
   );
-  const changeUid = (uid: string) => {
-    setUid(uid);
-  };
   const {
     register,
     handleSubmit,
-    formState: { errors },
-    reset,
-  } = useForm<IAuthorization>({ mode: "onChange" });
+    getValues,
+    formState: { errors, isValid },
+  } = useForm<IResetPassword>({ mode: "onChange" });
 
-  const onSubmit: SubmitHandler<IAuthorization> = (data) => {
-    alert(`your password ${data.password}`);
-    alert(`your password ${data.passwordConfirm}`);
-    reset();
-  };
-  const changeToken = (token: string) => {
-    setToken(token);
-  };
-  const [password, setPassword] = useState("");
-  const [passwordConfirmation, setPasswordConfirmation] = useState("");
-  const changePassword = (password: string) => {
-    setPassword(password);
-  };
-  const changePasswordConfirmation = (passwordConfirmation: string) => {
-    setPasswordConfirmation(passwordConfirmation);
-  };
   const [resetPassword] = useResetPasswordMutation();
   const resendActivation = () => {
     resetPassword(futureResetPassword.email);
@@ -61,8 +38,12 @@ const NewPassword = () => {
     }, 60000);
   };
   const [resetPasswordConfirm] = useResetPasswordConfirmMutation();
-  const handlerResetPassword = () => {
-    resetPasswordConfirm({ uid, token, password });
+  const onSubmit: SubmitHandler<IResetPassword> = (auth) => {
+    resetPasswordConfirm({
+      uid: auth?.uid,
+      token: auth?.token,
+      password: auth?.password,
+    });
     navigate("/login", { replace: true });
   };
   return (
@@ -105,25 +86,64 @@ const NewPassword = () => {
           >
             Новый пароль
           </h2>
-          <Input
-            label="Идентификатор пользователя (Uid)"
+          <label
+            style={{
+              color: theme === "dark" ? "#fff" : "#242426",
+            }}
+          >
+            Идентификатор пользователя (Uid)
+          </label>
+          <input
+            style={
+              theme === "dark"
+                ? { backgroundColor: "#323537", borderColor: "transparent" }
+                : {
+                    backgroundColor: "#fff",
+                    borderColor: "#AFB2B6",
+                    color: "#000",
+                  }
+            }
+            {...register("uid", {
+              required: "Uid не может быть пустым",
+            })}
+            autoComplete="new-password"
             type="text"
             name="uid"
-            placeholder="Введите uid"
-            onChange={changeUid}
-            value={uid}
-            autoComplete="new-password"
+            placeholder="Введите идентификатор пользователя (Uid)"
           />
-          <Input
-            label="Токен"
+
+          {errors?.uid && (
+            <div style={{ color: "#ed4337" }}>{errors?.uid?.message}</div>
+          )}
+          <label
+            style={{
+              color: theme === "dark" ? "#fff" : "#242426",
+            }}
+          >
+            Токен
+          </label>
+          <input
+            style={
+              theme === "dark"
+                ? { backgroundColor: "#323537", borderColor: "transparent" }
+                : {
+                    backgroundColor: "#fff",
+                    borderColor: "#AFB2B6",
+                    color: "#000",
+                  }
+            }
+            {...register("token", {
+              required: "Токен не может быть пустым",
+            })}
+            autoComplete="new-password"
             type="text"
             name="token"
             placeholder="Введите токен"
-            onChange={changeToken}
-            value={token}
-            autoComplete="new-password"
           />
 
+          {errors?.token && (
+            <div style={{ color: "#ed4337" }}>{errors?.token?.message}</div>
+          )}
           <label
             style={{
               color: theme === "dark" ? "#fff" : "#242426",
@@ -148,16 +168,18 @@ const NewPassword = () => {
                 message:
                   "Пароль должен состоять из букв латинского алфавита (A-z) и арабских цифр (0-9)",
               },
+              minLength: {
+                value: 8,
+                message: "Минимум 8 символов",
+              },
             })}
+            autoComplete="new-password"
             type="password"
             placeholder="Введите пароль"
-            // value={password}
-            // onChange={(event) => changePassword(event.target.value)}
-            // autoComplete="new-password"
           />
 
-          {errors.password && (
-            <div style={{ color: "#ed4337" }}>{errors.password.message}</div>
+          {errors?.password && (
+            <div style={{ color: "#ed4337" }}>{errors?.password?.message}</div>
           )}
 
           <label
@@ -177,29 +199,37 @@ const NewPassword = () => {
                     color: "#000",
                   }
             }
-            {...register("passwordConfirm", {
+            {...register("cpassword", {
               required: "Пароль не может быть пустым",
               pattern: {
-                value: / /,
-                message: "Пароли должны совпадать",
+                value: /(?=.*[0-9])(?=.*[a-zA-Z]).{8,30}/,
+                message:
+                  "Пароль должен состоять из букв латинского алфавита (A-z) и арабских цифр (0-9)",
+              },
+              minLength: {
+                value: 8,
+                message: "Минимум 8 символов",
+              },
+              validate: (value) => {
+                const { password } = getValues();
+                return password === value || "Пароль не совпадает";
               },
             })}
+            autoComplete="new-password"
+            name="cpassword"
             type="password"
-            placeholder="Повторите пароль"
-            // onChange={(event) => changePasswordConfirmation(event.target.value)}
-            // value={passwordConfirmation}
-            // autoComplete="new-password"
+            placeholder="Подтверждение пароля"
           />
 
-          {errors.password && (
-            <div style={{ color: "#ed4337" }}>{errors.password.message}</div>
+          {errors.cpassword && (
+            <div style={{ color: "#ed4337" }}>{errors.cpassword.message}</div>
           )}
 
           <input
             className="submit"
             type="submit"
             value="Регистрация"
-            // onClick={handlerResetPassword}
+            disabled={!isValid}
           />
 
           <p
@@ -211,7 +241,10 @@ const NewPassword = () => {
             {timer !== 0 ? (
               <span> {timer} сек</span>
             ) : (
-              <span onClick={resendActivation}> Отправить</span>
+              <span onClick={resendActivation} style={{ cursor: "pointer" }}>
+                {" "}
+                Отправить
+              </span>
             )}
           </p>
         </form>
