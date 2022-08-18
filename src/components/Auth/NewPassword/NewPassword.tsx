@@ -3,16 +3,19 @@ import Submit from "../AuthInput/Submit";
 import Logo from "../../UI/Header/Logo/Logo";
 import "./NewPassword.scss";
 import { useAppSelector } from "../../store/hooks/redux";
-import {  useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import {
   useResetPasswordConfirmMutation,
   useResetPasswordMutation,
 } from "../../requests/authorization";
+import { ILogin } from "../../types/ILogin";
+import { SubmitHandler, useForm } from "react-hook-form";
 
 const NewPassword = () => {
   const { theme } = useAppSelector((state) => state.themeReducer);
   const navigate = useNavigate();
+  const location = useLocation();
   const [uid, setUid] = useState("");
   const [token, setToken] = useState("");
   const [timer, setTimer] = useState(0);
@@ -21,6 +24,18 @@ const NewPassword = () => {
   );
   const changeUid = (uid: string) => {
     setUid(uid);
+  };
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm<ILogin>({ mode: "onChange" });
+
+  const onSubmit: SubmitHandler<ILogin> = (data) => {
+    alert(`your email ${data.email}`);
+    alert(`your password ${data.password}`);
+    reset();
   };
   const changeToken = (token: string) => {
     setToken(token);
@@ -59,10 +74,7 @@ const NewPassword = () => {
       <section className="section-window new-password">
         <p
           style={{
-            color:
-              theme === "dark"
-                ? "#fff"
-                : "#242426",
+            color: theme === "dark" ? "#fff" : "#242426",
           }}
         >
           На вашу почту <span>{futureResetPassword.email}</span> отправлено
@@ -78,6 +90,7 @@ const NewPassword = () => {
           токен
         </p>
         <form
+          onSubmit={handleSubmit(onSubmit)}
           action=""
           className="form-window new-password-form-window"
           style={
@@ -88,10 +101,7 @@ const NewPassword = () => {
         >
           <h2
             style={{
-              color:
-                theme === "dark"
-                  ? "#fff"
-                  : "#242426",
+              color: theme === "dark" ? "#fff" : "#242426",
             }}
           >
             Новый пароль
@@ -114,36 +124,94 @@ const NewPassword = () => {
             value={token}
             autoComplete="new-password"
           />
-          <Input
-            label="Пароль"
-            type="password"
-            name="password"
-            placeholder="Введите пароль"
-            onChange={changePassword}
-            value={password}
-            autoComplete="new-password"
-          />
-          <Input
-            label="Подтверждение пароля"
-            type="password"
-            name="password"
-            placeholder="Повторите пароль"
-            onChange={changePasswordConfirmation}
-            value={passwordConfirmation}
-            autoComplete="new-password"
-          />
-          <Submit
-            className="submit"
-            type="submit"
-            value="Изменить пароль"
-            onClick={handlerResetPassword}
-          />
-          <p
+
+          <label
             style={{
               color:
-                theme === "dark"
+                theme === "dark" || location.pathname === "/"
                   ? "#fff"
-                  : "#80858b",
+                  : "#242426",
+            }}
+          >
+            Пароль
+          </label>
+          <input
+            style={
+              theme === "dark" || location.pathname === "/"
+                ? { backgroundColor: "#323537", borderColor: "transparent" }
+                : {
+                    backgroundColor: "#fff",
+                    borderColor: "#AFB2B6",
+                    color: "#000",
+                  }
+            }
+            {...register("password", {
+              required: "Пароль не может быть пустым",
+              pattern: {
+                value: /(?=.*[0-9])(?=.*[a-zA-Z]).{8,30}/,
+                message:
+                  "Пароль должен состоять из букв латинского алфавита (A-z) и арабских цифр (0-9)",
+              },
+            })}
+            type="password"
+            placeholder="Введите пароль"
+            // value={password}
+            // onChange={(event) => changePassword(event.target.value)}
+            // autoComplete="new-password"
+          />
+
+          {errors.password && (
+            <div style={{ color: "#ed4337" }}>{errors.password.message}</div>
+          )}
+
+          <label
+            style={{
+              color:
+                theme === "dark" || location.pathname === "/"
+                  ? "#fff"
+                  : "#242426",
+            }}
+          >
+            Подтверждение пароля
+          </label>
+          <input
+            style={
+              theme === "dark" || location.pathname === "/"
+                ? { backgroundColor: "#323537", borderColor: "transparent" }
+                : {
+                    backgroundColor: "#fff",
+                    borderColor: "#AFB2B6",
+                    color: "#000",
+                  }
+            }
+            {...register("passwordConfirm", {
+              required: "Пароль не может быть пустым",
+              pattern: {
+                value: / /,
+                message: "Пароли должны совпадать",
+              },
+            })}
+            type="password"
+            placeholder="Повторите пароль"
+            // onChange={(event) => changePasswordConfirmation(event.target.value)}
+            // value={passwordConfirmation}
+            // autoComplete="new-password"
+          />
+
+          {errors.password && (
+            <div style={{ color: "#ed4337" }}>{errors.password.message}</div>
+          )}
+
+          <input
+            className="submit"
+            type="submit"
+            value="Регистрация"
+            onClick={handlerResetPassword}
+          />
+
+          <p
+            style={{
+              color: theme === "dark" ? "#fff" : "#80858b",
             }}
           >
             Отправить ключ заново?
