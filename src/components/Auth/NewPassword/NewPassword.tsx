@@ -206,7 +206,7 @@ const NewPassword = () => {
             className="submit"
             type="submit"
             value="Регистрация"
-            onClick={handlerResetPassword}
+            // onClick={handlerResetPassword}
           />
 
           <p

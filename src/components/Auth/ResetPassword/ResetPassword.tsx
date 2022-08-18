@@ -4,12 +4,26 @@ import Logo from "../../UI/Header/Logo/Logo";
 import "./ResetPassword.scss";
 import { useState } from "react";
 import { useAppSelector } from "../../store/hooks/redux";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useResetPasswordMutation } from "../../requests/authorization";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { ILogin } from "../../types/ILogin";
 
 const ResetPassword = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm<ILogin>({ mode: "onChange" });
+
+  const onSubmit: SubmitHandler<ILogin> = (data) => {
+    alert(`your email ${data.email}`);
+    reset();
+  };
   const { theme } = useAppSelector((state) => state.themeReducer);
   const navigate = useNavigate();
+   const location = useLocation();
   const [resetPassword] = useResetPasswordMutation();
   const [email, setEmail] = useState("");
   const handlerClick = () => {
@@ -30,6 +44,7 @@ const ResetPassword = () => {
       </div>
       <section className="section-window">
         <form
+          onSubmit={handleSubmit(onSubmit)}
           action=""
           className="form-window reset-password-form-window"
           style={
@@ -45,19 +60,38 @@ const ResetPassword = () => {
           >
             Восстановить пароль
           </h2>
-          <Input
-            label="Почта"
-            type="email"
-            name="email"
+          <input
+            style={
+              theme === "dark" || location.pathname === "/"
+                ? { backgroundColor: "#323537", borderColor: "transparent" }
+                : {
+                    backgroundColor: "#fff",
+                    borderColor: "#AFB2B6",
+                    color: "#000",
+                  }
+            }
+            {...register("email", {
+              required: "Почта не может быть пустой",
+              pattern: {
+                value:
+                  /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/,
+                message: "Некорректная почта",
+              },
+            })}
+            type="text"
             placeholder="Введите почту"
-            value={email}
-            onChange={changeEmail}
+            // value={email}
+            // onChange={(event) => changeEmail(event.target.value)}
           />
-          <Submit
-            onClick={handlerClick}
+
+          {errors.email && (
+            <div style={{ color: "#ed4337" }}>{errors.email.message}</div>
+          )}
+          <input
             className="submit"
             type="submit"
             value="Восстановить"
+            // onClick={handlerClick}
           />
         </form>
       </section>
