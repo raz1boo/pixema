@@ -114,36 +114,36 @@ const ModalFilter = () => {
         <div className="modal-filter__main">
           <div className="modal-filter__sort-by">
             <h3>Год выхода</h3>
-              <Controller
-                name="sortBy"
-                control={control}
-                render={({ field: { onChange } }) => {
-                  return (
-                    <label className="sort-switcher">
-                      <button
-                        onClick={() => {
-                          onChange("-1");
-                        }}
-                        value="-1"
-                        name="sort"
-                        disabled={getValues().sortBy === "-1"}
-                      >
-                        Новые
-                      </button>
-                      <button
-                        onClick={() => {
-                          onChange("1");
-                        }}
-                        value="1"
-                        name="sort"
-                        disabled={getValues().sortBy === "1"}
-                      >
-                        Старые
-                      </button>
-                    </label>
-                  );
-                }}
-              />
+            <Controller
+              name="sortBy"
+              control={control}
+              render={({ field: { onChange } }) => {
+                return (
+                  <label className="sort-switcher">
+                    <button
+                      onClick={() => {
+                        onChange("-1");
+                      }}
+                      value="-1"
+                      name="sort"
+                      disabled={getValues().sortBy === "-1"}
+                    >
+                      Новые
+                    </button>
+                    <button
+                      onClick={() => {
+                        onChange("1");
+                      }}
+                      value="1"
+                      name="sort"
+                      disabled={getValues().sortBy === "1"}
+                    >
+                      Старые
+                    </button>
+                  </label>
+                );
+              }}
+            />
           </div>
           <div className="modal-filter__genre">
             <h3>Жанры</h3>
@@ -173,13 +173,17 @@ const ModalFilter = () => {
                                 </li>
                               )
                           )}
-                          <input
-                            type="text"
-                            maxLength={20}
-                            value={text}
-                            onChange={(e) => onChangeHandler(e.target.value)}
-                            placeholder={value[1]?.label ? "" : "Выберите жанр"}
-                          />
+                          {value.length !== 10 && (
+                            <input
+                              type="text"
+                              maxLength={20}
+                              value={text}
+                              onChange={(e) => onChangeHandler(e.target.value)}
+                              placeholder={
+                                value[1]?.label ? "" : "Выберите жанр"
+                              }
+                            />
+                          )}
                         </>
                       </ul>
                       {suggestions && (

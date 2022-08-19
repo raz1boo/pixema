@@ -209,12 +209,13 @@
         gap: 12px;
         flex-wrap: wrap;
         padding: 0;
+        flex-flow: row wrap;
         margin: 0;
         input {
           max-height: 32px;
           padding: 0 3px;
-          width: 55%;
-          min-width: 112px;
+          flex: 1;
+          min-width: 132px;
         }
       }
       li {
@@ -253,6 +254,7 @@
       justify-content: center;
       align-items: center;
       flex-direction: column-reverse;
+      gap: 20px;
     }
     a {
       color: #fff;

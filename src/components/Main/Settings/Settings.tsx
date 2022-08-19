@@ -18,7 +18,7 @@ const Settings = () => {
   const { setUser } = authSlice.actions;
   const [error, setError] = useState({ data: { username: [""] } });
   const [passwordError, setPasswordError] = useState({
-    data: { new_password: [""], current_password: [""] },
+    data: { new_password: [""], current_password: [""], patch_password: [""] },
   });
   const [patchPassword] = usePatchPasswordMutation();
   const [patchUserName] = usePatchUserNameMutation();
@@ -37,6 +37,9 @@ const Settings = () => {
       username: currentUser?.username,
     },
   });
+  const settingsStyle = {
+    height: "100%",
+  };
   const handlerSave = () => {
     const { username, password, npassword, cpassword } = getValues();
     dispatch(
@@ -53,17 +56,36 @@ const Settings = () => {
         token: accessCookie,
       })
         .unwrap()
+        .then((data) =>
+          setError({ data: { username: ["Логин успешно изменён"] } })
+        )
         .catch((error) => setError(error));
     cpassword &&
       npassword &&
-      password &&
-      patchPassword({
-        token: accessCookie,
-        new_password: npassword,
-        current_password: password,
-      })
-        .unwrap()
-        .catch((error) => setPasswordError(error));
+      (password
+        ? patchPassword({
+            token: accessCookie,
+            new_password: npassword,
+            current_password: password,
+          })
+            .unwrap()
+            .then((data) =>
+              setPasswordError({
+                data: {
+                  new_password: [""],
+                  current_password: [""],
+                  patch_password: ["Пароль успешно изменён"],
+                },
+              })
+            )
+            .catch((error) => setPasswordError(error))
+        : setPasswordError({
+            data: {
+              new_password: [""],
+              current_password: ["Введите пароль"],
+              patch_password: [""],
+            },
+          }));
     reset();
   };
   useEffect(() => {
@@ -73,7 +95,7 @@ const Settings = () => {
   return (
     <div
       className="main-block settings"
-      style={isAuth ? { height: "none" } : { height: "100%" }}
+      style={isAuth ? undefined : settingsStyle}
     >
       <Layout>
         {isAuth && (
@@ -132,20 +154,36 @@ const Settings = () => {
                     <div style={{ color: "#ed4337" }}>
                       {errors?.username?.message}
                     </div>
+                  ) : error?.data?.username[0] ===
+                    "A user with that username already exists." ? (
+                    <div style={{ color: "#ed4337" }}>
+                      Данный логин уже используется
+                    </div>
                   ) : (
-                    error?.data?.username[0] ===
-                      "A user with that username already exists." && (
-                      <div style={{ color: "#ed4337" }}>
-                        Данный логин уже используется
-                      </div>
-                    )
+                    <div style={{ color: "#00A340" }}>
+                      {error?.data?.username[0]}
+                    </div>
                   )}
                 </div>
                 <div className="profile-form">
                   <p style={{ color: theme === "light" ? "#242426" : "#fff" }}>
                     Почта
                   </p>
-                  <div className="profile-form__email">
+                  <div
+                    className="profile-form__email"
+                    style={
+                      theme === "dark"
+                        ? {
+                            backgroundColor: "#323537",
+                            borderColor: "transparent",
+                          }
+                        : {
+                            backgroundColor: "#fff",
+                            borderColor: "#AFB2B6",
+                            color: "#000",
+                          }
+                    }
+                  >
                     {currentUser?.email}
                   </div>
                 </div>
@@ -184,15 +222,21 @@ const Settings = () => {
                             }
                       }
                       {...register("password", {
-                        required: "Пароль не может быть пустым",
                         pattern: {
                           value: /(?=.*[0-9])(?=.*[a-zA-Z]).{8,30}/,
                           message:
                             "Пароль должен состоять из букв латинского алфавита (A-z) и арабских цифр (0-9)",
                         },
-                        minLength: {
-                          value: 8,
-                          message: "Минимум 8 символов",
+                        validate: (value) => {
+                          value &&
+                            setPasswordError({
+                              data: {
+                                new_password: [""],
+                                current_password: [""],
+                                patch_password: [""],
+                              },
+                            });
+                          return true;
                         },
                       })}
                       autoComplete="new-password"
@@ -204,11 +248,18 @@ const Settings = () => {
                       <div style={{ color: "#ed4337" }}>
                         {errors?.password?.message}
                       </div>
+                    ) : passwordError?.data?.current_password?.[0] ===
+                      "Invalid password." ? (
+                      <div style={{ color: "#ed4337" }}>Неверный пароль</div>
+                    ) : passwordError?.data?.current_password?.[0] ===
+                      "Введите пароль" ? (
+                      <div style={{ color: "#ed4337" }}>
+                        {passwordError?.data?.current_password?.[0]}
+                      </div>
                     ) : (
-                      passwordError?.data?.current_password?.[0] ===
-                        "Invalid password." && (
-                        <div style={{ color: "#ed4337" }}>Неверный пароль</div>
-                      )
+                      <div style={{ color: "#00A340" }}>
+                        {passwordError?.data?.patch_password?.[0]}
+                      </div>
                     )}
                   </div>
                 </div>
@@ -233,7 +284,6 @@ const Settings = () => {
                             }
                       }
                       {...register("npassword", {
-                        required: "Пароль не может быть пустым",
                         pattern: {
                           value: /(?=.*[0-9])(?=.*[a-zA-Z]).{8,30}/,
                           message:
@@ -242,6 +292,17 @@ const Settings = () => {
                         minLength: {
                           value: 8,
                           message: "Минимум 8 символов",
+                        },
+                        validate: (value) => {
+                          value &&
+                            setPasswordError({
+                              data: {
+                                new_password: [""],
+                                current_password: [""],
+                                patch_password: [""],
+                              },
+                            });
+                          return true;
                         },
                       })}
                       autoComplete="new-password"
@@ -282,7 +343,6 @@ const Settings = () => {
                             }
                       }
                       {...register("cpassword", {
-                        required: "Пароль не может быть пустым",
                         pattern: {
                           value: /(?=.*[0-9])(?=.*[a-zA-Z]).{8,30}/,
                           message:
@@ -359,11 +419,13 @@ const Settings = () => {
               className="footer-button save"
               onClick={handlerSave}
               disabled={
-                (errors?.password ||
-                  errors?.cpassword ||
-                  errors?.npassword ||
-                  errors?.username) &&
-                true
+                errors?.cpassword ||
+                errors?.npassword ||
+                errors?.username ||
+                passwordError?.data?.current_password?.[0] ||
+                passwordError?.data?.new_password?.[0]
+                  ? true
+                  : false
               }
             >
               Сохранить

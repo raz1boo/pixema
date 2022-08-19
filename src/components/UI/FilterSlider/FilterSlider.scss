@@ -4,6 +4,9 @@
   align-items: center;
   gap: 30px;
   width: 100%;
+  @media (max-width: 768px) {
+    gap: 10px;
+  }
   &__content {
     display: flex;
     gap: 40px;
