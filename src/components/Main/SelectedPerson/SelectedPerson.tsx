@@ -93,7 +93,7 @@ const SelectedPerson = () => {
             <div className="selected-person">
               <div className="selected-person__top-block">
                 <div className="selected-person__left-side">
-                  <img src={photo} alt={`img/${id}`} />
+                  <img src={photo} alt={`img/${id}`} className='selected-person__photo'/>
                 </div>
                 <div className="selected-person__right-side">
                   <h1 style={{ color: theme === "light" ? "#242426" : "#fff" }}>

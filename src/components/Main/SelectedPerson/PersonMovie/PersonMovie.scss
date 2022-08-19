@@ -28,9 +28,15 @@
     top: 0;
     left: 0;
     right: 0;
-    height: 358px;
+    height: 357px;
     background-color: rgba(#000, 0);
     transition: 0.3s ease;
+    @media (max-width: 1720px) {
+      height: 279px;
+    }
+    @media (max-width: 600px) {
+      height: 357px;
+    }
   }
   &__poster {
     min-height: 357px;
