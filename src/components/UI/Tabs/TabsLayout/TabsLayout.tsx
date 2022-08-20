@@ -15,8 +15,6 @@ interface ITabsLayout {
 }
 
 const TabsLayout = ({ roles, sequels, similars, title, personMovies }: ITabsLayout) => {
-  console.log(personMovies);
-  
   return (
     <div className="tabs-layout">
       <Slider title={title}>
