@@ -9,6 +9,7 @@ import { useGetNewMoviesQuery } from "../../requests/pixemaAPI";
 import { useAppSelector } from "../../store/hooks/redux";
 import { getCurrentDate } from "../../helpers/getCurrentDate";
 import { getRandomInt } from "../../helpers/getRandomInt";
+import { IMovieTrailer } from "../../types/IMovie";
 
 const Home = () => {
   const { limit, type } = useAppSelector((state) => state.loadReducer);
@@ -52,11 +53,11 @@ const Home = () => {
     videos,
     year,
   } = { ...datta };
-  const prepareVideos = (videos: any) => {
+  const prepareVideos = (videos: IMovieTrailer[] | undefined) => {
     const regex =
       /(?:youtu\.be\/|youtube\.com(?:\/embed\/|\/v\/|\/watch\?v=|\/user\/\S+|\/ytscreeningroom\?v=|\/sandalsResorts#\w\/\w\/.*\/))([^&]{10,12})/;
 
-    return videos?.map((video: any) => {
+    return videos?.map((video: IMovieTrailer) => {
       return {
         ...video,
         embedUrl: `https://www.youtube.com/embed/${

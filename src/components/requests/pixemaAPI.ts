@@ -10,7 +10,7 @@ export const pixemaAPI = createApi({
   reducerPath: "pixemaAPI",
   baseQuery: fetchBaseQuery({ baseUrl: API_URL }),
   endpoints: (build) => ({
-    getMovieById: build.query<IMovie, string | string[] | undefined>({
+    getMovieById: build.query<IMovie, number | string | string[] | undefined>({
       query: (id) => `/movie?search=${id}&field=id&token=${API_KEY}`,
     }),
     getMoviesById: build.query<IData, IBaseQuery>({

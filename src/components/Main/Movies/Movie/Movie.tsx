@@ -5,8 +5,9 @@ import Genres from "../../../UI/Genres/Genres";
 import { useFavorites } from "../../../store/hooks/useFavorites";
 import FavoriteSmallButton from "../../../UI/FavoriteSmallButton/FavoriteSmallButton";
 import { useAppSelector } from "../../../store/hooks/redux";
+import { IMovieProps } from "../../../types/IMovie";
 
-const Movie = ({ docs }: any) => {
+const Movie = ({ docs }: IMovieProps) => {
   const { favorites } = useFavorites();
   const { theme } = useAppSelector((state) => state.themeReducer);
   return (

@@ -1,20 +1,22 @@
 import { SwiperSlide } from "swiper/react";
 import Movie from "../../../Main/Movies/Movie/Movie";
 import PersonMovie from "../../../Main/SelectedPerson/PersonMovie/PersonMovie";
-import { IMovie, IMoviePerson } from "../../../types/IMovie";
+import { IMovie, IMoviePerson, IMovieSimilar } from "../../../types/IMovie";
 import Slider from "../../Slider/Slider";
 import PersonTab from "./PersonTab/PersonTab";
 import "./TabsLayout.scss";
 
 interface ITabsLayout {
   roles?: IMoviePerson[] | undefined;
-  similars?: any[] | undefined;
-  personMovies?: any[] | undefined;
+  similars?: IMovieSimilar[] | undefined;
+  personMovies?: IMovie[] | undefined;
   sequels?: IMovie[] | undefined;
   title?: string;
 }
 
 const TabsLayout = ({ roles, sequels, similars, title, personMovies }: ITabsLayout) => {
+  console.log(personMovies);
+  
   return (
     <div className="tabs-layout">
       <Slider title={title}>

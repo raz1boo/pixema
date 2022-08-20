@@ -20,6 +20,12 @@ import "./SelectedMovie.scss";
 import cn from "classnames";
 import { useAppSelector } from "../../store/hooks/redux";
 import MediaQuery from "react-responsive";
+import {
+  IMovie,
+  IMoviePerson,
+  IMovieSimilar,
+  IMovieTrailer,
+} from "../../types/IMovie";
 
 const SelectedMovie = () => {
   const params = useParams();
@@ -51,11 +57,11 @@ const SelectedMovie = () => {
     facts,
     enName,
   } = { ...data };
-  const prepareVideos = (videos: any) => {
+  const prepareVideos = (videos: IMovieTrailer[] | undefined) => {
     const regex =
       /(?:youtu\.be\/|youtube\.com(?:\/embed\/|\/v\/|\/watch\?v=|\/user\/\S+|\/ytscreeningroom\?v=|\/sandalsResorts#\w\/\w\/.*\/))([^&]{10,12})/;
 
-    return videos?.map((video: any) => {
+    return videos?.map((video: IMovieTrailer) => {
       return {
         ...video,
         embedUrl: `https://www.youtube.com/embed/${
@@ -67,18 +73,11 @@ const SelectedMovie = () => {
       };
     });
   };
-  const src = prepareVideos(
-    videos?.trailers
-      .map(
-        (item: any) =>
-          item.name.slice("").split(" ")[0] === "Трейлер" &&
-          item.site === "youtube" &&
-          item
-      )
-      .filter((i) => i)
+  const src = videos?.trailers.filter(
+    (item: IMovieTrailer) => item.name === "Трейлер" && item.site === "youtube"
   );
-  const person = (value: any) => {
-    return persons?.filter((item: any) =>
+  const person = (value: string) => {
+    return persons?.filter((item: IMoviePerson) =>
       item.enProfession === value ? item.name : undefined
     );
   };
@@ -147,13 +146,13 @@ const SelectedMovie = () => {
     },
   ];
 
-  const roles = persons?.filter((item: any) =>
+  const roles = persons?.filter((item: IMoviePerson) =>
     item.enProfession === "actor" && item.name?.length ? item : undefined
   );
-  const similars = similarMovies?.filter((item: any) =>
+  const similars = similarMovies?.filter((item: IMovieSimilar) =>
     item.name?.length ? item : undefined
   );
-  const sequels = sequelsAndPrequels?.filter((item: any) =>
+  const sequels = sequelsAndPrequels?.filter((item: IMovie) =>
     item.name?.length ? item : undefined
   );
   const tabs = [
@@ -206,7 +205,7 @@ const SelectedMovie = () => {
   return (
     <>
       <IframeModal
-        src={src?.[0]?.embedUrl}
+        src={prepareVideos(src)?.[0]?.embedUrl}
         active={active}
         closeModal={() => setActive(false)}
       />
@@ -237,13 +236,16 @@ const SelectedMovie = () => {
                       "фильм"
                     }`}
                   </button>
-                  {src?.[0]?.embedUrl && (
+                  {prepareVideos(src)?.[0]?.embedUrl && (
                     <div className="trailer-block">
                       <button onClick={() => setActive(true)}>
                         <FiPlay />
                         Смотреть трейлер
                       </button>
-                      <img src={src?.[0]?.imgUrl} alt="trailer"></img>
+                      <img
+                        src={prepareVideos(src)?.[0]?.imgUrl}
+                        alt="trailer"
+                      ></img>
                     </div>
                   )}
                 </div>
@@ -322,13 +324,16 @@ const SelectedMovie = () => {
                     <FiPlay />
                   </button>
                 </div>
-                {src?.[0]?.embedUrl && (
+                {prepareVideos(src)?.[0]?.embedUrl && (
                   <div className="trailer-block">
                     <button onClick={() => setActive(true)}>
                       <FiPlay />
                       Смотреть трейлер
                     </button>
-                    <img src={src?.[0]?.imgUrl} alt="trailer"></img>
+                    <img
+                      src={prepareVideos(src)?.[0]?.imgUrl}
+                      alt="trailer"
+                    ></img>
                   </div>
                 )}
                 <div

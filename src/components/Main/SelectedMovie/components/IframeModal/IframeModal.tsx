@@ -5,7 +5,7 @@ import { useOutsideClick } from "rooks";
 import { useRef } from "react";
 
 interface Iframe {
-  src: string;
+  src: string | undefined;
   active: boolean;
   closeModal: () => void;
 }

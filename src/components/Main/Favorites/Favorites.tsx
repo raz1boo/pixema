@@ -1,5 +1,9 @@
-import { useGetMoviesByIdQuery } from "../../requests/pixemaAPI";
+import {
+  useGetMovieByIdQuery,
+  useGetMoviesByIdQuery,
+} from "../../requests/pixemaAPI";
 import { useFavorites } from "../../store/hooks/useFavorites";
+import { IMovie } from "../../types/IMovie";
 import Layout from "../../UI/Layout/Layout";
 import Movie from "../Movies/Movie/Movie";
 import "./Favorites.scss";
@@ -9,7 +13,8 @@ const Favorites = () => {
   const query = favorites.map((item) => `search=${item}&field=id`).join("&");
   const countFavorites = Number(favorites.length);
   const { data } = useGetMoviesByIdQuery({ query, limit: countFavorites });
-  const fetch = { docs: data };
+  const { data: onceData } = useGetMovieByIdQuery(favorites[0]);
+  const fetch = { docs: [onceData], total: 1, limmit: 1 };
   return (
     <div className="favorites">
       {favorites.length ? (
@@ -24,9 +29,11 @@ const Favorites = () => {
           }
         >
           {countFavorites !== 1 ? (
-            data?.docs.map((item) => <Movie key={item.id} docs={item} />)
+            data?.docs.map((item: IMovie) => (
+              <Movie key={item.id} docs={item} />
+            ))
           ) : (
-            <Movie docs={fetch.docs} />
+            <Movie docs={fetch?.docs?.[0]} />
           )}
         </Layout>
       ) : (
