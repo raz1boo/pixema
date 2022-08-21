@@ -1,5 +1,5 @@
 # Pixema | Front-end app for search and watching films, serials and cartoons
-Look at preview: https//:pixema.vercel.app
+Look at preview: [https//:pixema.vercel.app](https://pixema.vercel.app/)
 
 Technologies stack: 
 • React
