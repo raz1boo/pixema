@@ -20,9 +20,6 @@ const Favorites = () => {
       {favorites.length ? (
         <Layout
           className={
-            countFavorites % 10 === 0 ||
-            countFavorites % 8 === 0 ||
-            countFavorites % 9 === 0 ||
             countFavorites % 5 === 0
               ? "justify-content__space-between"
               : undefined
