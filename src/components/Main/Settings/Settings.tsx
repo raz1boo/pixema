@@ -59,8 +59,11 @@ const Settings = () => {
         .then((data) =>
           setError({ data: { username: ["Логин успешно изменён"] } })
         )
-        .catch((error) => setError(error));
-    cpassword &&
+        .catch((error) => {
+          setError(error);
+          console.log(error);
+        });
+    cpassword ===
       npassword &&
       (password
         ? patchPassword({
@@ -159,10 +162,18 @@ const Settings = () => {
                     <div style={{ color: "#ed4337" }}>
                       Данный логин уже используется
                     </div>
-                  ) : (
-                    <div style={{ color: "#00A340" }}>
-                      {error?.data?.username[0]}
+                  ) : error?.data?.username[0] ===
+                    "Enter a valid username. This value may contain only letters, numbers, and @/./+/-/_ characters." ? (
+                    <div style={{ color: "#ed4337" }}>
+                      Введите действительное имя пользователя. Это значение
+                      может содержать только буквы, цифры и символы @ . + - _
                     </div>
+                  ) : (
+                    error?.data?.username[0] === "Логин успешно изменён" && (
+                      <div style={{ color: "#00A340" }}>
+                        {error?.data?.username[0]}
+                      </div>
+                    )
                   )}
                 </div>
                 <div className="profile-form">

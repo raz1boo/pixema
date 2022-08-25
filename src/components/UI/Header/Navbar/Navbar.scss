@@ -47,11 +47,11 @@
     height: 100px;
     border-radius: 0px;
     width: 100%;
-    position: sticky;
     position: -webkit-sticky;
     position: -moz-sticky;
     position: -o-sticky;
     position: -ms-sticky;
+    position: sticky;
     flex-direction: row;
     align-items: center;
     justify-content: space-evenly;

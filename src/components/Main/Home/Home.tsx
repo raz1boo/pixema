@@ -4,7 +4,7 @@ import NewMovies from "../Movies/Movies";
 import Rating from "../../UI/Rating/Rating";
 import AgeRating from "../../UI/AgeRating/AgeRating";
 import Genres from "../../UI/Genres/Genres";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useGetNewMoviesQuery } from "../../requests/pixemaAPI";
 import { useAppSelector } from "../../store/hooks/redux";
 import { getCurrentDate } from "../../helpers/getCurrentDate";
@@ -28,12 +28,14 @@ const Home = () => {
   const [oldDate, setOldDate] = useState(
     localStorage.getItem("oldDate") || `${getCurrentDate() - 1}`
   );
-  if (oldDate !== `${getCurrentDate()}`) {
-    setBgVideo(`${getRandomInt(0, dataLength || 27)}`);
-    setOldDate(`${getCurrentDate()}`);
-  }
-  localStorage.setItem("bgVideo", bgVideo);
-  localStorage.setItem("oldDate", oldDate);
+  useEffect(() => {
+    if (oldDate !== `${getCurrentDate()}`) {
+      setBgVideo(`${getRandomInt(1, dataLength || 26)}`);
+      setOldDate(`${getCurrentDate()}`);
+    }
+    localStorage.setItem("bgVideo", bgVideo);
+    localStorage.setItem("oldDate", oldDate);
+  }, [bgVideo, dataLength, oldDate]);
   const datta = data?.docs
     .map(
       (item) =>
