@@ -20,7 +20,6 @@ const ConfirmRegistration = () => {
   const {
     register,
     handleSubmit,
-    getValues,
     formState: { errors, isValid },
   } = useForm<IActivate>({ mode: "onChange" });
   const [activateEmail] = useActivateEmailMutation();

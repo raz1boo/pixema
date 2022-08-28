@@ -1,6 +1,7 @@
 {
-  "name": "pixema-app",
+  "name": "pixema",
   "version": "0.1.0",
+  "type":"module",
   "private": true,
   "dependencies": {
     "@reduxjs/toolkit": "^1.8.3",
@@ -44,7 +45,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "jest",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -67,6 +68,7 @@
   },
   "devDependencies": {
     "@types/lodash.memoize": "^4.1.7",
-    "gh-pages": "^4.0.0"
+    "gh-pages": "^4.0.0",
+    "jest": "^27.5.1"
   }
 }
