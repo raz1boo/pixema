@@ -59,10 +59,9 @@ const Settings = () => {
         .then((data) =>
           setError({ data: { username: ["Логин успешно изменён"] } })
         )
-        .catch((error) => {
-          setError(error);
-          console.log(error);
-        });
+        .catch((error) => 
+          setError(error)
+        );
     cpassword ===
       npassword &&
       (password

@@ -11,7 +11,9 @@ const Registration = () => {
   const { theme } = useAppSelector((state) => state.themeReducer);
   const [postSignUp] = usePostSignUpMutation();
   const navigate = useNavigate();
-  const [error, setError] = useState({ data: { email: [""], username: [""] } });
+  const [error, setError] = useState({
+    data: { email: [""], username: [""], password: [""] },
+  });
   const {
     register,
     handleSubmit,
@@ -102,7 +104,7 @@ const Registration = () => {
           {errors?.username ? (
             <div style={{ color: "#ed4337" }}>{errors?.username?.message}</div>
           ) : (
-            error?.data?.username[0] ===
+            error?.data?.username?.[0] ===
               "A user with that username already exists." && (
               <div style={{ color: "#ed4337" }}>
                 Данный логин уже используется
@@ -143,7 +145,7 @@ const Registration = () => {
           {errors?.email ? (
             <div style={{ color: "#ed4337" }}>{errors?.email?.message}</div>
           ) : (
-            error?.data?.email[0] ===
+            error?.data?.email?.[0] ===
               "user with this Email already exists." && (
               <div style={{ color: "#ed4337" }}>
                 Данная почта уже используется
@@ -185,8 +187,15 @@ const Registration = () => {
             placeholder="Введите пароль"
           />
 
-          {errors?.password && (
+          {errors?.password ? (
             <div style={{ color: "#ed4337" }}>{errors?.password?.message}</div>
+          ) : (
+            error?.data?.password?.[0] ===
+              "The password is too similar to the Email." && (
+              <div style={{ color: "#ed4337" }}>
+                Пароль слишком похож на почту
+              </div>
+            )
           )}
 
           <label
