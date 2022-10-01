@@ -13,7 +13,7 @@ const Rating = ({ rating }: IMovie) => {
             (rating?.kp <= 5 && "rating__red"))
       )}
     >
-      {rating?.kp && rate[0] + rate[1] + rate[2]}
+      {rating?.kp && rate[0] + (rate[1] || '.') + (rate[2] || '0')}
     </div>
   );
 };
