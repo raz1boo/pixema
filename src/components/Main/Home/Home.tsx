@@ -75,7 +75,7 @@ const Home = () => {
   );
   return (
     <div className="home">
-      <div className="background-video-block">
+      {/* <div className="background-video-block">
         <div className="background-video-block__untouch-block"></div>
         <iframe
           title="video"
@@ -101,7 +101,7 @@ const Home = () => {
             <Link to={`/film/${id}`}>Подробнее</Link>
           </div>
         </div>
-      )}
+      )} */}
       <div className="home__content">
         <NewMovies type={1} />
         <NewMovies type={2} />
